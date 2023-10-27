@@ -2,6 +2,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AdoptionCenter {
   final String id;
+  final String imageUrl;
   final String name;
   final String description;
   final AdoptionCenterLocation location;
@@ -9,6 +10,7 @@ class AdoptionCenter {
 
   AdoptionCenter({
     required this.id,
+    required this.imageUrl,
     required this.name,
     required this.description,
     required this.location,

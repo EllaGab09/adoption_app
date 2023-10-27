@@ -6,7 +6,7 @@ class Animal {
   final String breed;
   final String color;
   final int age;
-  final String activity_level;
+  final String activityLevel;
 
   const Animal({
     required this.name,
@@ -16,6 +16,6 @@ class Animal {
     required this.breed,
     required this.color,
     required this.age,
-    required this.activity_level,
+    required this.activityLevel,
   });
 }

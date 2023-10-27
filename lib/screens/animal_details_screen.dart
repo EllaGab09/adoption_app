@@ -1,4 +1,5 @@
 import 'package:adoption_app/models/animal.dart';
+import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class AnimalDetailScreen extends StatelessWidget {
@@ -9,8 +10,8 @@ class AnimalDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(animal.name),
+      appBar: LogoAppBar(
+        onProfilePressed: () {},
       ),
       body: ListView(
         children: <Widget>[
@@ -65,7 +66,7 @@ class AnimalDetailScreen extends StatelessWidget {
                 ListTile(
                   leading: const Icon(Icons.directions_run),
                   title: const Text("Activity Level"),
-                  subtitle: Text(animal.activity_level),
+                  subtitle: Text(animal.activityLevel),
                 ),
               ],
             ),
