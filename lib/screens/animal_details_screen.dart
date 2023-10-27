@@ -7,6 +7,19 @@ class AnimalDetailScreen extends StatelessWidget {
 
   AnimalDetailScreen({super.key, required this.animal});
 
+  Color _getActivityLevelColor(String activityLevel) {
+    if (activityLevel == "Low") {
+      return Colors.green;
+    } else if (activityLevel == "Moderate") {
+      return Colors.yellow;
+    } else if (activityLevel == "High") {
+      return Colors.red;
+    } else {
+      // Default color if the activity level is not recognized
+      return Colors.grey;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,10 +105,21 @@ class AnimalDetailScreen extends StatelessWidget {
                   subtitle: Text("${animal.age} years"),
                 ),
                 ListTile(
-                  leading: const Icon(Icons.directions_run),
                   title: const Text("Activity Level"),
                   subtitle: Text(animal.activityLevel),
+                  leading: Icon(
+                    Icons.directions_run,
+                    color: _getActivityLevelColor(animal.activityLevel),
+                  ),
                 ),
+                ListTile(
+                  title: const Text("Sex:"),
+                  subtitle: Text(animal.sex),
+                  leading: Icon(
+                    animal.sex == "Male" ? Icons.male : Icons.female,
+                    color: animal.sex == "Male" ? Colors.blue : Colors.pink,
+                  ),
+                )
               ],
             ),
           ),

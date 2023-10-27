@@ -11,6 +11,7 @@ const dummyAnimals = [
     color: 'Golden',
     age: 2,
     activityLevel: 'High',
+    sex: "Male",
   ),
   Animal(
     name: 'Whiskers',
@@ -22,6 +23,7 @@ const dummyAnimals = [
     color: 'Cream',
     age: 3,
     activityLevel: 'Low',
+    sex: "Female",
   ),
   Animal(
     name: 'Kiwi',
@@ -33,6 +35,7 @@ const dummyAnimals = [
     color: 'Green',
     age: 1,
     activityLevel: 'Moderate',
+    sex: "Male",
   ),
   Animal(
     name: 'Coco',
@@ -44,6 +47,7 @@ const dummyAnimals = [
     color: 'Chocolate',
     age: 2,
     activityLevel: 'High',
+    sex: "Female",
   ),
   Animal(
     name: 'Buddy',
@@ -55,6 +59,7 @@ const dummyAnimals = [
     color: 'Golden',
     age: 2,
     activityLevel: 'High',
+    sex: "Male",
   ),
   Animal(
     name: 'Whiskers',
@@ -66,6 +71,7 @@ const dummyAnimals = [
     color: 'Cream',
     age: 3,
     activityLevel: 'Low',
+    sex: "Female",
   ),
   Animal(
     name: 'Kiwi',
@@ -77,6 +83,7 @@ const dummyAnimals = [
     color: 'Green',
     age: 1,
     activityLevel: 'Moderate',
+    sex: "Male",
   ),
   Animal(
     name: 'Coco',
@@ -88,5 +95,6 @@ const dummyAnimals = [
     color: 'Chocolate',
     age: 2,
     activityLevel: 'High',
+    sex: "Female",
   ),
 ];
