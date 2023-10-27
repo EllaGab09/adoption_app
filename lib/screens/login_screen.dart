@@ -7,11 +7,23 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Pet Adoption App Login'),
-      ),
       body: Center(
-        child: LoginForm(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/images/petAdoptLogo.png'),
+            const SizedBox(height: 20),
+            const Text(
+              'Login',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20),
+            LoginForm(),
+          ],
+        ),
       ),
     );
   }
@@ -25,13 +37,13 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool rememberMe = false; // Add rememberMe variable
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           TextField(
             controller: emailController,
@@ -44,6 +56,19 @@ class _LoginFormState extends State<LoginForm> {
             obscureText: true,
           ),
           SizedBox(height: 20),
+          Row(
+            children: [
+              Checkbox(
+                value: rememberMe,
+                onChanged: (value) {
+                  setState(() {
+                    rememberMe = value!;
+                  });
+                },
+              ),
+              Text('Remember me'),
+            ],
+          ),
           ElevatedButton(
             onPressed: () {
               Navigator.of(context).push(
@@ -55,6 +80,12 @@ class _LoginFormState extends State<LoginForm> {
               print('Email: $email, Password: $password');
             },
             child: Text('Login'),
+          ),
+          TextButton(
+            onPressed: () {
+              // Handle forgot password
+            },
+            child: const Text('Forgot Password?'),
           ),
         ],
       ),

@@ -1,5 +1,5 @@
 import 'package:adoption_app/screens/login_screen.dart';
-import 'screens/categories_screen.dart';
+//import 'screens/categories_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
