@@ -123,6 +123,7 @@ class _LoginFormState extends State<LoginForm> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                //https://pub.dev/packages/sign_in_button
                 SignInButton(
                   Buttons.google,
                   onPressed: () {},
@@ -138,6 +139,19 @@ class _LoginFormState extends State<LoginForm> {
                 SignInButton(
                   Buttons.linkedIn,
                   onPressed: () {},
+                ),
+                const SizedBox(height: 5),
+                Text("Need an account? "),
+                TextButton(
+                  onPressed: () {
+                    // Handle "SIGN UP" action here
+                  },
+                  child: Text('SIGN UP'),
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    tapTargetSize: MaterialTapTargetSize
+                        .shrinkWrap, // Remove the minimum button size
+                  ),
                 ),
               ],
             ),
