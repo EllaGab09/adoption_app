@@ -92,26 +92,52 @@ class AnimalDetailScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Divider(),
-                ListTile(
-                  leading: const Icon(Icons.pets),
-                  title: const Text("Type"),
-                  subtitle: Text(animal.type),
+                const Divider(
+                  thickness: 3,
                 ),
-                ListTile(
-                  leading: const Icon(Icons.category),
-                  title: const Text("Breed"),
-                  subtitle: Text(animal.breed),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.color_lens),
-                  title: const Text("Color"),
-                  subtitle: Text(animal.color),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.cake),
-                  title: const Text("Age"),
-                  subtitle: Text("${animal.age} years"),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          'Type: ${animal.type}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        const SizedBox(
+                            width: 16), // Adjust the spacing between items
+                        Text(
+                          'Breed: ${animal.breed}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Color: ${animal.color}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        const SizedBox(
+                            width: 16), // Adjust the spacing between items
+                        Text(
+                          'Age: ${animal.age} years',
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 ListTile(
                   title: const Text("Activity Level"),

@@ -55,11 +55,14 @@ class CategoryGridItem extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 14,
                 ),
+                maxLines: 2, // Set the maximum number of lines
+                overflow: TextOverflow.ellipsis, // Overflow style
               ),
+              const SizedBox(height: 10),
               Text(
                 "${animal.sex} ${animal.breed}",
                 style: const TextStyle(
-                  fontSize: 10,
+                  fontSize: 11,
                 ),
               )
             ],

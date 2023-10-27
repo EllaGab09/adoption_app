@@ -61,10 +61,10 @@ class _LoginFormState extends State<LoginForm> {
               labelText: 'Email',
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide(), // Solid border
+                borderSide: const BorderSide(), // Solid border
               ),
               hintText: 'Enter your email', // Placeholder text
-              contentPadding: EdgeInsets.all(12.0),
+              contentPadding: const EdgeInsets.all(12.0),
             ),
           ),
           const SizedBox(
@@ -76,10 +76,10 @@ class _LoginFormState extends State<LoginForm> {
               labelText: 'Password',
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide(), // Solid border
+                borderSide: const BorderSide(), // Solid border
               ),
               hintText: 'Enter your password', // Placeholder text
-              contentPadding: EdgeInsets.all(12.0),
+              contentPadding: const EdgeInsets.all(12.0),
             ),
             obscureText: true,
           ),
@@ -99,19 +99,20 @@ class _LoginFormState extends State<LoginForm> {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (ctx) => CategoriesScreen()));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (ctx) => const CategoriesScreen()));
 
               String email = emailController.text;
               String password = passwordController.text;
 
               print('Email: $email, Password: $password');
             },
-            child: Text('Login'),
             style: ElevatedButton.styleFrom(
-              shape: StadiumBorder(), // Make the button rounder
-              minimumSize: Size(200, 50), // Set the button's width and height
+              shape: const StadiumBorder(), // Make the button rounder
+              minimumSize:
+                  const Size(200, 50), // Set the button's width and height
             ),
+            child: const Text('Login'),
           ),
           TextButton(
             onPressed: () {
@@ -141,17 +142,17 @@ class _LoginFormState extends State<LoginForm> {
                   onPressed: () {},
                 ),
                 const SizedBox(height: 5),
-                Text("Need an account? "),
+                const Text("Need an account? "),
                 TextButton(
                   onPressed: () {
                     // Handle "SIGN UP" action here
                   },
-                  child: Text('SIGN UP'),
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
                     tapTargetSize: MaterialTapTargetSize
                         .shrinkWrap, // Remove the minimum button size
                   ),
+                  child: const Text('SIGN UP'),
                 ),
               ],
             ),

@@ -5,7 +5,8 @@ const dummyAnimals = [
       name: 'Buddy',
       imageUrl:
           "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
-      description: 'Friendly and playful. Loves going for walks.',
+      description:
+          'Friendly and playful. Loves going for walks.Friendly and playful. Loves going for walks.',
       type: 'Dog',
       breed: 'Golden Retriever',
       color: 'Golden',
@@ -17,7 +18,8 @@ const dummyAnimals = [
       name: 'Whiskers',
       imageUrl:
           "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
-      description: 'Calm and loves to nap. Great with kids.',
+      description:
+          'Calm and loves to nap. Great with kids.Calm and loves to nap. Great with kids.Calm and loves to nap. Great with kids.',
       type: 'Cat',
       breed: 'Siamese',
       color: 'Cream',
