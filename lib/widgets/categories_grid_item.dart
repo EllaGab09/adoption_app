@@ -1,10 +1,10 @@
+import 'package:adoption_app/screens/animal_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/models/animal.dart';
 
 class CategoryGridItem extends StatelessWidget {
+  const CategoryGridItem({super.key, required this.animal});
   final Animal animal;
-
-  const CategoryGridItem({Key? key, required this.animal}) : super(key: key);
 
   // Define a constant variable for borderRadius
   static BorderRadius gridItemBorderRadius = BorderRadius.circular(100);
@@ -13,7 +13,11 @@ class CategoryGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Handle the tap action, e.g., navigate to the details screen
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => AnimalDetailScreen(animal: animal),
+          ),
+        );
       },
       child: Card(
         //color: Colors.amber,
