@@ -56,6 +56,12 @@ class CategoryGridItem extends StatelessWidget {
                   fontSize: 14,
                 ),
               ),
+              Text(
+                "${animal.sex} ${animal.breed}",
+                style: const TextStyle(
+                  fontSize: 10,
+                ),
+              )
             ],
           ),
         ),
