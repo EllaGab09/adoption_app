@@ -1,4 +1,5 @@
 import 'package:adoption_app/screens/categories_screen.dart';
+import 'package:adoption_app/screens/forgot_password_screen.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:flutter/material.dart';
 
@@ -116,7 +117,8 @@ class _LoginFormState extends State<LoginForm> {
           ),
           TextButton(
             onPressed: () {
-              // Handle forgot password
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (ctx) => const ForgotPasswordScreen()));
             },
             child: const Text('Forgot Password?'),
           ),
