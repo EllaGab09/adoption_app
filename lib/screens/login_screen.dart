@@ -108,6 +108,10 @@ class _LoginFormState extends State<LoginForm> {
               print('Email: $email, Password: $password');
             },
             child: Text('Login'),
+            style: ElevatedButton.styleFrom(
+              shape: StadiumBorder(), // Make the button rounder
+              minimumSize: Size(200, 50), // Set the button's width and height
+            ),
           ),
           TextButton(
             onPressed: () {
