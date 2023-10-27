@@ -53,7 +53,7 @@ class AnimalDetailScreen extends StatelessWidget {
                     const SizedBox(
                         width:
                             10), // Add spacing between the name and the button
-                    Spacer(),
+                    const Spacer(),
                     ElevatedButton(
                       onPressed: () {
                         // Handle Adopt button press

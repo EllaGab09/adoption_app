@@ -21,17 +21,17 @@ class CategoryGridItem extends StatelessWidget {
       },
       child: Card(
         //color: Colors.amber,
-        shape: const RoundedRectangleBorder(
+        /* shape: const RoundedRectangleBorder(
           side: BorderSide(
-            color: Colors.lightBlue,
+             color: Colors.lightBlue,
             width: 1.0,
           ),
-        ),
+        ), */
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Container(
+              SizedBox(
                 height: 150, // Set a fixed height for the image container
                 child: ClipRRect(
                   borderRadius: gridItemBorderRadius,
