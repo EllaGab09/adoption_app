@@ -16,7 +16,7 @@ class CategoryGridItem extends StatelessWidget {
         // Handle the tap action, e.g., navigate to the details screen
       },
       child: Card(
-        color: Colors.amber,
+        //color: Colors.amber,
         shape: const RoundedRectangleBorder(
           side: BorderSide(
             color: Colors.lightBlue,

@@ -9,7 +9,7 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Categories'),
+        title: Text('Pet Adopt'),
         actions: [
           Container(
             decoration: BoxDecoration(
@@ -19,7 +19,7 @@ class CategoriesScreen extends StatelessWidget {
               ),
             ),
             child: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.person,
                 size: 32,
               ),
@@ -30,16 +30,51 @@ class CategoriesScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: GridView(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 200,
-          childAspectRatio:
-              3 / 4, // Adjust the aspect ratio for better item spacing
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20,
-        ),
+      body: Column(
         children: [
-          for (final animal in dummyAnimals) CategoryGridItem(animal: animal)
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              'Categories',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Container(
+            height: 50, // Adjust the height as needed
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 5, // Replace with the actual number of buttons
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Handle button tap
+                    },
+                    child: Text('Category $index'),
+                  ),
+                );
+              },
+            ),
+          ),
+          Expanded(
+            child: GridView(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200,
+                childAspectRatio:
+                    3 / 4, // Adjust the aspect ratio for better item spacing
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+              ),
+              children: [
+                for (final animal in dummyAnimals)
+                  CategoryGridItem(animal: animal)
+              ],
+            ),
+          ),
         ],
       ),
     );
