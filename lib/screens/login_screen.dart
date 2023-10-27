@@ -1,5 +1,6 @@
 import 'package:adoption_app/screens/categories_screen.dart';
 import 'package:adoption_app/screens/forgot_password_screen.dart';
+import 'package:adoption_app/screens/sign_up_screen.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:flutter/material.dart';
 
@@ -147,7 +148,8 @@ class _LoginFormState extends State<LoginForm> {
                 const Text("Need an account? "),
                 TextButton(
                   onPressed: () {
-                    // Handle "SIGN UP" action here
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (ctx) => const SignUpScreen()));
                   },
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
