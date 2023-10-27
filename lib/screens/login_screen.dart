@@ -42,9 +42,9 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
         children: <Widget>[
-          Align(
+          const Align(
             alignment: Alignment.centerLeft,
-            child: const Text(
+            child: Text(
               'Login',
               style: TextStyle(
                 fontSize: 24,

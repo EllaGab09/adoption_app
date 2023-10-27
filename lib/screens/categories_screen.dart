@@ -9,7 +9,12 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pet Adopt'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset('assets/images/petAdoptLogo.png'),
+        ),
         actions: [
           Container(
             decoration: BoxDecoration(
@@ -40,24 +45,6 @@ class CategoriesScreen extends StatelessWidget {
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
-            ),
-          ),
-          Container(
-            height: 50, // Adjust the height as needed
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 5, // Replace with the actual number of buttons
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Handle button tap
-                    },
-                    child: Text('Category $index'),
-                  ),
-                );
-              },
             ),
           ),
           Expanded(
