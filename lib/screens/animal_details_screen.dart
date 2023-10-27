@@ -70,6 +70,15 @@ class AnimalDetailScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 const Text(
+                  'Location',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(animal.location),
+                const SizedBox(height: 20),
+                const Text(
                   'Description',
                   style: TextStyle(
                     fontSize: 20,
