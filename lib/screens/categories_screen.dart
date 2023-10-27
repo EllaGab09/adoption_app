@@ -22,13 +22,12 @@ class CategoriesScreen extends StatelessWidget {
       body: GridView(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 200,
-          childAspectRatio:
-              3 / 4, // Adjust the aspect ratio for better item spacing
+          childAspectRatio: 3 / 4,
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
         ),
         children: [
-          for (final animal in dummyAnimals) CategoryGridItem(animal: animal)
+          for (final animal in dummyAnimals) CategoryGridItem(animal: animal),
         ],
       ),
     );
