@@ -63,28 +63,41 @@ class UserProfileScreen extends StatelessWidget {
             ),
             // Display user details here
             ListTile(
-              title: const Text('Email'),
-              subtitle: Text(user.email),
+              title: const Text(
+                'Info',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Email: ${user.email}'),
+                  Text('First Name: ${user.firstname}'),
+                  Text('Surname: ${user.surname}'),
+                  Text('Age: ${user.age.toString()}'),
+                ],
+              ),
             ),
+
             ListTile(
-              title: const Text('Age'),
-              subtitle: Text(user.age.toString()),
-            ),
-            ListTile(
-              title: const Text('Street'),
-              subtitle: Text(user.address.street),
-            ),
-            ListTile(
-              title: const Text('City'),
-              subtitle: Text(user.address.city),
-            ),
-            ListTile(
-              title: const Text('Zip Code'),
-              subtitle: Text(user.address.zipCode),
-            ),
-            ListTile(
-              title: const Text('Country'),
-              subtitle: Text(user.address.country),
+              title: const Text(
+                'Address',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Street: ${user.address.street}'),
+                  Text('City: ${user.address.city}'),
+                  Text('Zip Code: ${user.address.zipCode}'),
+                  Text('Country: ${user.address.country}'),
+                ],
+              ),
             ),
           ],
         ),
