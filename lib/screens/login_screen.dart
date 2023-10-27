@@ -47,15 +47,33 @@ class _LoginFormState extends State<LoginForm> {
         children: <Widget>[
           TextField(
             controller: emailController,
-            decoration: InputDecoration(labelText: 'Email'),
+            decoration: InputDecoration(
+              labelText: 'Email',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide(), // Solid border
+              ),
+              hintText: 'Enter your email', // Placeholder text
+              contentPadding: EdgeInsets.all(12.0),
+            ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(
+            height: 20,
+          ),
           TextField(
             controller: passwordController,
-            decoration: InputDecoration(labelText: 'Password'),
+            decoration: InputDecoration(
+              labelText: 'Password',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide(), // Solid border
+              ),
+              hintText: 'Enter your password', // Placeholder text
+              contentPadding: EdgeInsets.all(12.0),
+            ),
             obscureText: true,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             children: [
               Checkbox(
@@ -66,7 +84,7 @@ class _LoginFormState extends State<LoginForm> {
                   });
                 },
               ),
-              Text('Remember me'),
+              const Text('Remember me'),
             ],
           ),
           ElevatedButton(
