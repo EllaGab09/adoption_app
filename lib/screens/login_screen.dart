@@ -1,4 +1,5 @@
 import 'package:adoption_app/screens/categories_screen.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -9,16 +10,11 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/petAdoptLogo.png'),
-            const SizedBox(height: 20),
-            const Text(
-              'Login',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  top: 30), // Logo Padding from the top of the screen
+              child: Image.asset('assets/images/petAdoptLogo.png'),
             ),
             const SizedBox(height: 20),
             LoginForm(),
@@ -44,7 +40,21 @@ class _LoginFormState extends State<LoginForm> {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
         children: <Widget>[
+          Align(
+            alignment: Alignment.centerLeft,
+            child: const Text(
+              'Login',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
           TextField(
             controller: emailController,
             decoration: InputDecoration(
@@ -105,6 +115,29 @@ class _LoginFormState extends State<LoginForm> {
             },
             child: const Text('Forgot Password?'),
           ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SignInButton(
+                  Buttons.google,
+                  onPressed: () {},
+                ),
+                SignInButton(
+                  Buttons.facebook,
+                  onPressed: () {},
+                ),
+                SignInButton(
+                  Buttons.apple,
+                  onPressed: () {},
+                ),
+                SignInButton(
+                  Buttons.linkedIn,
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
