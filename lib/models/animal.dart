@@ -8,7 +8,7 @@ class Animal {
   final int age;
   final String activity_level;
 
-  Animal({
+  const Animal({
     required this.name,
     required this.imageUrl,
     required this.description,

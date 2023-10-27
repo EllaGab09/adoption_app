@@ -6,26 +6,33 @@ class CategoryGridItem extends StatelessWidget {
 
   const CategoryGridItem({super.key, required this.animal});
 
+// Define a constant variable for borderRadius
+  static BorderRadius gridItemBorderRadius = BorderRadius.circular(30);
+
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Column(
         children: [
-          Image.network(
-            animal.imageUrl, // Use the animal's image URL
-            fit: BoxFit.cover,
-            height: 150,
+          ClipRRect(
+            borderRadius: gridItemBorderRadius,
+            child: Image.network(
+              animal.imageUrl,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
+            ),
           ),
           Text(
             animal.name,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
             animal.description,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
             ),
           ),

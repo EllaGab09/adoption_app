@@ -19,41 +19,17 @@ class CategoriesScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Categories',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  // Add active filters here
-                ],
-              ),
-            ),
-            GridView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 2 / 3, // Adjust the aspect ratio as needed
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-              ),
-              itemCount: dummyAnimals.length,
-              itemBuilder: (ctx, index) {
-                return CategoryGridItem(animal: dummyAnimals[index]);
-              },
-            ),
-          ],
+      body: GridView(
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 200,
+          childAspectRatio:
+              3 / 4, // Adjust the aspect ratio for better item spacing
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
         ),
+        children: [
+          for (final animal in dummyAnimals) CategoryGridItem(animal: animal)
+        ],
       ),
     );
   }
