@@ -24,14 +24,41 @@ class UserProfileScreen extends StatelessWidget {
                 width: double.infinity,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                'User Profile',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      // Handle the "User Profile" tap
+                    },
+                    child: const Text(
+                      'User Profile',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const Spacer(), // Add some spacing between the text and the icon
+                  InkWell(
+                    onTap: () {
+                      // Handle the "Messages" tap
+                    },
+                    child: const Row(
+                      children: [
+                        Text(
+                          'Inbox ',
+                          style: TextStyle(
+                            fontSize: 18,
+                            //  fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Icon(Icons.mail_outline),
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
             // Display user details here
