@@ -28,6 +28,34 @@ class AnimalDetailScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  children: [
+                    Text(
+                      animal.name, // Display the animal's name
+                      style: const TextStyle(
+                        fontSize: 24, // Adjust the font size
+                        fontWeight: FontWeight.bold, // Make it bold
+                      ),
+                    ),
+                    const SizedBox(
+                        width:
+                            10), // Add spacing between the name and the button
+                    Spacer(),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Handle Adopt button press
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(5), // Square button
+                        ),
+                      ),
+                      child: const Text("Adopt"),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
                 const Text(
                   'Description',
                   style: TextStyle(
