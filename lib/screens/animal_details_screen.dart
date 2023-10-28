@@ -1,9 +1,29 @@
+import 'package:adoption_app/models/adoption_center.dart';
 import 'package:adoption_app/models/animal.dart';
+import 'package:adoption_app/screens/adoption_center_screen.dart';
 import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AnimalDetailScreen extends StatelessWidget {
   final Animal animal;
+
+  //Temp Dummy
+  final dummyAdoptionCenter = AdoptionCenter(
+    id: '1',
+    imageUrl:
+        "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
+    name: 'Happy Paws Adoption Center',
+    description: 'We provide a loving home for pets of all kinds.',
+    location: AdoptionCenterLocation(
+      location: LatLng(37.7749, -122.4194), // Replace with actual coordinates
+      street: '123 Main St',
+      city: 'Anytown',
+      zipCode: '12345',
+      country: 'United States',
+    ),
+    availableAnimalIds: ['1', '2', '3'], // Replace with actual animal IDs
+  );
 
   AnimalDetailScreen({super.key, required this.animal});
 
@@ -29,7 +49,7 @@ class AnimalDetailScreen extends StatelessWidget {
       body: ListView(
         children: <Widget>[
           Container(
-            height: 250, // Set the image container height
+            height: 250,
             child: Image.network(
               animal.imageUrl,
               fit: BoxFit.cover,
@@ -44,20 +64,17 @@ class AnimalDetailScreen extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      animal.name, // Display the animal's name
+                      animal.name,
                       style: const TextStyle(
-                        fontSize: 24, // Adjust the font size
-                        fontWeight: FontWeight.bold, // Make it bold
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(
-                        width:
-                            10), // Add spacing between the name and the button
+                        width: 10), // Spacing between the name and the button
                     const Spacer(),
                     ElevatedButton(
-                      onPressed: () {
-                        // Handle Adopt button press
-                      },
+                      onPressed: () {},
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius:
@@ -65,6 +82,23 @@ class AnimalDetailScreen extends StatelessWidget {
                         ),
                       ),
                       child: const Text("Adopt"),
+                    ),
+
+                    //TEMP BUTTON
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (ctx) => AdoptionCenterScreen(
+                                  adoptionCenter: dummyAdoptionCenter,
+                                )));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(5), // Square button
+                        ),
+                      ),
+                      child: const Text("Adoption Center"),
                     ),
                   ],
                 ),

@@ -6,6 +6,7 @@ import 'package:adoption_app/dummy_data/animal_data.dart';
 
 import 'package:adoption_app/models/user.dart';
 
+//Temp Dummy
 final dummyUser = User(
   id: '1',
   imageUrl:
