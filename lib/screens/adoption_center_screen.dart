@@ -71,6 +71,14 @@ class AdoptionCenterScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
+                Column(
+                  children: [
+                    Container(
+                      height: 300, // Adjust the height as needed
+                      child: MapSample(), // Embed the GoogleMapScreen here
+                    ),
+                  ],
+                ),
                 /* GoogleMap(
                   initialCameraPosition: CameraPosition(
                     target: LatLng(
