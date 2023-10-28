@@ -15,13 +15,13 @@ class MapSampleState extends State<MapSample> {
       Completer<GoogleMapController>();
 
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+    target: LatLng(62.471616274771996, 6.235525434056398),
+    zoom: 16.4746,
   );
 
-  static const CameraPosition _kLake = CameraPosition(
+  static const CameraPosition _kStore = CameraPosition(
       bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
+      target: LatLng(62.4723849014027, 6.2407047900133295),
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
 
@@ -36,15 +36,15 @@ class MapSampleState extends State<MapSample> {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: const Text('To the lake!'),
-        icon: const Icon(Icons.directions_boat),
+        onPressed: _goToTheStore,
+        label: const Text('Lets buy some lunch!!'),
+        icon: const Icon(Icons.fastfood),
       ),
     );
   }
 
-  Future<void> _goToTheLake() async {
+  Future<void> _goToTheStore() async {
     final GoogleMapController controller = await _controller.future;
-    await controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+    await controller.animateCamera(CameraUpdate.newCameraPosition(_kStore));
   }
 }
