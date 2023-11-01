@@ -15,6 +15,7 @@ class AnimalDetailScreen extends StatelessWidget {
         "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
     name: 'Happy Paws Adoption Center',
     description: 'We provide a loving home for pets of all kinds.',
+    phoneNo: '123456789',
     location: AdoptionCenterLocation(
       location: LatLng(37.7749, -122.4194), // Replace with actual coordinates
       street: '123 Main St',

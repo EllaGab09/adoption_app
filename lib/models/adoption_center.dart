@@ -5,6 +5,7 @@ class AdoptionCenter {
   final String imageUrl;
   final String name;
   final String description;
+  final String phoneNo;
   final AdoptionCenterLocation location;
   final List<String> availableAnimalIds;
 
@@ -13,6 +14,7 @@ class AdoptionCenter {
     required this.imageUrl,
     required this.name,
     required this.description,
+    required this.phoneNo,
     required this.location,
     required this.availableAnimalIds,
   });

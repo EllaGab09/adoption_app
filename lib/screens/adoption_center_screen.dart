@@ -55,6 +55,19 @@ class AdoptionCenterScreen extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
+                const Text(
+                  'Contact ',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  adoptionCenter.phoneNo,
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
                 const SizedBox(height: 20),
                 const Divider(),
                 InkWell(
