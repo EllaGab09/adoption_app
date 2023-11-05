@@ -44,10 +44,11 @@ class CategoriesScreen extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
-              'Categories',
+              'Our Shelter Animals',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
               ),
             ),
           ),

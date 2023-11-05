@@ -1,7 +1,7 @@
 import 'package:adoption_app/models/adoption_center.dart';
 import 'package:adoption_app/models/animal.dart';
 import 'package:adoption_app/screens/adoption_center_screen.dart';
-import 'package:adoption_app/widgets/logo_app_bar.dart';
+import 'package:adoption_app/widgets/animal_logo_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -43,12 +43,12 @@ class AnimalDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: LogoAppBar(
-        onProfilePressed: () {},
+      appBar: AnimalLogoAppBar(
+        onFavoriteToggle: () => {},
       ),
       body: ListView(
         children: <Widget>[
-          Container(
+          SizedBox(
             height: 250,
             child: Image.network(
               animal.imageUrl,
