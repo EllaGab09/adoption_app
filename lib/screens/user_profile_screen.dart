@@ -16,7 +16,7 @@ class UserProfileScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 250, // Set the image container height
               child: Image.network(
                 user.imageUrl,

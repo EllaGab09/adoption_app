@@ -1,6 +1,18 @@
 import 'package:adoption_app/screens/login_screen.dart';
 //import 'screens/categories_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+final theme = ThemeData(
+  useMaterial3: true,
+  colorScheme: ColorScheme.fromSwatch(
+    primarySwatch: Colors.pink,
+    accentColor: Colors.pinkAccent,
+    backgroundColor: Colors.orange,
+    brightness: Brightness.dark,
+  ),
+  textTheme: GoogleFonts.robotoTextTheme(),
+);
 
 void main() {
   runApp(const App());
@@ -11,6 +23,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: LoginScreen());
+    return MaterialApp(theme: theme, home: const LoginScreen());
   }
 }

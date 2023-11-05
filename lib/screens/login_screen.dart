@@ -19,7 +19,7 @@ class LoginScreen extends StatelessWidget {
               child: Image.asset('assets/images/petAdoptLogo.png'),
             ),
             const SizedBox(height: 20),
-            LoginForm(),
+            const LoginForm(),
           ],
         ),
       ),
@@ -28,6 +28,8 @@ class LoginScreen extends StatelessWidget {
 }
 
 class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
+
   @override
   _LoginFormState createState() => _LoginFormState();
 }

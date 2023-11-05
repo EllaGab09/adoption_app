@@ -25,11 +25,12 @@ class AdoptionCenterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(adoptionCenter.name),
       ),
       body: ListView(
         children: <Widget>[
-          Container(
+          SizedBox(
             height: 250,
             child: Image.network(
               adoptionCenter.imageUrl,
@@ -71,9 +72,9 @@ class AdoptionCenterScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Column(
+                const Column(
                   children: [
-                    Container(
+                    SizedBox(
                       height: 300, // Adjust the height as needed
                       child: MapSample(), // Embed the GoogleMapScreen here
                     ),
