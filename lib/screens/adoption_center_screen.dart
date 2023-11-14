@@ -5,21 +5,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AdoptionCenterScreen extends StatelessWidget {
   final AdoptionCenter adoptionCenter;
-  final Set<Marker> markers;
 
   AdoptionCenterScreen({Key? key, required this.adoptionCenter})
-      : markers = <Marker>{
-          Marker(
-            markerId: MarkerId(adoptionCenter.id),
-            position: adoptionCenter.adress.coordinates,
-            infoWindow: InfoWindow(
-              title: adoptionCenter.name,
-              snippet:
-                  'Location: ${adoptionCenter.adress.city}, ${adoptionCenter.adress.country}',
-            ),
-          ),
-        },
-        super(key: key);
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -89,14 +77,12 @@ class AdoptionCenterScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Column(
-                  children: [
-                    Container(
-                      height: 300,
-                      child: MapScreen(
-                          adoptionCenterLocation: adoptionCenter.adress),
-                    ),
-                  ],
+                // The adoptionCenterLocation is passed to MapScreen
+                Container(
+                  height: 300,
+                  child: MapScreen(
+                    adoptionCenterLocation: adoptionCenter.adress,
+                  ),
                 ),
               ],
             ),

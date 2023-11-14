@@ -11,16 +11,16 @@ class AnimalDetailScreen extends StatelessWidget {
   final dummyAdoptionCenter = AdoptionCenter(
     id: '1',
     /*  imageUrl:
-      "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg", */
+        "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg", */
     name: 'Happy Paws Adoption Center',
     description: 'We provide a loving home for pets of all kinds.',
     phoneNo: '123456789',
     adress: AdoptionCenterLocation(
-      street: 'Høgvollvegen',
-      city: 'Ålesund',
-      zipCode: '6018',
+      street: 'Midtre Lambertgard',
+      city: 'Langevåg',
+      zipCode: '6030',
       country: 'Norge',
-    )..fetchCoordinates(), // Call fetchCoordinates when creating the AdoptionCenterLocation
+    ),
     availableAnimalIds: ['1', '2', '3'], // Replace with actual animal IDs
   );
 
