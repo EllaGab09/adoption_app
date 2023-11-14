@@ -10,10 +10,10 @@ class MapScreen extends StatefulWidget {
   MapScreen({Key? key, required this.adoptionCenterLocation}) : super(key: key);
 
   @override
-  State<MapScreen> createState() => MapSampleState();
+  State<MapScreen> createState() => MapState();
 }
 
-class MapSampleState extends State<MapScreen> {
+class MapState extends State<MapScreen> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
@@ -22,8 +22,8 @@ class MapSampleState extends State<MapScreen> {
   @override
   void initState() {
     super.initState();
-    _initialCameraPosition = CameraPosition(
-      target: LatLng(0, 0), // Default to (0, 0)
+    _initialCameraPosition = const CameraPosition(
+      target: LatLng(0, 0), //  Default to (0, 0)
       zoom: 15,
     );
     _updateCameraPosition();
@@ -53,9 +53,28 @@ class MapSampleState extends State<MapScreen> {
               onMapCreated: (GoogleMapController controller) {
                 _controller.complete(controller);
               },
+              markers: <Marker>{
+                Marker(
+                  markerId: const MarkerId('adoptionCenter'),
+                  position: widget.adoptionCenterLocation.coordinates,
+                  infoWindow: const InfoWindow(
+                    title: 'Adoption Center',
+                    snippet: 'Your adoption center is here!',
+                  ),
+                ),
+              },
+              // Enable user interaction
+              myLocationEnabled: true,
+              compassEnabled: true,
+              zoomControlsEnabled: true,
+              // Add gesture detectors for additional interaction
+              onTap: (LatLng latLng) {
+                // Handle map tap
+                print('Map tapped at $latLng');
+              },
             );
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }

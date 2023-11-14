@@ -1,7 +1,6 @@
 import 'package:adoption_app/widgets/googleMap.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/models/adoption_center.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AdoptionCenterScreen extends StatelessWidget {
   final AdoptionCenter adoptionCenter;
@@ -78,7 +77,7 @@ class AdoptionCenterScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 // The adoptionCenterLocation is passed to MapScreen
-                Container(
+                SizedBox(
                   height: 300,
                   child: MapScreen(
                     adoptionCenterLocation: adoptionCenter.adress,
