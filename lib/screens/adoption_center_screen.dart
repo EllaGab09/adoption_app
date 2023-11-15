@@ -69,7 +69,7 @@ class AdoptionCenterScreen extends StatelessWidget {
                   },
                   child: ListTile(
                     leading: const Icon(Icons.location_on),
-                    title: const Text("Location"),
+                    title: const Text("Click for interactive map"),
                     subtitle: Text(
                       '${adoptionCenter.adress.street}, ${adoptionCenter.adress.city}, ${adoptionCenter.adress.zipCode}, ${adoptionCenter.adress.country}',
                     ),

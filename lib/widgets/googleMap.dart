@@ -23,7 +23,7 @@ class MapState extends State<MapScreen> {
   void initState() {
     super.initState();
     _initialCameraPosition = const CameraPosition(
-      target: LatLng(0, 0), //  Default to (0, 0)
+      target: LatLng(0, 0), // Default to (0, 0)
       zoom: 15,
     );
     _updateCameraPosition();
@@ -47,31 +47,25 @@ class MapState extends State<MapScreen> {
         future: widget.adoptionCenterLocation.fetchCoordinates(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return GoogleMap(
-              mapType: MapType.normal,
-              initialCameraPosition: _initialCameraPosition,
-              onMapCreated: (GoogleMapController controller) {
-                _controller.complete(controller);
-              },
-              markers: <Marker>{
-                Marker(
-                  markerId: const MarkerId('adoptionCenter'),
-                  position: widget.adoptionCenterLocation.coordinates,
-                  infoWindow: const InfoWindow(
-                    title: 'Adoption Center',
-                    snippet: 'Your adoption center is here!',
+            return GestureDetector(
+              onTap: () {},
+              child: GoogleMap(
+                mapType: MapType.normal,
+                initialCameraPosition: _initialCameraPosition,
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
+                },
+                markers: <Marker>{
+                  Marker(
+                    markerId: const MarkerId('adoptionCenter'),
+                    position: widget.adoptionCenterLocation.coordinates,
+                    infoWindow: const InfoWindow(
+                      title: 'Adoption Center',
+                      snippet: 'Your adoption center is here!',
+                    ),
                   ),
-                ),
-              },
-              // Enable user interaction
-              myLocationEnabled: true,
-              compassEnabled: true,
-              zoomControlsEnabled: true,
-              // Add gesture detectors for additional interaction
-              onTap: (LatLng latLng) {
-                // Handle map tap
-                print('Map tapped at $latLng');
-              },
+                },
+              ),
             );
           } else {
             return const Center(
