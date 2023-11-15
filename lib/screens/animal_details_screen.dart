@@ -3,7 +3,6 @@ import 'package:adoption_app/models/animal.dart';
 import 'package:adoption_app/screens/adoption_center_screen.dart';
 import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AnimalDetailScreen extends StatelessWidget {
   final Animal animal;
@@ -11,16 +10,16 @@ class AnimalDetailScreen extends StatelessWidget {
   //Temp Dummy
   final dummyAdoptionCenter = AdoptionCenter(
     id: '1',
-    imageUrl:
-        "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
+    /*  imageUrl:
+        "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg", */
     name: 'Happy Paws Adoption Center',
     description: 'We provide a loving home for pets of all kinds.',
-    location: AdoptionCenterLocation(
-      location: LatLng(37.7749, -122.4194), // Replace with actual coordinates
-      street: '123 Main St',
-      city: 'Anytown',
-      zipCode: '12345',
-      country: 'United States',
+    phoneNo: '123456789',
+    adress: AdoptionCenterLocation(
+      street: 'Midtre Lambertgard',
+      city: 'Langevåg',
+      zipCode: '6030',
+      country: 'Norge',
     ),
     availableAnimalIds: ['1', '2', '3'], // Replace with actual animal IDs
   );
