@@ -1,6 +1,7 @@
 import 'package:adoption_app/screens/categories_screen.dart';
 import 'package:adoption_app/screens/forgot_password_screen.dart';
 import 'package:adoption_app/screens/sign_up_screen.dart';
+import 'package:adoption_app/screens/tabs.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:flutter/material.dart';
 
@@ -103,8 +104,8 @@ class _LoginFormState extends State<LoginForm> {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (ctx) => const CategoriesScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (ctx) => const TabsScreen()));
 
               String email = emailController.text;
               String password = passwordController.text;

@@ -1,4 +1,5 @@
 import 'package:adoption_app/screens/login_screen.dart';
+import 'package:adoption_app/screens/tabs.dart';
 //import 'screens/categories_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
