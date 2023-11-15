@@ -31,7 +31,7 @@ class AnimalLogoAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           child: IconButton(
             icon: const Icon(
-              Icons.star_border,
+              Icons.favorite_border,
               size: 32,
             ),
             onPressed: onFavoriteToggle,
