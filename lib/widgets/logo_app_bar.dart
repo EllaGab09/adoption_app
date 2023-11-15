@@ -20,24 +20,24 @@ class LogoAppBar extends StatelessWidget implements PreferredSizeWidget {
         padding: const EdgeInsets.all(8.0),
         child: Image.asset('assets/images/petAdoptLogo.png'),
       ),
-      actions: [
-        Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: Colors.white,
-              width: 2, // Border width
-            ),
-          ),
-          child: IconButton(
-            icon: const Icon(
-              Icons.person,
-              size: 32,
-            ),
-            onPressed: onProfilePressed,
-          ),
-        ),
-      ],
+      // actions: [
+      //   Container(
+      //     decoration: BoxDecoration(
+      //       shape: BoxShape.circle,
+      //       border: Border.all(
+      //         color: Colors.white,
+      //         width: 2, // Border width
+      //       ),
+      //     ),
+      //     child: IconButton(
+      //       icon: const Icon(
+      //         Icons.person,
+      //         size: 32,
+      //       ),
+      //       onPressed: onProfilePressed,
+      //     ),
+      //   ),
+      // ],
     );
   }
 }
