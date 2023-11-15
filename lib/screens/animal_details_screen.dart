@@ -40,6 +40,42 @@ class AnimalDetailScreen extends StatelessWidget {
     }
   }
 
+  void showAdoptionDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Apply for Adoption'),
+          content: const Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text('User Name'),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Enter your message',
+                ),
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Adopt'),
+              onPressed: () {
+                // Handle adoption here
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +110,9 @@ class AnimalDetailScreen extends StatelessWidget {
                         width: 10), // Spacing between the name and the button
                     const Spacer(),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showAdoptionDialog(context);
+                      },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius:
