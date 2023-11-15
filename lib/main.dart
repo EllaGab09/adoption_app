@@ -24,6 +24,13 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: theme, home: const LoginScreen());
+    return MaterialApp(
+      theme: theme,
+      home: const LoginScreen(),
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/tabs': (context) => const TabsScreen(),
+      },
+    );
   }
 }

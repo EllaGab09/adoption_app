@@ -99,6 +99,24 @@ class UserProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
+            Stack(
+              children: <Widget>[
+                // ... other widgets here ...
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: FloatingActionButton.extended(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/login');
+                      },
+                      label: const Text('Logout'),
+                      icon: const Icon(Icons.logout),
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
