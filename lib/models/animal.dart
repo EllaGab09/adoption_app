@@ -1,3 +1,13 @@
+enum DogBreed { labrador, goldenRetriever, poodle }
+
+enum CatBreed { siamese, persian }
+
+enum BirdBreed { canary, parrot }
+
+enum AnimalType { dog, cat, bird }
+
+enum AnimalColor { brown, black, white }
+
 class Animal {
   final String name;
   final String imageUrl;
