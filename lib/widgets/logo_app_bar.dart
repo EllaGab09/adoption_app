@@ -4,9 +4,9 @@ class LogoAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onProfilePressed;
 
   const LogoAppBar({
-    Key? key,
+    super.key,
     required this.onProfilePressed,
-  }) : super(key: key);
+  });
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);

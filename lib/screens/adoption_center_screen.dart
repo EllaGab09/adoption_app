@@ -5,8 +5,7 @@ import 'package:adoption_app/models/adoption_center.dart';
 class AdoptionCenterScreen extends StatelessWidget {
   final AdoptionCenter adoptionCenter;
 
-  AdoptionCenterScreen({Key? key, required this.adoptionCenter})
-      : super(key: key);
+  AdoptionCenterScreen({super.key, required this.adoptionCenter});
 
   @override
   Widget build(BuildContext context) {

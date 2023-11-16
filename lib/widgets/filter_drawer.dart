@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
 class FilterDrawer extends StatelessWidget {
-  const FilterDrawer({Key? key, required this.onFilterOptionSelected})
-      : super(key: key);
+  const FilterDrawer({super.key, required this.onFilterOptionSelected});
 
-  final void Function(String) onFilterOptionSelected;
+  final void Function(String, String) onFilterOptionSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +24,35 @@ class FilterDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text('Filter Option 1'),
+            title: const Text('Filter by Animal'),
             onTap: () {
-              onFilterOptionSelected('Option 1');
-              Navigator.pop(context); // Close the drawer
+              // Implement logic to filter by type
+              onFilterOptionSelected('type', 'Dog');
+              Navigator.pop(context);
             },
           ),
           ListTile(
-            title: const Text('Filter Option 2'),
+            title: const Text('Filter by Breed'),
             onTap: () {
-              onFilterOptionSelected('Option 2');
-              Navigator.pop(context); // Close the drawer
+              // Implement logic to filter by breed
+              onFilterOptionSelected('breed', 'Labrador');
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: const Text('Filter by Color'),
+            onTap: () {
+              // Implement logic to filter by color
+              onFilterOptionSelected('color', 'Brown');
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: const Text('Filter by Age'),
+            onTap: () {
+              // Implement logic to filter by age
+              onFilterOptionSelected('age', '2');
+              Navigator.pop(context);
             },
           ),
           // Add more filter options as needed

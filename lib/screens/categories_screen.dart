@@ -3,6 +3,7 @@ import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/widgets/categories_grid_item.dart';
 import 'package:adoption_app/dummy_data/animal_data.dart';
+import 'package:adoption_app/widgets/filter_drawer.dart';
 
 import 'package:adoption_app/models/user.dart';
 
@@ -27,6 +28,12 @@ final dummyUser = User(
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
 
+  void handleFilterOptionSelected(String attribute, String value) {
+    // Implement your filter logic based on the selected attribute and value
+    print('Selected filter option: $attribute - $value');
+    // Add your filtering logic here
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,16 +46,34 @@ class CategoriesScreen extends StatelessWidget {
           );
         },
       ),
+      drawer: FilterDrawer(onFilterOptionSelected: handleFilterOptionSelected),
       body: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              'Categories',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                Builder(
+                  builder: (context) => TextButton(
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                    child: const Column(
+                      children: [
+                        Icon(Icons.tune),
+                        Text('Filter'),
+                      ],
+                    ),
+                  ),
+                ),
+                const Text(
+                  'Categories',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
           ),
           Expanded(
