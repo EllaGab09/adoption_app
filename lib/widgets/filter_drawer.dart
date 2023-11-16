@@ -39,88 +39,101 @@ class _FilterDrawerState extends State<FilterDrawer> {
               ),
             ),
           ),
-          ExpansionPanelList(
-            elevation: 1,
-            expandedHeaderPadding: EdgeInsets.zero,
-            dividerColor: Colors.grey,
-            expansionCallback: (int index, bool isExpanded) {
-              var animalType = AnimalType.values[index];
+          Container(
+            color: Colors.transparent, // Set background color to transparent
+            child: ExpansionPanelList(
+              elevation: 1,
+              expandedHeaderPadding: EdgeInsets.zero,
+              expandIconColor: Colors.transparent,
+              dividerColor:
+                  Colors.transparent, // Set divider color to transparent
+              expansionCallback: (int index, bool isExpanded) {
+                var animalType = AnimalType.values[index];
 
-              setState(() {
-                isTypeCheckedMap[animalType] = isExpanded;
-                if (!isExpanded) {
-                  // If the type is not expanded, expand it without checking the breeds
-                  selectedBreedsMap[animalType] = <dynamic>{};
-                }
-              });
+                setState(() {
+                  isTypeCheckedMap[animalType] = isExpanded;
+                  if (!isExpanded) {
+                    // If the type is not expanded, expand it without checking the breeds
+                    selectedBreedsMap[animalType] = <dynamic>{};
+                  }
+                });
 
-              widget.onFilterOptionSelected(
-                  'breed', selectedBreedsMap.values.join(', '));
-            },
-            children:
-                AnimalType.values.map<ExpansionPanel>((AnimalType animalType) {
-              return ExpansionPanel(
-                canTapOnHeader: true,
-                headerBuilder: (BuildContext context, bool isExpanded) {
-                  return ListTile(
-                    title: Row(
-                      children: [
-                        Text(capitalize(animalType.toString().split('.').last)),
-                        SizedBox(width: 10),
-                        Checkbox(
-                          value: isTypeCheckedMap.containsKey(animalType)
-                              ? isTypeCheckedMap[animalType]
-                              : selectedBreedsMap.containsKey(animalType),
+                widget.onFilterOptionSelected(
+                    'breed', selectedBreedsMap.values.join(', '));
+              },
+              children: AnimalType.values.map<ExpansionPanel>(
+                (AnimalType animalType) {
+                  return ExpansionPanel(
+                    canTapOnHeader: false, // Disable tapping on the header
+                    headerBuilder: (BuildContext context, bool isExpanded) {
+                      return ListTile(
+                        title: Row(
+                          children: [
+                            Text(capitalize(
+                                animalType.toString().split('.').last)),
+                            SizedBox(width: 10),
+                            Checkbox(
+                              value: isTypeCheckedMap.containsKey(animalType)
+                                  ? isTypeCheckedMap[animalType]
+                                  : selectedBreedsMap.containsKey(animalType),
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  if (value!) {
+                                    selectedBreedsMap[animalType] = <dynamic>{};
+                                  } else {
+                                    selectedBreedsMap.remove(animalType);
+                                  }
+                                  isTypeCheckedMap[animalType] = value;
+                                });
+                                widget.onFilterOptionSelected('breed',
+                                    selectedBreedsMap.values.join(', '));
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    body: ListView.builder(
+                      physics:
+                          NeverScrollableScrollPhysics(), // Disable scrolling in the body
+                      shrinkWrap: true,
+                      itemCount: getBreedDropdownItems(animalType).length,
+                      itemBuilder: (context, index) {
+                        var breed = getBreedDropdownItems(animalType)[index];
+                        return CheckboxListTile(
+                          dense: true, // Make the ListTile dense
+                          title: Text(
+                              capitalize(breed.toString().split('.').last)),
+                          contentPadding:
+                              EdgeInsets.zero, // Remove padding around ListTile
+                          value: selectedBreedsMap.containsKey(animalType) &&
+                              selectedBreedsMap[animalType]!.contains(breed),
                           onChanged: (bool? value) {
                             setState(() {
                               if (value!) {
-                                selectedBreedsMap[animalType] = <dynamic>{};
+                                selectedBreedsMap.putIfAbsent(
+                                    animalType, () => <dynamic>{});
+                                selectedBreedsMap[animalType]!.add(breed);
                               } else {
-                                selectedBreedsMap.remove(animalType);
+                                selectedBreedsMap[animalType]!.remove(breed);
+                                if (selectedBreedsMap[animalType]!.isEmpty) {
+                                  selectedBreedsMap.remove(animalType);
+                                }
                               }
-                              isTypeCheckedMap[animalType] = value;
                             });
                             widget.onFilterOptionSelected(
                                 'breed', selectedBreedsMap.values.join(', '));
                           },
-                        ),
-                      ],
+                        );
+                      },
                     ),
+                    isExpanded: isTypeCheckedMap.containsKey(animalType)
+                        ? isTypeCheckedMap[animalType]!
+                        : selectedBreedsMap.containsKey(animalType),
                   );
                 },
-                body: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: getBreedDropdownItems(animalType).length,
-                  itemBuilder: (context, index) {
-                    var breed = getBreedDropdownItems(animalType)[index];
-                    return CheckboxListTile(
-                      title: Text(capitalize(breed.toString().split('.').last)),
-                      value: selectedBreedsMap.containsKey(animalType) &&
-                          selectedBreedsMap[animalType]!.contains(breed),
-                      onChanged: (bool? value) {
-                        setState(() {
-                          if (value!) {
-                            selectedBreedsMap.putIfAbsent(
-                                animalType, () => <dynamic>{});
-                            selectedBreedsMap[animalType]!.add(breed);
-                          } else {
-                            selectedBreedsMap[animalType]!.remove(breed);
-                            if (selectedBreedsMap[animalType]!.isEmpty) {
-                              selectedBreedsMap.remove(animalType);
-                            }
-                          }
-                        });
-                        widget.onFilterOptionSelected(
-                            'breed', selectedBreedsMap.values.join(', '));
-                      },
-                    );
-                  },
-                ),
-                isExpanded: isTypeCheckedMap.containsKey(animalType)
-                    ? isTypeCheckedMap[animalType]!
-                    : selectedBreedsMap.containsKey(animalType),
-              );
-            }).toList(),
+              ).toList(),
+            ),
           ),
           Row(
             children: [
@@ -141,8 +154,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         (AnimalActivity value) {
                   return DropdownMenuItem<AnimalActivity>(
                     value: value,
-                    child:
-                        Text(capitalize('${value.toString().split('.').last}')),
+                    child: Text(capitalize(value.toString().split('.').last)),
                   );
                 }).toList(),
               ),
