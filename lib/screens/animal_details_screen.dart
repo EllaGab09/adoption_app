@@ -154,12 +154,6 @@ class AnimalDetailScreen extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Text(
-                          'Color: ${animal.color}',
-                          style: const TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
                         const SizedBox(
                             width: 16), // Adjust the spacing between items
                         Text(

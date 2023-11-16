@@ -6,7 +6,9 @@ enum BirdBreed { canary, parrot }
 
 enum AnimalType { dog, cat, bird }
 
-enum AnimalColor { brown, black, white }
+enum AnimalActivity { unspecified, low, medium, high }
+
+enum AnimalSex { unspecified, male, female, high }
 
 class Animal {
   final String name;
@@ -14,7 +16,6 @@ class Animal {
   final String description;
   final String type; //Dog, Cat, Bird etc
   final String breed;
-  final String color;
   final int age;
   final String activityLevel;
   final String sex;
@@ -26,7 +27,6 @@ class Animal {
     required this.description,
     required this.type,
     required this.breed,
-    required this.color,
     required this.age,
     required this.activityLevel,
     required this.sex,

@@ -11,8 +11,8 @@ class FilterDrawer extends StatefulWidget {
 }
 
 class _FilterDrawerState extends State<FilterDrawer> {
-  AnimalType selectedAnimalType = AnimalType.dog;
-  dynamic selectedBreed;
+  Map<AnimalType, Set<dynamic>> selectedBreedsMap = {};
+  Map<AnimalType, bool> isTypeCheckedMap = {};
 
   @override
   Widget build(BuildContext context) {
@@ -22,89 +22,117 @@ class _FilterDrawerState extends State<FilterDrawer> {
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.transparent,
             ),
             child: Text(
-              'Filter Options',
+              'Filters',
               style: TextStyle(
-                color: Colors.white,
+                //color: Colors.white,
                 fontSize: 24,
               ),
             ),
           ),
-          Row(
-            children: [
-              const Text(
-                'Animal:   ',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-              DropdownButton<AnimalType>(
-                value: selectedAnimalType,
-                onChanged: (AnimalType? value) {
-                  setState(() {
-                    selectedAnimalType = value ?? AnimalType.dog;
-                    selectedBreed =
-                        null; // Reset selected breed when animal type changes
-                  });
+          ExpansionPanelList(
+            elevation: 1,
+            expandedHeaderPadding: EdgeInsets.zero,
+            dividerColor: Colors.grey,
+            expansionCallback: (int index, bool isExpanded) {
+              var animalType = AnimalType.values[index];
+
+              setState(() {
+                isTypeCheckedMap[animalType] = isExpanded;
+                if (!isExpanded) {
+                  // If the type is not expanded, expand it without checking the breeds
+                  selectedBreedsMap[animalType] = <dynamic>{};
+                }
+              });
+
+              widget.onFilterOptionSelected(
+                  'breed', selectedBreedsMap.values.join(', '));
+            },
+            children:
+                AnimalType.values.map<ExpansionPanel>((AnimalType animalType) {
+              return ExpansionPanel(
+                canTapOnHeader: true,
+                headerBuilder: (BuildContext context, bool isExpanded) {
+                  return ListTile(
+                    title: Row(
+                      children: [
+                        Text(animalType.toString().split('.').last),
+                        SizedBox(width: 10),
+                        Checkbox(
+                          value: isTypeCheckedMap.containsKey(animalType)
+                              ? isTypeCheckedMap[animalType]
+                              : selectedBreedsMap.containsKey(animalType),
+                          onChanged: (bool? value) {
+                            setState(() {
+                              if (value!) {
+                                selectedBreedsMap[animalType] = <dynamic>{};
+                              } else {
+                                selectedBreedsMap.remove(animalType);
+                              }
+                              isTypeCheckedMap[animalType] = value;
+                            });
+                            widget.onFilterOptionSelected(
+                                'breed', selectedBreedsMap.values.join(', '));
+                          },
+                        ),
+                      ],
+                    ),
+                  );
                 },
-                items: [
-                  const DropdownMenuItem<AnimalType>(
-                    value: null,
-                    child: Text('Select Animal Type'),
-                  ),
-                  ...AnimalType.values
-                      .map<DropdownMenuItem<AnimalType>>((AnimalType value) {
-                    return DropdownMenuItem<AnimalType>(
-                      value: value,
-                      child: Text('${value.toString().split('.').last}'),
+                body: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: getBreedDropdownItems(animalType).length,
+                  itemBuilder: (context, index) {
+                    var breed = getBreedDropdownItems(animalType)[index];
+                    return CheckboxListTile(
+                      title: Text(breed.toString().split('.').last),
+                      value: selectedBreedsMap.containsKey(animalType) &&
+                          selectedBreedsMap[animalType]!.contains(breed),
+                      onChanged: (bool? value) {
+                        setState(() {
+                          if (value!) {
+                            selectedBreedsMap.putIfAbsent(
+                                animalType, () => <dynamic>{});
+                            selectedBreedsMap[animalType]!.add(breed);
+                          } else {
+                            selectedBreedsMap[animalType]!.remove(breed);
+                            if (selectedBreedsMap[animalType]!.isEmpty) {
+                              selectedBreedsMap.remove(animalType);
+                            }
+                          }
+                        });
+                        widget.onFilterOptionSelected(
+                            'breed', selectedBreedsMap.values.join(', '));
+                      },
                     );
-                  }).toList(),
-                ],
-              ),
-            ],
+                  },
+                ),
+                isExpanded: isTypeCheckedMap.containsKey(animalType)
+                    ? isTypeCheckedMap[animalType]!
+                    : selectedBreedsMap.containsKey(animalType),
+              );
+            }).toList(),
           ),
           Row(
             children: [
               const Text(
-                'Breed:   ',
+                'Activity:   ',
                 style: TextStyle(
                   fontSize: 16,
                 ),
               ),
-              DropdownButton<dynamic>(
-                value: selectedBreed,
-                onChanged: (dynamic? value) {
-                  setState(() {
-                    selectedBreed = value;
-                  });
+              DropdownButton<AnimalActivity>(
+                value: AnimalActivity.unspecified,
+                onChanged: (AnimalActivity? value) {
                   widget.onFilterOptionSelected(
-                      'breed', value?.toString() ?? '');
-                  // Navigator.pop(context);
+                      'Activity', value?.toString() ?? '');
                 },
-                items: getBreedDropdownItems(selectedAnimalType),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              const Text(
-                'Color:   ',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-              DropdownButton<AnimalColor>(
-                value: AnimalColor.brown,
-                onChanged: (AnimalColor? value) {
-                  widget.onFilterOptionSelected(
-                      'color', value?.toString() ?? '');
-                  //  Navigator.pop(context);
-                },
-                items: AnimalColor.values
-                    .map<DropdownMenuItem<AnimalColor>>((AnimalColor value) {
-                  return DropdownMenuItem<AnimalColor>(
+                items: AnimalActivity.values
+                    .map<DropdownMenuItem<AnimalActivity>>(
+                        (AnimalActivity value) {
+                  return DropdownMenuItem<AnimalActivity>(
                     value: value,
                     child: Text('${value.toString().split('.').last}'),
                   );
@@ -124,32 +152,16 @@ class _FilterDrawerState extends State<FilterDrawer> {
     );
   }
 
-  List<DropdownMenuItem<dynamic>> getBreedDropdownItems(AnimalType animalType) {
-    List<DropdownMenuItem<dynamic>> breedItems = [];
-
-    List<Enum> getEnumValues(AnimalType animalType) {
-      switch (animalType) {
-        case AnimalType.dog:
-          return DogBreed.values;
-        case AnimalType.cat:
-          return CatBreed.values;
-        case AnimalType.bird:
-          return BirdBreed.values;
-        default:
-          return [];
-      }
+  List<dynamic> getBreedDropdownItems(AnimalType animalType) {
+    switch (animalType) {
+      case AnimalType.dog:
+        return DogBreed.values;
+      case AnimalType.cat:
+        return CatBreed.values;
+      case AnimalType.bird:
+        return BirdBreed.values;
+      default:
+        return [];
     }
-
-    List<Enum> enumValues = getEnumValues(animalType);
-    // print('Enum values for $animalType: $enumValues');
-
-    breedItems = enumValues.map<DropdownMenuItem<dynamic>>((Enum value) {
-      return DropdownMenuItem<dynamic>(
-        value: value,
-        child: Text('${value.toString().split('.').last}'),
-      );
-    }).toList();
-
-    return breedItems;
   }
 }
