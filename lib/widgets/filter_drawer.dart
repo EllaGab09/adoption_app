@@ -14,6 +14,13 @@ class _FilterDrawerState extends State<FilterDrawer> {
   Map<AnimalType, Set<dynamic>> selectedBreedsMap = {};
   Map<AnimalType, bool> isTypeCheckedMap = {};
 
+  String capitalize(String input) {
+    if (input.isEmpty) {
+      return input;
+    }
+    return input[0].toUpperCase() + input.substring(1);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -58,7 +65,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                   return ListTile(
                     title: Row(
                       children: [
-                        Text(animalType.toString().split('.').last),
+                        Text(capitalize(animalType.toString().split('.').last)),
                         SizedBox(width: 10),
                         Checkbox(
                           value: isTypeCheckedMap.containsKey(animalType)
@@ -87,7 +94,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                   itemBuilder: (context, index) {
                     var breed = getBreedDropdownItems(animalType)[index];
                     return CheckboxListTile(
-                      title: Text(breed.toString().split('.').last),
+                      title: Text(capitalize(breed.toString().split('.').last)),
                       value: selectedBreedsMap.containsKey(animalType) &&
                           selectedBreedsMap[animalType]!.contains(breed),
                       onChanged: (bool? value) {
@@ -134,7 +141,8 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         (AnimalActivity value) {
                   return DropdownMenuItem<AnimalActivity>(
                     value: value,
-                    child: Text('${value.toString().split('.').last}'),
+                    child:
+                        Text(capitalize('${value.toString().split('.').last}')),
                   );
                 }).toList(),
               ),
