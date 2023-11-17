@@ -1,14 +1,52 @@
-enum DogBreed { labrador, goldenRetriever, poodle }
+enum DogBreed {
+  labradorRetriever,
+  germanShepherd,
+  goldenRetriever,
+  bulldog,
+  beagle,
+  poodle,
+  rottweiler,
+  siberianHusky,
+  dachshund,
+  boxer
+}
 
-enum CatBreed { siamese, persian }
+enum CatBreed {
+  persian,
+  siamese,
+  maine,
+  bengal,
+  ragdoll,
+  sphynx,
+  abyssinian,
+  scottishFold,
+  surmese,
+  britishShorthair
+}
 
-enum BirdBreed { canary, parrot }
+enum BirdBreed {
+  budgerigar,
+  cockatiel,
+  lovebird,
+  parrot,
+  cockatoo,
+  conure,
+  finch,
+  canary,
+  parakeet
+}
 
-enum AnimalType { dog, cat, bird }
+enum FishType { goldfish, betta, tetras, guppies, angelfish }
+
+enum ReptileType { turtle, snake, lizard, frog }
+
+enum SmallAnimals { rabbits, guineaPigs, hamsters, gerbils, mice, rats }
+
+enum AnimalType { dog, cat, bird, reptile, fish, smallAnimals }
 
 enum AnimalActivity { unspecified, low, medium, high }
 
-enum AnimalSex { unspecified, male, female, high }
+enum AnimalSex { unspecified, male, female }
 
 class Animal {
   final String name;

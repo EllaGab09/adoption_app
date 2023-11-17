@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:adoption_app/models/animal.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +15,9 @@ class FilterDrawer extends StatefulWidget {
 class _FilterDrawerState extends State<FilterDrawer> {
   Map<AnimalType, Set<dynamic>> selectedBreedsMap = {};
   Map<AnimalType, bool> isTypeCheckedMap = {};
+
+  AnimalActivity _selectedActivity = AnimalActivity.unspecified;
+  AnimalSex _selectedSex = AnimalSex.unspecified;
 
   String capitalize(String input) {
     if (input.isEmpty) {
@@ -71,7 +76,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           children: [
                             Text(capitalize(
                                 animalType.toString().split('.').last)),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Checkbox(
                               value: isTypeCheckedMap.containsKey(animalType)
                                   ? isTypeCheckedMap[animalType]
@@ -95,7 +100,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     },
                     body: ListView.builder(
                       physics:
-                          NeverScrollableScrollPhysics(), // Disable scrolling in the body
+                          const NeverScrollableScrollPhysics(), // Disable scrolling in the body
                       shrinkWrap: true,
                       itemCount: getBreedDropdownItems(animalType).length,
                       itemBuilder: (context, index) {
@@ -144,15 +149,45 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 ),
               ),
               DropdownButton<AnimalActivity>(
-                value: AnimalActivity.unspecified,
+                value: _selectedActivity,
                 onChanged: (AnimalActivity? value) {
-                  widget.onFilterOptionSelected(
-                      'Activity', value?.toString() ?? '');
+                  setState(() {
+                    widget.onFilterOptionSelected(
+                        'Activity', value?.toString() ?? '');
+                    _selectedActivity = value ?? AnimalActivity.unspecified;
+                  });
                 },
                 items: AnimalActivity.values
                     .map<DropdownMenuItem<AnimalActivity>>(
                         (AnimalActivity value) {
                   return DropdownMenuItem<AnimalActivity>(
+                    value: value,
+                    child: Text(capitalize(value.toString().split('.').last)),
+                  );
+                }).toList(),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              const Text(
+                'Sex:   ',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              DropdownButton<AnimalSex>(
+                value: _selectedSex,
+                onChanged: (AnimalSex? value) {
+                  setState(() {
+                    widget.onFilterOptionSelected(
+                        'Sex', value?.toString() ?? '');
+                    _selectedSex = value ?? AnimalSex.unspecified;
+                  });
+                },
+                items: AnimalSex.values
+                    .map<DropdownMenuItem<AnimalSex>>((AnimalSex value) {
+                  return DropdownMenuItem<AnimalSex>(
                     value: value,
                     child: Text(capitalize(value.toString().split('.').last)),
                   );
@@ -180,6 +215,12 @@ class _FilterDrawerState extends State<FilterDrawer> {
         return CatBreed.values;
       case AnimalType.bird:
         return BirdBreed.values;
+      case AnimalType.reptile:
+        return ReptileType.values;
+      case AnimalType.fish:
+        return FishType.values;
+      case AnimalType.smallAnimals:
+        return SmallAnimals.values;
       default:
         return [];
     }
