@@ -20,13 +20,6 @@ class CategoryGridItem extends StatelessWidget {
         );
       },
       child: Card(
-        //color: Colors.amber,
-        /* shape: const RoundedRectangleBorder(
-          side: BorderSide(
-             color: Colors.lightBlue,
-            width: 1.0,
-          ),
-        ), */
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

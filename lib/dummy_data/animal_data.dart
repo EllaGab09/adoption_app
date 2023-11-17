@@ -33,7 +33,7 @@ const dummyAnimals = [
       type: 'Bird',
       breed: 'Parrot',
       age: 1,
-      activityLevel: 'Moderate',
+      activityLevel: 'Medium',
       sex: "Male",
       location: "Spjelkavik, Ålesund"),
   Animal(
@@ -77,7 +77,7 @@ const dummyAnimals = [
       type: 'Bird',
       breed: 'Parrot',
       age: 1,
-      activityLevel: 'Moderate',
+      activityLevel: 'Medium',
       sex: "Male",
       location: "Spjelkavik, Ålesund"),
   Animal(

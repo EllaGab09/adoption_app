@@ -29,8 +29,8 @@ class AnimalDetailScreen extends StatelessWidget {
   Color _getActivityLevelColor(String activityLevel) {
     if (activityLevel == "Low") {
       return Colors.green;
-    } else if (activityLevel == "Moderate") {
-      return Colors.yellow;
+    } else if (activityLevel == "Medium") {
+      return Colors.orange;
     } else if (activityLevel == "High") {
       return Colors.red;
     } else {

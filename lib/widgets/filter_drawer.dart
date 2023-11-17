@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:adoption_app/models/animal.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +22,42 @@ class _FilterDrawerState extends State<FilterDrawer> {
       return input;
     }
     return input[0].toUpperCase() + input.substring(1);
+  }
+
+  List<Animal> applyFilters(List<Animal> animals) {
+    return animals.where((animal) {
+      // Filter by type
+      if (isTypeCheckedMap.isNotEmpty && !isTypeCheckedMap[animal.type]!) {
+        return false;
+      }
+
+      // Filter by breeds
+      if (selectedBreedsMap.isNotEmpty &&
+          (!selectedBreedsMap.containsKey(animal.type) ||
+              !selectedBreedsMap[animal.type]!.contains(animal.breed))) {
+        return false;
+      }
+
+      // Filter by activity
+      if (_selectedActivity != AnimalActivity.unspecified &&
+          animal.activityLevel != _selectedActivity.toString()) {
+        return false;
+      }
+
+      // Filter by sex
+      if (_selectedSex != AnimalSex.unspecified &&
+          animal.sex != _selectedSex.toString()) {
+        return false;
+      }
+
+      // Filter by age
+      /* if (animal.age != null && _selectedAge != null &&
+        animal.age != int.tryParse(_selectedAge)) {
+      return false;
+    } */
+
+      return true;
+    }).toList();
   }
 
   @override

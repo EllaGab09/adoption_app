@@ -1,3 +1,4 @@
+import 'package:adoption_app/models/animal.dart';
 import 'package:adoption_app/screens/user_profile_screen.dart';
 import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -25,13 +26,79 @@ final dummyUser = User(
   ),
 );
 
-class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+class CategoriesScreen extends StatefulWidget {
+  const CategoriesScreen({Key? key}) : super(key: key);
+
+  @override
+  _CategoriesScreenState createState() => _CategoriesScreenState();
+}
+
+class _CategoriesScreenState extends State<CategoriesScreen> {
+  List<Animal> displayedAnimals = dummyAnimals; // Initial list to display
+  List<Animal> filteredAnimals = [];
 
   void handleFilterOptionSelected(String attribute, String value) {
-    // Implement your filter logic based on the selected attribute and value
-    print('Selected filter option: $attribute - $value');
-    // Add your filtering logic here
+    // Convert enum values to strings
+    if (attribute == 'Sex') {
+      value = value
+          .split('.')
+          .last
+          .toLowerCase(); // Convert AnimalSex.male to 'male'
+    }
+    if (attribute == 'Activity') {
+      value = value
+          .split('.')
+          .last
+          .toLowerCase(); // Convert AnimalActivity.high to 'high'
+    }
+
+    // Apply filters
+    setState(() {
+      filteredAnimals = applyFilters(attribute, value);
+    });
+
+    // Print the filtered list for debugging
+    print('Filtered list: $filteredAnimals');
+  }
+
+  List<Animal> applyFilters(String attribute, String value) {
+    List<Animal> filteredList = dummyAnimals;
+
+    if (attribute == 'breed') {
+      filteredList = filteredList.where((animal) {
+        return animal.breed.toLowerCase() == value.toLowerCase();
+      }).toList();
+    } else if (attribute == 'Activity') {
+      print('Filtering by activity: $value');
+      filteredList = filteredList.where((animal) {
+        return animal.activityLevel.toLowerCase() == value.toLowerCase();
+      }).toList();
+    } else if (attribute == 'Sex') {
+      print('Filtering by sex: $value');
+      filteredList = filteredList.where((animal) {
+        return animal.sex.toLowerCase() == value.toLowerCase();
+      }).toList();
+    } else if (attribute == 'age') {
+      filteredList = filteredList.where((animal) {
+        return animal.age.toString() == value;
+      }).toList();
+    }
+
+    // Add logic to check if all filters are satisfied
+    filteredList = dummyAnimals
+        .where((animal) =>
+            // Add conditions here for other filters
+            (attribute != 'breed' ||
+                animal.breed.toLowerCase() == value.toLowerCase()) &&
+            (attribute != 'Activity' ||
+                animal.activityLevel.toLowerCase() == value.toLowerCase()) &&
+            (attribute != 'Sex' ||
+                animal.sex.toLowerCase() == value.toLowerCase()) &&
+            (attribute != 'age' || animal.age.toString() == value))
+        .toList();
+
+    print('Filtered list: $filteredList');
+    return filteredList;
   }
 
   @override
@@ -77,18 +144,20 @@ class CategoriesScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: GridView(
+            child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200,
-                childAspectRatio:
-                    3 / 4, // Adjust the aspect ratio for better item spacing
+                childAspectRatio: 3 / 4,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
               ),
-              children: [
-                for (final animal in dummyAnimals)
-                  CategoryGridItem(animal: animal)
-              ],
+              itemCount: displayedAnimals.length,
+              itemBuilder: (context, index) {
+                return CategoryGridItem(
+                    animal: filteredAnimals.isEmpty
+                        ? dummyAnimals[index]
+                        : filteredAnimals[index]);
+              },
             ),
           ),
         ],
