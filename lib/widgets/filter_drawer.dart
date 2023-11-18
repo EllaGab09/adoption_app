@@ -79,7 +79,10 @@ class _FilterDrawerState extends State<FilterDrawer> {
   List<Animal> applyFilters(List<Animal> animals) {
     return animals.where((animal) {
       // Filter by type
-      if (isTypeCheckedMap.isNotEmpty && !isTypeCheckedMap[animal.type]!) {
+      if (isTypeCheckedMap.isNotEmpty &&
+          isTypeCheckedMap.containsValue(true) &&
+          !isTypeCheckedMap[animal.type]!) {
+        print('Type Filter - Excluding: ${animal.type}');
         return false;
       }
 
@@ -87,27 +90,31 @@ class _FilterDrawerState extends State<FilterDrawer> {
       if (selectedBreedsMap.isNotEmpty &&
           (!selectedBreedsMap.containsKey(animal.type) ||
               !selectedBreedsMap[animal.type]!.contains(animal.breed))) {
+        print('Breed Filter - Excluding: ${animal.breed}');
         return false;
       }
 
       // Filter by activity
       if (_selectedActivity != AnimalActivity.unspecified &&
           animal.activityLevel != _selectedActivity.toString()) {
+        print('Activity Filter - Excluding: ${animal.activityLevel}');
         return false;
       }
 
       // Filter by sex
       if (_selectedSex != AnimalSex.unspecified &&
           animal.sex != _selectedSex.toString()) {
+        print('Sex Filter - Excluding: ${animal.sex}');
         return false;
       }
-      //Filter by age between
+
+      // Filter by age between
       if (_selectedAge.start != 0 &&
           (_selectedAge.end == 15
-              ? animal.age == null || animal.age < _selectedAge.start
-              : (animal.age == null ||
-                  animal.age < _selectedAge.start ||
+              ? animal.age < _selectedAge.start
+              : (animal.age < _selectedAge.start ||
                   animal.age <= _selectedAge.end))) {
+        print('Age Filter - Excluding: ${animal.age}');
         return false;
       }
 

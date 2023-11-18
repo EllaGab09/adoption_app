@@ -29,10 +29,10 @@ class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});
 
   @override
-  _CategoriesScreenState createState() => _CategoriesScreenState();
+  CategoriesScreenState createState() => CategoriesScreenState();
 }
 
-class _CategoriesScreenState extends State<CategoriesScreen> {
+class CategoriesScreenState extends State<CategoriesScreen> {
   List<Animal> displayedAnimals = dummyAnimals; // Initial list to display
   List<Animal> filteredAnimals = [];
   Set<String> selectedBreeds = Set();
@@ -94,10 +94,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     // Apply age filter
     if (selectedAge.start != 0 || selectedAge.end != 15) {
       filteredList = filteredList.where((animal) {
-        return animal.age != null &&
-            ((animal.age! >= selectedAge.start &&
-                    animal.age! <= selectedAge.end) ||
-                (selectedAge.end == 15 && animal.age! >= 15));
+        return ((animal.age >= selectedAge.start &&
+                animal.age <= selectedAge.end) ||
+            (selectedAge.end == 15 && animal.age! >= 15));
       }).toList();
     }
 
