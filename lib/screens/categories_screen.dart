@@ -59,9 +59,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     setState(() {
       filteredAnimals = applyFilters();
     });
-
-    // Print the filtered list for debugging
-    print('Filtered list: $filteredAnimals');
   }
 
   List<Animal> applyFilters() {
@@ -93,7 +90,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     // Apply age filter
     if (selectedAge.isNotEmpty) {
       filteredList = filteredList.where((animal) {
-        return animal.age.toString() == selectedAge;
+        return animal.age != null && animal.age.toString() == selectedAge;
       }).toList();
     }
 

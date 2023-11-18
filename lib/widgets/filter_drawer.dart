@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 class FilterDrawer extends StatefulWidget {
   const FilterDrawer({
-    Key? key,
+    super.key,
     required this.onFilterOptionSelected,
     required this.selectedSex,
     required this.selectedActivity,
     required this.selectedBreeds,
     required this.selectedAge,
-  }) : super(key: key);
+  });
 
   final void Function(String, String) onFilterOptionSelected;
   final AnimalSex selectedSex;
@@ -27,6 +27,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
 
   AnimalActivity _selectedActivity = AnimalActivity.unspecified;
   AnimalSex _selectedSex = AnimalSex.unspecified;
+  final int _selectedAge = 0;
 
   String capitalize(String input) {
     if (input.isEmpty) {
@@ -101,10 +102,11 @@ class _FilterDrawerState extends State<FilterDrawer> {
       }
 
       // Filter by age
-      /* if (animal.age != null && _selectedAge != null &&
-        animal.age != int.tryParse(_selectedAge)) {
-      return false;
-    } */
+      if (_selectedAge != 0 && // Assuming 0 is the default value for age
+          animal.age != null &&
+          animal.age != _selectedAge) {
+        return false;
+      }
 
       return true;
     }).toList();
