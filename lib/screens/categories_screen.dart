@@ -38,7 +38,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   Set<String> selectedBreeds = Set();
   AnimalActivity selectedActivity = AnimalActivity.unspecified;
   AnimalSex selectedSex = AnimalSex.unspecified;
-  String selectedAge = '';
+  RangeValues selectedAge = const RangeValues(0, 15);
 
   void handleFilterOptionSelected(String attribute, String value) {
     if (attribute == 'Sex') {
@@ -52,7 +52,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     } else if (attribute == 'breed') {
       selectedBreeds.add(value.toLowerCase());
     } else if (attribute == 'age') {
-      selectedAge = value;
+      final ageValues = value.split(' - ');
+      selectedAge = RangeValues(
+        double.parse(ageValues[0]),
+        double.parse(ageValues[1]),
+      );
     }
 
     // Apply filters
@@ -88,9 +92,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     }
 
     // Apply age filter
-    if (selectedAge.isNotEmpty) {
+    if (selectedAge.start != 0 || selectedAge.end != 15) {
       filteredList = filteredList.where((animal) {
-        return animal.age != null && animal.age.toString() == selectedAge;
+        return animal.age != null &&
+            ((animal.age! >= selectedAge.start &&
+                    animal.age! <= selectedAge.end) ||
+                (selectedAge.end == 15 && animal.age! >= 15));
       }).toList();
     }
 

@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 
 class FilterDrawer extends StatefulWidget {
   const FilterDrawer({
-    super.key,
+    Key? key,
     required this.onFilterOptionSelected,
     required this.selectedSex,
     required this.selectedActivity,
     required this.selectedBreeds,
     required this.selectedAge,
-  });
+  }) : super(key: key);
 
   final void Function(String, String) onFilterOptionSelected;
   final AnimalSex selectedSex;
   final AnimalActivity selectedActivity;
   final Set<String> selectedBreeds;
-  final String selectedAge;
+  final RangeValues selectedAge;
 
   @override
   _FilterDrawerState createState() => _FilterDrawerState();
@@ -27,7 +27,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
 
   AnimalActivity _selectedActivity = AnimalActivity.unspecified;
   AnimalSex _selectedSex = AnimalSex.unspecified;
-  final int _selectedAge = 0;
+  late RangeValues _selectedAge;
 
   String capitalize(String input) {
     if (input.isEmpty) {
@@ -41,6 +41,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
     super.initState();
     _selectedActivity = widget.selectedActivity;
     _selectedSex = widget.selectedSex;
+    _selectedAge = widget.selectedAge;
     selectedBreedsMap = widget.selectedBreeds.fold(
       <AnimalType, Set<dynamic>>{},
       (map, breed) {
@@ -100,11 +101,13 @@ class _FilterDrawerState extends State<FilterDrawer> {
           animal.sex != _selectedSex.toString()) {
         return false;
       }
-
-      // Filter by age
-      if (_selectedAge != 0 && // Assuming 0 is the default value for age
-          animal.age != null &&
-          animal.age != _selectedAge) {
+      //Filter by age between
+      if (_selectedAge.start != 0 &&
+          (_selectedAge.end == 15
+              ? animal.age == null || animal.age < _selectedAge.start
+              : (animal.age == null ||
+                  animal.age < _selectedAge.start ||
+                  animal.age <= _selectedAge.end))) {
         return false;
       }
 
@@ -125,26 +128,23 @@ class _FilterDrawerState extends State<FilterDrawer> {
             child: Text(
               'Filters',
               style: TextStyle(
-                //color: Colors.white,
                 fontSize: 24,
               ),
             ),
           ),
           Container(
-            color: Colors.transparent, // Set background color to transparent
+            color: Colors.transparent,
             child: ExpansionPanelList(
               elevation: 1,
               expandedHeaderPadding: EdgeInsets.zero,
               expandIconColor: Colors.transparent,
-              dividerColor:
-                  Colors.transparent, // Set divider color to transparent
+              dividerColor: Colors.transparent,
               expansionCallback: (int index, bool isExpanded) {
                 var animalType = AnimalType.values[index];
 
                 setState(() {
                   isTypeCheckedMap[animalType] = isExpanded;
                   if (!isExpanded) {
-                    // If the type is not expanded, expand it without checking the breeds
                     selectedBreedsMap[animalType] = <dynamic>{};
                   }
                 });
@@ -155,7 +155,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
               children: AnimalType.values.map<ExpansionPanel>(
                 (AnimalType animalType) {
                   return ExpansionPanel(
-                    canTapOnHeader: false, // Disable tapping on the header
+                    canTapOnHeader: false,
                     headerBuilder: (BuildContext context, bool isExpanded) {
                       return ListTile(
                         title: Row(
@@ -185,18 +185,16 @@ class _FilterDrawerState extends State<FilterDrawer> {
                       );
                     },
                     body: ListView.builder(
-                      physics:
-                          const NeverScrollableScrollPhysics(), // Disable scrolling in the body
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: getBreedDropdownItems(animalType).length,
                       itemBuilder: (context, index) {
                         var breed = getBreedDropdownItems(animalType)[index];
                         return CheckboxListTile(
-                          dense: true, // Make the ListTile dense
+                          dense: true,
                           title: Text(
                               capitalize(breed.toString().split('.').last)),
-                          contentPadding:
-                              EdgeInsets.zero, // Remove padding around ListTile
+                          contentPadding: EdgeInsets.zero,
                           value: selectedBreedsMap.containsKey(animalType) &&
                               selectedBreedsMap[animalType]!.contains(breed),
                           onChanged: (bool? value) {
@@ -281,12 +279,41 @@ class _FilterDrawerState extends State<FilterDrawer> {
               ),
             ],
           ),
-          TextField(
-            decoration: const InputDecoration(labelText: 'Age'),
-            keyboardType: TextInputType.number,
-            onChanged: (String value) {
-              widget.onFilterOptionSelected('age', value);
-            },
+          SizedBox(
+            height: 15,
+          ),
+          Text(
+            'Between ${_selectedAge.start.round()} and ${_selectedAge.end == 15 ? 'up' : _selectedAge.end.round()}',
+            style: TextStyle(fontSize: 16),
+          ),
+          Row(
+            children: [
+              const Text(
+                'Age:   ',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              RangeSlider(
+                values: _selectedAge,
+                onChanged: (RangeValues values) {
+                  setState(() {
+                    _selectedAge = values;
+                  });
+                  widget.onFilterOptionSelected(
+                    'age',
+                    '${values.start.round()} - ${values.end.round()}',
+                  );
+                },
+                min: 0,
+                max: 15,
+                divisions: 15,
+                labels: RangeLabels(
+                  _selectedAge.start.round().toString(),
+                  _selectedAge.end.round().toString(),
+                ),
+              ),
+            ],
           ),
         ],
       ),
