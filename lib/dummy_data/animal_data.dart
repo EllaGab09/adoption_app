@@ -91,4 +91,15 @@ const dummyAnimals = [
       activityLevel: 'High',
       sex: "Female",
       location: "Spjelkavik, Ålesund"),
+  Animal(
+      name: 'Blub',
+      imageUrl:
+          "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
+      description: 'Is fish.',
+      type: 'Fish',
+      breed: 'Goldfish',
+      age: 9,
+      activityLevel: 'Low',
+      sex: "Female",
+      location: "Spjelkavik, Ålesund"),
 ];

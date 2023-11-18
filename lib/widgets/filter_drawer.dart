@@ -76,52 +76,6 @@ class _FilterDrawerState extends State<FilterDrawer> {
     }
   }
 
-  List<Animal> applyFilters(List<Animal> animals) {
-    return animals.where((animal) {
-      // Filter by type
-      if (isTypeCheckedMap.isNotEmpty &&
-          isTypeCheckedMap.containsValue(true) &&
-          !isTypeCheckedMap[animal.type]!) {
-        print('Type Filter - Excluding: ${animal.type}');
-        return false;
-      }
-
-      // Filter by breeds
-      if (selectedBreedsMap.isNotEmpty &&
-          (!selectedBreedsMap.containsKey(animal.type) ||
-              !selectedBreedsMap[animal.type]!.contains(animal.breed))) {
-        print('Breed Filter - Excluding: ${animal.breed}');
-        return false;
-      }
-
-      // Filter by activity
-      if (_selectedActivity != AnimalActivity.unspecified &&
-          animal.activityLevel != _selectedActivity.toString()) {
-        print('Activity Filter - Excluding: ${animal.activityLevel}');
-        return false;
-      }
-
-      // Filter by sex
-      if (_selectedSex != AnimalSex.unspecified &&
-          animal.sex != _selectedSex.toString()) {
-        print('Sex Filter - Excluding: ${animal.sex}');
-        return false;
-      }
-
-      // Filter by age between
-      if (_selectedAge.start != 0 &&
-          (_selectedAge.end == 15
-              ? animal.age < _selectedAge.start
-              : (animal.age < _selectedAge.start ||
-                  animal.age <= _selectedAge.end))) {
-        print('Age Filter - Excluding: ${animal.age}');
-        return false;
-      }
-
-      return true;
-    }).toList();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -150,7 +104,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 var animalType = AnimalType.values[index];
 
                 setState(() {
-                  isTypeCheckedMap[animalType] = isExpanded;
+                  isTypeCheckedMap[animalType] = !isExpanded;
                   if (!isExpanded) {
                     selectedBreedsMap[animalType] = <dynamic>{};
                   }
@@ -200,11 +154,15 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         return CheckboxListTile(
                           dense: true,
                           title: Text(
-                              capitalize(breed.toString().split('.').last)),
+                            capitalize(breed.toString().split('.').last),
+                          ),
                           contentPadding: EdgeInsets.zero,
-                          value: selectedBreedsMap.containsKey(animalType) &&
-                              selectedBreedsMap[animalType]!.contains(breed),
+                          value:
+                              selectedBreedsMap[animalType]?.contains(breed) ??
+                                  false,
                           onChanged: (bool? value) {
+                            print(
+                                'Selected Animal Type: $animalType, Selected Breed: $breed');
                             setState(() {
                               if (value!) {
                                 selectedBreedsMap.putIfAbsent(
@@ -218,7 +176,9 @@ class _FilterDrawerState extends State<FilterDrawer> {
                               }
                             });
                             widget.onFilterOptionSelected(
-                                'breed', selectedBreedsMap.values.join(', '));
+                              'breed',
+                              selectedBreedsMap.values.join(', '),
+                            );
                           },
                         );
                       },

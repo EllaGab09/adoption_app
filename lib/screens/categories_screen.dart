@@ -39,19 +39,29 @@ class CategoriesScreenState extends State<CategoriesScreen> {
   AnimalActivity selectedActivity = AnimalActivity.unspecified;
   AnimalSex selectedSex = AnimalSex.unspecified;
   RangeValues selectedAge = const RangeValues(0, 15);
+  AnimalType selectedType = AnimalType.dog;
 
   void handleFilterOptionSelected(String attribute, String value) {
-    if (attribute == 'Sex') {
+    if (attribute == 'type') {
+      // Handling for Type
+      value = value.split('.').last.toLowerCase();
+      selectedType = AnimalType.values
+          .firstWhere((type) => type.toString().split('.').last == value);
+    } else if (attribute == 'Sex') {
+      // Handling for Sex
       value = value.split('.').last.toLowerCase();
       selectedSex = AnimalSex.values
           .firstWhere((sex) => sex.toString().split('.').last == value);
     } else if (attribute == 'Activity') {
+      // Handling for Activity
       value = value.split('.').last.toLowerCase();
       selectedActivity = AnimalActivity.values.firstWhere(
           (activity) => activity.toString().split('.').last == value);
     } else if (attribute == 'breed') {
+      // Handling for Breed
       selectedBreeds.add(value.toLowerCase());
     } else if (attribute == 'age') {
+      // Handling for Age
       final ageValues = value.split(' - ');
       selectedAge = RangeValues(
         double.parse(ageValues[0]),
@@ -67,6 +77,19 @@ class CategoriesScreenState extends State<CategoriesScreen> {
 
   List<Animal> applyFilters() {
     List<Animal> filteredList = dummyAnimals;
+
+    // Apply type filter
+    if (selectedType != null) {
+      filteredList = filteredList.where((animal) {
+        String animalType = animal.type.trim().toLowerCase();
+        String selectedTypeValue =
+            selectedType.toString().split('.').last.toLowerCase();
+        bool typeCondition = animalType == selectedTypeValue;
+        print(
+            'Animal Type: $animalType, Selected Type: $selectedTypeValue, Type Condition: $typeCondition');
+        return typeCondition;
+      }).toList();
+    }
 
     // Apply breed filter
     if (selectedBreeds.isNotEmpty) {
@@ -103,6 +126,8 @@ class CategoriesScreenState extends State<CategoriesScreen> {
     setState(() {
       displayedAnimals = filteredList;
     });
+
+    print('Filtered Animals Count: ${filteredList.length}');
 
     return filteredList;
   }
