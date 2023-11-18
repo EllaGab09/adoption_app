@@ -70,7 +70,18 @@ const dummyAnimals = [
       sex: "Female",
       location: "Spjelkavik, Ålesund"),
   Animal(
-      name: 'Birb',
+      name: 'BirbBoi',
+      imageUrl:
+          "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
+      description: 'Colorful and energetic. Enjoys flying around.',
+      type: 'Bird',
+      breed: 'Canary',
+      age: 14,
+      activityLevel: 'Low',
+      sex: "Male",
+      location: "Spjelkavik, Ålesund"),
+  Animal(
+      name: 'BirbGirl',
       imageUrl:
           "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
       description: 'Colorful and energetic. Enjoys flying around.',

@@ -39,7 +39,7 @@ class CategoriesScreenState extends State<CategoriesScreen> {
   AnimalActivity selectedActivity = AnimalActivity.unspecified;
   AnimalSex selectedSex = AnimalSex.unspecified;
   RangeValues selectedAge = const RangeValues(0, 15);
-  AnimalType selectedType = AnimalType.dog;
+  AnimalType selectedType = AnimalType.unspecified;
 
   void handleFilterOptionSelected(String attribute, String value) {
     if (attribute == 'type') {
@@ -79,15 +79,12 @@ class CategoriesScreenState extends State<CategoriesScreen> {
     List<Animal> filteredList = dummyAnimals;
 
     // Apply type filter
-    if (selectedType != null) {
+    if (selectedType != AnimalType.unspecified) {
       filteredList = filteredList.where((animal) {
         String animalType = animal.type.trim().toLowerCase();
         String selectedTypeValue =
             selectedType.toString().split('.').last.toLowerCase();
-        bool typeCondition = animalType == selectedTypeValue;
-        print(
-            'Animal Type: $animalType, Selected Type: $selectedTypeValue, Type Condition: $typeCondition');
-        return typeCondition;
+        return animalType == selectedTypeValue;
       }).toList();
     }
 

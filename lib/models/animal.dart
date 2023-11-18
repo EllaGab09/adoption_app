@@ -42,7 +42,7 @@ enum ReptileType { turtle, snake, lizard, frog }
 
 enum SmallAnimals { rabbits, guineaPigs, hamsters, gerbils, mice, rats }
 
-enum AnimalType { dog, cat, bird, reptile, fish, smallAnimals }
+enum AnimalType { unspecified, dog, cat, bird, reptile, fish, smallAnimals }
 
 enum AnimalActivity { unspecified, low, medium, high }
 
