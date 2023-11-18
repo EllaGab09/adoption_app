@@ -279,12 +279,18 @@ class _FilterDrawerState extends State<FilterDrawer> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Text(
-            'Between ${_selectedAge.start.round()} and ${_selectedAge.end == 15 ? 'up' : _selectedAge.end.round()}',
-            style: TextStyle(fontSize: 16),
+            (_selectedAge.start == 0 && _selectedAge.end == 15)
+                ? 'Filtering: All ages'
+                : (_selectedAge.start == 0)
+                    ? 'Filtering:  Up to ${_selectedAge.end.round()}'
+                    : (_selectedAge.end == 15)
+                        ? 'Filtering:  From ${_selectedAge.start.round()} and up'
+                        : 'Filtering:  Between ${_selectedAge.start.round()} and ${_selectedAge.end.round()}',
+            style: const TextStyle(fontSize: 16),
           ),
           Row(
             children: [
