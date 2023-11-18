@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:adoption_app/widgets/categories_grid_item.dart';
 import 'package:adoption_app/dummy_data/animal_data.dart';
 import 'package:adoption_app/widgets/filter_drawer.dart';
-
 import 'package:adoption_app/models/user.dart';
 
 //Temp Dummy
@@ -27,7 +26,7 @@ final dummyUser = User(
 );
 
 class CategoriesScreen extends StatefulWidget {
-  const CategoriesScreen({Key? key}) : super(key: key);
+  const CategoriesScreen({super.key});
 
   @override
   _CategoriesScreenState createState() => _CategoriesScreenState();
@@ -36,68 +35,72 @@ class CategoriesScreen extends StatefulWidget {
 class _CategoriesScreenState extends State<CategoriesScreen> {
   List<Animal> displayedAnimals = dummyAnimals; // Initial list to display
   List<Animal> filteredAnimals = [];
+  Set<String> selectedBreeds = Set();
+  AnimalActivity selectedActivity = AnimalActivity.unspecified;
+  AnimalSex selectedSex = AnimalSex.unspecified;
+  String selectedAge = '';
 
   void handleFilterOptionSelected(String attribute, String value) {
-    // Convert enum values to strings
     if (attribute == 'Sex') {
-      value = value
-          .split('.')
-          .last
-          .toLowerCase(); // Convert AnimalSex.male to 'male'
-    }
-    if (attribute == 'Activity') {
-      value = value
-          .split('.')
-          .last
-          .toLowerCase(); // Convert AnimalActivity.high to 'high'
+      value = value.split('.').last.toLowerCase();
+      selectedSex = AnimalSex.values
+          .firstWhere((sex) => sex.toString().split('.').last == value);
+    } else if (attribute == 'Activity') {
+      value = value.split('.').last.toLowerCase();
+      selectedActivity = AnimalActivity.values.firstWhere(
+          (activity) => activity.toString().split('.').last == value);
+    } else if (attribute == 'breed') {
+      selectedBreeds.add(value.toLowerCase());
+    } else if (attribute == 'age') {
+      selectedAge = value;
     }
 
     // Apply filters
     setState(() {
-      filteredAnimals = applyFilters(attribute, value);
+      filteredAnimals = applyFilters();
     });
 
     // Print the filtered list for debugging
     print('Filtered list: $filteredAnimals');
   }
 
-  List<Animal> applyFilters(String attribute, String value) {
+  List<Animal> applyFilters() {
     List<Animal> filteredList = dummyAnimals;
 
-    if (attribute == 'breed') {
+    // Apply breed filter
+    if (selectedBreeds.isNotEmpty) {
       filteredList = filteredList.where((animal) {
-        return animal.breed.toLowerCase() == value.toLowerCase();
-      }).toList();
-    } else if (attribute == 'Activity') {
-      print('Filtering by activity: $value');
-      filteredList = filteredList.where((animal) {
-        return animal.activityLevel.toLowerCase() == value.toLowerCase();
-      }).toList();
-    } else if (attribute == 'Sex') {
-      print('Filtering by sex: $value');
-      filteredList = filteredList.where((animal) {
-        return animal.sex.toLowerCase() == value.toLowerCase();
-      }).toList();
-    } else if (attribute == 'age') {
-      filteredList = filteredList.where((animal) {
-        return animal.age.toString() == value;
+        return selectedBreeds.contains(animal.breed.toLowerCase());
       }).toList();
     }
 
-    // Add logic to check if all filters are satisfied
-    filteredList = dummyAnimals
-        .where((animal) =>
-            // Add conditions here for other filters
-            (attribute != 'breed' ||
-                animal.breed.toLowerCase() == value.toLowerCase()) &&
-            (attribute != 'Activity' ||
-                animal.activityLevel.toLowerCase() == value.toLowerCase()) &&
-            (attribute != 'Sex' ||
-                animal.sex.toLowerCase() == value.toLowerCase()) &&
-            (attribute != 'age' || animal.age.toString() == value))
-        .toList();
+    // Apply activity filter
+    if (selectedActivity != AnimalActivity.unspecified) {
+      filteredList = filteredList.where((animal) {
+        return animal.activityLevel.toLowerCase() ==
+            selectedActivity.toString().split('.').last;
+      }).toList();
+    }
 
-    print('Filtered list: $filteredList');
+    // Apply sex filter
+    if (selectedSex != AnimalSex.unspecified) {
+      filteredList = filteredList.where((animal) {
+        return animal.sex.toLowerCase() ==
+            selectedSex.toString().split('.').last;
+      }).toList();
+    }
+
+    // Apply age filter
+    if (selectedAge.isNotEmpty) {
+      filteredList = filteredList.where((animal) {
+        return animal.age.toString() == selectedAge;
+      }).toList();
+    }
+
+    setState(() {
+      displayedAnimals = filteredList;
+    });
+
     return filteredList;
   }
 
@@ -113,7 +116,13 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           );
         },
       ),
-      drawer: FilterDrawer(onFilterOptionSelected: handleFilterOptionSelected),
+      drawer: FilterDrawer(
+        onFilterOptionSelected: handleFilterOptionSelected,
+        selectedSex: selectedSex,
+        selectedActivity: selectedActivity,
+        selectedBreeds: selectedBreeds,
+        selectedAge: selectedAge,
+      ),
       body: Column(
         children: [
           Padding(

@@ -2,9 +2,20 @@ import 'package:adoption_app/models/animal.dart';
 import 'package:flutter/material.dart';
 
 class FilterDrawer extends StatefulWidget {
-  const FilterDrawer({super.key, required this.onFilterOptionSelected});
+  const FilterDrawer({
+    Key? key,
+    required this.onFilterOptionSelected,
+    required this.selectedSex,
+    required this.selectedActivity,
+    required this.selectedBreeds,
+    required this.selectedAge,
+  }) : super(key: key);
 
   final void Function(String, String) onFilterOptionSelected;
+  final AnimalSex selectedSex;
+  final AnimalActivity selectedActivity;
+  final Set<String> selectedBreeds;
+  final String selectedAge;
 
   @override
   _FilterDrawerState createState() => _FilterDrawerState();
@@ -22,6 +33,45 @@ class _FilterDrawerState extends State<FilterDrawer> {
       return input;
     }
     return input[0].toUpperCase() + input.substring(1);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedActivity = widget.selectedActivity;
+    _selectedSex = widget.selectedSex;
+    selectedBreedsMap = widget.selectedBreeds.fold(
+      <AnimalType, Set<dynamic>>{},
+      (map, breed) {
+        final type = getBreedType(breed);
+        if (!map.containsKey(type)) {
+          map[type] = <dynamic>{};
+        }
+        map[type]!.add(breed);
+        return map;
+      },
+    );
+    isTypeCheckedMap = selectedBreedsMap.map((type, breeds) {
+      return MapEntry(type, breeds.isNotEmpty);
+    });
+  }
+
+  AnimalType getBreedType(String breed) {
+    if (DogBreed.values.map((e) => e.toString()).contains(breed)) {
+      return AnimalType.dog;
+    } else if (CatBreed.values.map((e) => e.toString()).contains(breed)) {
+      return AnimalType.cat;
+    } else if (BirdBreed.values.map((e) => e.toString()).contains(breed)) {
+      return AnimalType.bird;
+    } else if (ReptileType.values.map((e) => e.toString()).contains(breed)) {
+      return AnimalType.reptile;
+    } else if (FishType.values.map((e) => e.toString()).contains(breed)) {
+      return AnimalType.fish;
+    } else if (SmallAnimals.values.map((e) => e.toString()).contains(breed)) {
+      return AnimalType.smallAnimals;
+    } else {
+      return AnimalType.dog;
+    }
   }
 
   List<Animal> applyFilters(List<Animal> animals) {
