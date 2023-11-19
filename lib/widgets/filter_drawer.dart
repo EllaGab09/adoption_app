@@ -250,13 +250,15 @@ class _FilterDrawerState extends State<FilterDrawer> {
             height: 15,
           ),
           Text(
-            (_selectedAge.start == 0 && _selectedAge.end == 15)
-                ? 'Filtering: All ages'
-                : (_selectedAge.start == 0)
-                    ? 'Filtering:  Up to ${_selectedAge.end.round()}'
-                    : (_selectedAge.end == 15)
-                        ? 'Filtering:  From ${_selectedAge.start.round()} and up'
-                        : 'Filtering:  Between ${_selectedAge.start.round()} and ${_selectedAge.end.round()}',
+            (_selectedAge.start == _selectedAge.end)
+                ? 'Filtering: Only ${_selectedAge.start.round()}'
+                : (_selectedAge.start == 0 && _selectedAge.end == 15)
+                    ? 'Filtering: All ages'
+                    : (_selectedAge.start == 0)
+                        ? 'Filtering:  Up to ${_selectedAge.end.round()}'
+                        : (_selectedAge.end == 15)
+                            ? 'Filtering:  From ${_selectedAge.start.round()} and up'
+                            : 'Filtering:  Between ${_selectedAge.start.round()} and ${_selectedAge.end.round()}',
             style: const TextStyle(fontSize: 16),
           ),
           Row(
