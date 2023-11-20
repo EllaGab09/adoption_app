@@ -9,6 +9,7 @@ class FilterDrawer extends StatefulWidget {
     required this.selectedActivity,
     required this.selectedBreeds,
     required this.selectedAge,
+    required this.selectedType,
   }) : super(key: key);
 
   final void Function(String, String) onFilterOptionSelected;
@@ -16,6 +17,7 @@ class FilterDrawer extends StatefulWidget {
   final AnimalActivity selectedActivity;
   final Set<String> selectedBreeds;
   final RangeValues selectedAge;
+  final AnimalType selectedType;
 
   @override
   _FilterDrawerState createState() => _FilterDrawerState();
@@ -27,6 +29,8 @@ class _FilterDrawerState extends State<FilterDrawer> {
 
   AnimalActivity _selectedActivity = AnimalActivity.unspecified;
   AnimalSex _selectedSex = AnimalSex.unspecified;
+  late AnimalType selectedType;
+
   late RangeValues _selectedAge;
 
   String capitalize(String input) {
@@ -131,14 +135,22 @@ class _FilterDrawerState extends State<FilterDrawer> {
                               onChanged: (bool? value) {
                                 setState(() {
                                   if (value!) {
-                                    selectedBreedsMap[animalType] = <dynamic>{};
+                                    // Update selectedType when the checkbox is checked
+                                    selectedType = animalType;
                                   } else {
-                                    selectedBreedsMap.remove(animalType);
+                                    // Uncheck the checkbox and set selectedType to null
+                                    selectedType = AnimalType.unspecified;
                                   }
                                   isTypeCheckedMap[animalType] = value;
+
+                                  // Update selectedType in the parent widget
+                                  widget.onFilterOptionSelected(
+                                      'type', selectedType.toString());
+
+                                  // Update selectedType when the checkbox is checked
+                                  widget.onFilterOptionSelected('breed',
+                                      selectedBreedsMap.values.join(', '));
                                 });
-                                widget.onFilterOptionSelected('breed',
-                                    selectedBreedsMap.values.join(', '));
                               },
                             ),
                           ],

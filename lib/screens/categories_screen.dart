@@ -78,47 +78,71 @@ class CategoriesScreenState extends State<CategoriesScreen> {
   List<Animal> applyFilters() {
     List<Animal> filteredList = dummyAnimals;
 
+    print('Selected Type: $selectedType');
+    print('Before Type Filter: ${filteredList.map((animal) => animal.type)}');
+
     // Apply type filter
     if (selectedType != AnimalType.unspecified) {
+      print('Type Filter Applied: ${selectedType.toString()}');
       filteredList = filteredList.where((animal) {
         String animalType = animal.type.trim().toLowerCase();
         String selectedTypeValue =
             selectedType.toString().split('.').last.toLowerCase();
-        return animalType == selectedTypeValue;
+        bool typeCondition = animalType == selectedTypeValue;
+        print(
+            'Animal Type: $animalType, Selected Type: $selectedTypeValue, Type Condition: $typeCondition');
+        return typeCondition;
       }).toList();
     }
+    print('After Type Filter: ${filteredList.map((animal) => animal.type)}');
 
-    // Apply breed filter
-    if (selectedBreeds.isNotEmpty) {
+    // Add these print statements in the breed filter section
+    /* if (selectedBreeds.isNotEmpty) {
+      print('Breed Filter Applied: ${selectedBreeds.toString()}');
       filteredList = filteredList.where((animal) {
-        return selectedBreeds.contains(animal.breed.toLowerCase());
+        String animalBreed =
+            animal.breed.trim().toLowerCase(); // Trim whitespaces
+        print(
+            'Animal Breed: $animalBreed, Selected Breeds: ${selectedBreeds.toString()}');
+        bool breedCondition = selectedBreeds.contains(animalBreed);
+        print('Breed Condition: $breedCondition');
+        return breedCondition;
       }).toList();
-    }
+    } else {
+      print('No Breeds Selected');
+    } */
 
     // Apply activity filter
     if (selectedActivity != AnimalActivity.unspecified) {
+      print('Activity Filter Applied: ${selectedActivity.toString()}');
       filteredList = filteredList.where((animal) {
         return animal.activityLevel.toLowerCase() ==
             selectedActivity.toString().split('.').last;
       }).toList();
     }
+    print(
+        'After Activity Filter: ${filteredList.map((animal) => animal.type)}');
 
     // Apply sex filter
     if (selectedSex != AnimalSex.unspecified) {
+      print('Sex Filter Applied: ${selectedSex.toString()}');
       filteredList = filteredList.where((animal) {
         return animal.sex.toLowerCase() ==
             selectedSex.toString().split('.').last;
       }).toList();
     }
+    print('After Sex Filter: ${filteredList.map((animal) => animal.type)}');
 
     // Apply age filter
     if (selectedAge.start != 0 || selectedAge.end != 15) {
+      print('Age Filter Applied: ${selectedAge.toString()}');
       filteredList = filteredList.where((animal) {
         return ((animal.age >= selectedAge.start &&
                 animal.age <= selectedAge.end) ||
             (selectedAge.end == 15 && animal.age! >= 15));
       }).toList();
     }
+    print('After Age Filter: ${filteredList.map((animal) => animal.type)}');
 
     setState(() {
       displayedAnimals = filteredList;
@@ -147,6 +171,7 @@ class CategoriesScreenState extends State<CategoriesScreen> {
         selectedActivity: selectedActivity,
         selectedBreeds: selectedBreeds,
         selectedAge: selectedAge,
+        selectedType: selectedType,
       ),
       body: Column(
         children: [
