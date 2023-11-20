@@ -12,7 +12,7 @@ class FilterDrawer extends StatefulWidget {
     required this.selectedType,
   }) : super(key: key);
 
-  final void Function(String, String) onFilterOptionSelected;
+  final void Function(String, dynamic) onFilterOptionSelected;
   final AnimalSex selectedSex;
   final AnimalActivity selectedActivity;
   final Set<String> selectedBreeds;

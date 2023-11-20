@@ -41,7 +41,7 @@ class CategoriesScreenState extends State<CategoriesScreen> {
   RangeValues selectedAge = const RangeValues(0, 15);
   AnimalType selectedType = AnimalType.unspecified;
 
-  void handleFilterOptionSelected(String attribute, String value) {
+  void handleFilterOptionSelected(String attribute, dynamic value) {
     if (attribute == 'type') {
       // Handling for Type
       value = value.split('.').last.toLowerCase();
