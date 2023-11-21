@@ -56,8 +56,8 @@ class _FilterDrawerState extends State<FilterDrawer> {
         return map;
       },
     );
-    isTypeCheckedMap = _selectedBreedsMap.map((type, breeds) {
-      return MapEntry(type, breeds.isNotEmpty);
+    isTypeCheckedMap = selectedTypes.asMap().map((index, type) {
+      return MapEntry(type, true);
     });
   }
 
@@ -138,13 +138,9 @@ class _FilterDrawerState extends State<FilterDrawer> {
                                   isTypeCheckedMap[animalType] = value;
                                 });
 
-                                // Only call the 'type' filter callback when the checkbox is clicked
-                                if (value != null && value) {
-                                  widget.onFilterOptionSelected(
-                                    'type',
-                                    selectedTypes,
-                                  );
-                                }
+                                // Call the 'type' filter callback whenever the checkbox state changes
+                                widget.onFilterOptionSelected('type',
+                                    value == true ? selectedTypes : null);
                               },
                             ),
                           ],

@@ -51,6 +51,9 @@ class CategoriesScreenState extends State<CategoriesScreen> {
       } else if (value is AnimalType) {
         // If values is a single value, convert it to a list
         selectedTypes = [value];
+      } else if (value == null) {
+        // If the type filter is turned off, set selectedTypes to an empty list
+        selectedTypes.clear(); // Clear the selectedTypes list
       }
     } else if (attribute == 'Sex') {
       // Handling for Sex
@@ -63,10 +66,10 @@ class CategoriesScreenState extends State<CategoriesScreen> {
       selectedActivity = AnimalActivity.values.firstWhere(
           (activity) => activity.toString().split('.').last == value);
     } /* else if (attribute == 'breed') {
-      // Handling for Breed
-      selectedBreeds.clear(); // Clear existing breeds before adding new ones
-      selectedBreeds.add(value.toLowerCase());
-    } */
+    // Handling for Breed
+    selectedBreeds.clear(); // Clear existing breeds before adding new ones
+    selectedBreeds.add(value.toLowerCase());
+  } */
     else if (attribute == 'age') {
       // Handling for Age
       final ageValues = value.split(' - ');
@@ -85,21 +88,18 @@ class CategoriesScreenState extends State<CategoriesScreen> {
   List<Animal> applyFilters() {
     List<Animal> filteredList = dummyAnimals;
 
-    // Apply type filter
+// Apply type filter
     if (selectedTypes.isNotEmpty) {
       print('Type Filter Applied: ${selectedTypes.toString()}');
       filteredList = filteredList.where((animal) {
         String animalType = animal.type.trim().toLowerCase();
-        List<String> selectedTypeValues = selectedTypes
-            .map((type) => type.toString().split('.').last.toLowerCase())
-            .toList();
-        bool typeCondition = selectedTypeValues.contains(animalType);
-        print(
-            'Animal Type: $animalType, Selected Types: $selectedTypeValues, Type Condition: $typeCondition');
-        return typeCondition;
+        return selectedTypes.any((type) =>
+            animalType == type.toString().split('.').last.toLowerCase());
       }).toList();
     } else {
+      // If no types are selected, include all types in the result
       print('No Types Selected');
+      filteredList = dummyAnimals;
     }
     print('After Type Filter: ${filteredList.map((animal) => animal.type)}');
 
