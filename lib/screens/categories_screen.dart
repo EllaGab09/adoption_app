@@ -65,12 +65,11 @@ class CategoriesScreenState extends State<CategoriesScreen> {
       value = value.split('.').last.toLowerCase();
       selectedActivity = AnimalActivity.values.firstWhere(
           (activity) => activity.toString().split('.').last == value);
-    } /* else if (attribute == 'breed') {
-    // Handling for Breed
-    selectedBreeds.clear(); // Clear existing breeds before adding new ones
-    selectedBreeds.add(value.toLowerCase());
-  } */
-    else if (attribute == 'age') {
+    } else if (attribute == 'breed') {
+      // Handling for Breed
+      selectedBreeds.clear(); // Clear existing breeds before adding new ones
+      selectedBreeds.add(value.toLowerCase());
+    } else if (attribute == 'age') {
       // Handling for Age
       final ageValues = value.split(' - ');
       selectedAge = RangeValues(
@@ -104,7 +103,8 @@ class CategoriesScreenState extends State<CategoriesScreen> {
     print('After Type Filter: ${filteredList.map((animal) => animal.type)}');
 
     // Breed filter
-    /*  if (selectedBreeds.isNotEmpty) {
+    print('Before Breed Filter: $filteredList');
+    if (selectedBreeds.isNotEmpty) {
       print('Breed Filter Applied: $selectedBreeds');
       filteredList = filteredList.where((animal) {
         String animalBreed = animal.breed.trim().toLowerCase();
@@ -116,7 +116,7 @@ class CategoriesScreenState extends State<CategoriesScreen> {
       print('After Breed Filter: $filteredList');
     } else {
       print('No Breeds Selected');
-    } */
+    }
 
     // Apply activity filter
     if (selectedActivity != AnimalActivity.unspecified) {

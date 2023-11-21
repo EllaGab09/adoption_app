@@ -1,7 +1,10 @@
+// Import necessary packages and files
 import 'package:adoption_app/models/animal.dart';
 import 'package:flutter/material.dart';
 
+// Define a FilterDrawer widget
 class FilterDrawer extends StatefulWidget {
+  // Constructor with required parameters for filter options
   const FilterDrawer({
     Key? key,
     required this.onFilterOptionSelected,
@@ -12,25 +15,33 @@ class FilterDrawer extends StatefulWidget {
     required this.selectedTypes,
   }) : super(key: key);
 
+  // Callback function for handling filter option selection
   final void Function(String, dynamic) onFilterOptionSelected;
+  // Selected filter options passed as parameters
   final AnimalSex selectedSex;
   final AnimalActivity selectedActivity;
   final Set<String> selectedBreeds;
   final RangeValues selectedAge;
   final List<AnimalType> selectedTypes;
 
+  // Create the state for the FilterDrawer widget
   @override
   _FilterDrawerState createState() => _FilterDrawerState();
 }
 
+// Define the state for the FilterDrawer widget
 class _FilterDrawerState extends State<FilterDrawer> {
+  // Maps to store selected breeds and type checkboxes
   Map<AnimalType, Set<dynamic>> _selectedBreedsMap = {};
   Map<AnimalType, bool> isTypeCheckedMap = {};
+
+  // Selected activity, sex, age, and types
   AnimalActivity _selectedActivity = AnimalActivity.unspecified;
   AnimalSex _selectedSex = AnimalSex.unspecified;
   late List<AnimalType> selectedTypes;
   late RangeValues _selectedAge;
 
+  // Function to capitalize the first letter of a string
   String capitalize(String input) {
     if (input.isEmpty) {
       return input;
@@ -38,6 +49,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
     return input[0].toUpperCase() + input.substring(1);
   }
 
+  // Initialize state with selected filter options
   @override
   void initState() {
     super.initState();
@@ -45,6 +57,8 @@ class _FilterDrawerState extends State<FilterDrawer> {
     _selectedSex = widget.selectedSex;
     _selectedAge = widget.selectedAge;
     selectedTypes = widget.selectedTypes;
+
+    // Populate selected breeds map based on selected breeds
     _selectedBreedsMap = widget.selectedBreeds.fold(
       <AnimalType, Set<dynamic>>{},
       (map, breed) {
@@ -56,12 +70,16 @@ class _FilterDrawerState extends State<FilterDrawer> {
         return map;
       },
     );
+
+    // Initialize type checkboxes
     isTypeCheckedMap = selectedTypes.asMap().map((index, type) {
       return MapEntry(type, true);
     });
   }
 
+  // Function to determine the type of a breed
   AnimalType getBreedType(String breed) {
+    // Check the type of breed and return the corresponding AnimalType
     if (DogBreed.values.map((e) => e.toString()).contains(breed)) {
       return AnimalType.dog;
     } else if (CatBreed.values.map((e) => e.toString()).contains(breed)) {
@@ -79,12 +97,34 @@ class _FilterDrawerState extends State<FilterDrawer> {
     }
   }
 
+  // Function to get a list of breed items based on the animal type
+  List<dynamic> getBreedDropdownItems(AnimalType animalType) {
+    switch (animalType) {
+      case AnimalType.dog:
+        return DogBreed.values;
+      case AnimalType.cat:
+        return CatBreed.values;
+      case AnimalType.bird:
+        return BirdBreed.values;
+      case AnimalType.reptile:
+        return ReptileType.values;
+      case AnimalType.fish:
+        return FishType.values;
+      case AnimalType.smallAnimals:
+        return SmallAnimals.values;
+      default:
+        return [];
+    }
+  }
+
+  // Build the UI for the FilterDrawer widget
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
+          // Drawer header with the title 'Filters'
           const DrawerHeader(
             decoration: BoxDecoration(
               color: Colors.transparent,
@@ -96,6 +136,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
               ),
             ),
           ),
+          // Container for filter options
           Container(
             color: Colors.transparent,
             child: ExpansionPanelList(
@@ -103,6 +144,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
               expandedHeaderPadding: EdgeInsets.zero,
               expandIconColor: Colors.transparent,
               dividerColor: Colors.transparent,
+              // Callback for handling expansion and collapse of filter sections
               expansionCallback: (int index, bool isExpanded) {
                 var animalType = AnimalType.values[index];
 
@@ -113,10 +155,12 @@ class _FilterDrawerState extends State<FilterDrawer> {
                   }
                 });
               },
+              // Map AnimalType values to ExpansionPanel widgets
               children: AnimalType.values.map<ExpansionPanel>(
                 (AnimalType animalType) {
                   return ExpansionPanel(
                     canTapOnHeader: false,
+                    // Build the header of each ExpansionPanel
                     headerBuilder: (BuildContext context, bool isExpanded) {
                       return ListTile(
                         title: Row(
@@ -124,6 +168,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                             Text(capitalize(
                                 animalType.toString().split('.').last)),
                             const SizedBox(width: 10),
+                            // Checkbox for each type
                             Checkbox(
                               value: selectedTypes.contains(animalType),
                               onChanged: (bool? value) {
@@ -147,6 +192,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         ),
                       );
                     },
+                    // Body of the ExpansionPanel with a list of breed checkboxes
                     body: ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -193,6 +239,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
               ).toList(),
             ),
           ),
+          // Row for the 'Activity' filter dropdown
           Row(
             children: [
               const Text(
@@ -201,10 +248,12 @@ class _FilterDrawerState extends State<FilterDrawer> {
                   fontSize: 16,
                 ),
               ),
+              // Dropdown button for selecting activity
               DropdownButton<AnimalActivity>(
                 value: _selectedActivity,
                 onChanged: (AnimalActivity? value) {
                   setState(() {
+                    // Call filter callback and update selected activity
                     widget.onFilterOptionSelected(
                       'Activity',
                       value?.toString() ?? '',
@@ -223,6 +272,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
               ),
             ],
           ),
+          // Row for the 'Sex' filter dropdown
           Row(
             children: [
               const Text(
@@ -231,10 +281,12 @@ class _FilterDrawerState extends State<FilterDrawer> {
                   fontSize: 16,
                 ),
               ),
+              // Dropdown button for selecting sex
               DropdownButton<AnimalSex>(
                 value: _selectedSex,
                 onChanged: (AnimalSex? value) {
                   setState(() {
+                    // Call filter callback and update selected sex
                     widget.onFilterOptionSelected(
                       'Sex',
                       value?.toString() ?? '',
@@ -255,6 +307,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
           const SizedBox(
             height: 15,
           ),
+          // Display selected age range
           Text(
             (_selectedAge.start == _selectedAge.end)
                 ? 'Filtering: Only ${_selectedAge.start.round()}'
@@ -267,6 +320,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                             : 'Filtering:  Between ${_selectedAge.start.round()} and ${_selectedAge.end.round()}',
             style: const TextStyle(fontSize: 16),
           ),
+          // Row for the 'Age' filter range slider
           Row(
             children: [
               const Text(
@@ -275,12 +329,14 @@ class _FilterDrawerState extends State<FilterDrawer> {
                   fontSize: 16,
                 ),
               ),
+              // Range slider for selecting age range
               RangeSlider(
                 values: _selectedAge,
                 onChanged: (RangeValues values) {
                   setState(() {
                     _selectedAge = values;
                   });
+                  // Call filter callback and update selected age range
                   widget.onFilterOptionSelected(
                     'age',
                     '${values.start.round()} - ${values.end.round()}',
@@ -299,24 +355,5 @@ class _FilterDrawerState extends State<FilterDrawer> {
         ],
       ),
     );
-  }
-
-  List<dynamic> getBreedDropdownItems(AnimalType animalType) {
-    switch (animalType) {
-      case AnimalType.dog:
-        return DogBreed.values;
-      case AnimalType.cat:
-        return CatBreed.values;
-      case AnimalType.bird:
-        return BirdBreed.values;
-      case AnimalType.reptile:
-        return ReptileType.values;
-      case AnimalType.fish:
-        return FishType.values;
-      case AnimalType.smallAnimals:
-        return SmallAnimals.values;
-      default:
-        return [];
-    }
   }
 }
