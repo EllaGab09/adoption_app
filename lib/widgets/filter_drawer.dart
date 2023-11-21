@@ -112,12 +112,6 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     _selectedBreedsMap[animalType] = <dynamic>{};
                   }
                 });
-
-                // Only call the 'breed' filter callback when the panel is expanded or collapsed
-                widget.onFilterOptionSelected(
-                  'breed',
-                  _selectedBreedsMap.values.join(', '),
-                );
               },
               children: AnimalType.values.map<ExpansionPanel>(
                 (AnimalType animalType) {
