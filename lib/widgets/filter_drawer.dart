@@ -9,7 +9,7 @@ class FilterDrawer extends StatefulWidget {
     required this.selectedActivity,
     required this.selectedBreeds,
     required this.selectedAge,
-    required this.selectedType,
+    required this.selectedTypes,
   }) : super(key: key);
 
   final void Function(String, dynamic) onFilterOptionSelected;
@@ -17,20 +17,18 @@ class FilterDrawer extends StatefulWidget {
   final AnimalActivity selectedActivity;
   final Set<String> selectedBreeds;
   final RangeValues selectedAge;
-  final AnimalType selectedType;
+  final List<AnimalType> selectedTypes;
 
   @override
   _FilterDrawerState createState() => _FilterDrawerState();
 }
 
 class _FilterDrawerState extends State<FilterDrawer> {
-  Map<AnimalType, Set<dynamic>> selectedBreedsMap = {};
+  Map<AnimalType, Set<dynamic>> _selectedBreedsMap = {};
   Map<AnimalType, bool> isTypeCheckedMap = {};
-
   AnimalActivity _selectedActivity = AnimalActivity.unspecified;
   AnimalSex _selectedSex = AnimalSex.unspecified;
-  late AnimalType selectedType;
-
+  late List<AnimalType> selectedTypes;
   late RangeValues _selectedAge;
 
   String capitalize(String input) {
@@ -46,7 +44,8 @@ class _FilterDrawerState extends State<FilterDrawer> {
     _selectedActivity = widget.selectedActivity;
     _selectedSex = widget.selectedSex;
     _selectedAge = widget.selectedAge;
-    selectedBreedsMap = widget.selectedBreeds.fold(
+    selectedTypes = widget.selectedTypes;
+    _selectedBreedsMap = widget.selectedBreeds.fold(
       <AnimalType, Set<dynamic>>{},
       (map, breed) {
         final type = getBreedType(breed);
@@ -57,7 +56,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
         return map;
       },
     );
-    isTypeCheckedMap = selectedBreedsMap.map((type, breeds) {
+    isTypeCheckedMap = _selectedBreedsMap.map((type, breeds) {
       return MapEntry(type, breeds.isNotEmpty);
     });
   }
@@ -110,12 +109,15 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 setState(() {
                   isTypeCheckedMap[animalType] = !isExpanded;
                   if (!isExpanded) {
-                    selectedBreedsMap[animalType] = <dynamic>{};
+                    _selectedBreedsMap[animalType] = <dynamic>{};
                   }
                 });
 
+                // Only call the 'breed' filter callback when the panel is expanded or collapsed
                 widget.onFilterOptionSelected(
-                    'breed', selectedBreedsMap.values.join(', '));
+                  'breed',
+                  _selectedBreedsMap.values.join(', '),
+                );
               },
               children: AnimalType.values.map<ExpansionPanel>(
                 (AnimalType animalType) {
@@ -129,28 +131,26 @@ class _FilterDrawerState extends State<FilterDrawer> {
                                 animalType.toString().split('.').last)),
                             const SizedBox(width: 10),
                             Checkbox(
-                              value: isTypeCheckedMap.containsKey(animalType)
-                                  ? isTypeCheckedMap[animalType]
-                                  : selectedBreedsMap.containsKey(animalType),
+                              value: selectedTypes.contains(animalType),
                               onChanged: (bool? value) {
                                 setState(() {
                                   if (value!) {
-                                    // Update selectedType when the checkbox is checked
-                                    selectedType = animalType;
+                                    // Update selectedTypes when the checkbox is checked
+                                    selectedTypes.add(animalType);
                                   } else {
-                                    // Uncheck the checkbox and set selectedType to null
-                                    selectedType = AnimalType.unspecified;
+                                    // Uncheck the checkbox and remove the type from selectedTypes
+                                    selectedTypes.remove(animalType);
                                   }
                                   isTypeCheckedMap[animalType] = value;
-
-                                  // Update selectedType in the parent widget
-                                  widget.onFilterOptionSelected(
-                                      'type', selectedType.toString());
-
-                                  // Update selectedType when the checkbox is checked
-                                  widget.onFilterOptionSelected('breed',
-                                      selectedBreedsMap.values.join(', '));
                                 });
+
+                                // Only call the 'type' filter callback when the checkbox is clicked
+                                if (value != null && value) {
+                                  widget.onFilterOptionSelected(
+                                    'type',
+                                    selectedTypes,
+                                  );
+                                }
                               },
                             ),
                           ],
@@ -170,26 +170,26 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           ),
                           contentPadding: EdgeInsets.zero,
                           value:
-                              selectedBreedsMap[animalType]?.contains(breed) ??
+                              _selectedBreedsMap[animalType]?.contains(breed) ??
                                   false,
                           onChanged: (bool? value) {
                             print(
                                 'Selected Animal Type: $animalType, Selected Breed: $breed');
                             setState(() {
                               if (value!) {
-                                selectedBreedsMap.putIfAbsent(
+                                _selectedBreedsMap.putIfAbsent(
                                     animalType, () => <dynamic>{});
-                                selectedBreedsMap[animalType]!.add(breed);
+                                _selectedBreedsMap[animalType]!.add(breed);
                               } else {
-                                selectedBreedsMap[animalType]!.remove(breed);
-                                if (selectedBreedsMap[animalType]!.isEmpty) {
-                                  selectedBreedsMap.remove(animalType);
+                                _selectedBreedsMap[animalType]!.remove(breed);
+                                if (_selectedBreedsMap[animalType]!.isEmpty) {
+                                  _selectedBreedsMap.remove(animalType);
                                 }
                               }
                             });
                             widget.onFilterOptionSelected(
                               'breed',
-                              selectedBreedsMap.values.join(', '),
+                              _selectedBreedsMap.values.join(', '),
                             );
                           },
                         );
@@ -197,7 +197,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     ),
                     isExpanded: isTypeCheckedMap.containsKey(animalType)
                         ? isTypeCheckedMap[animalType]!
-                        : selectedBreedsMap.containsKey(animalType),
+                        : _selectedBreedsMap.containsKey(animalType),
                   );
                 },
               ).toList(),
@@ -216,7 +216,9 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 onChanged: (AnimalActivity? value) {
                   setState(() {
                     widget.onFilterOptionSelected(
-                        'Activity', value?.toString() ?? '');
+                      'Activity',
+                      value?.toString() ?? '',
+                    );
                     _selectedActivity = value ?? AnimalActivity.unspecified;
                   });
                 },
@@ -244,7 +246,9 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 onChanged: (AnimalSex? value) {
                   setState(() {
                     widget.onFilterOptionSelected(
-                        'Sex', value?.toString() ?? '');
+                      'Sex',
+                      value?.toString() ?? '',
+                    );
                     _selectedSex = value ?? AnimalSex.unspecified;
                   });
                 },

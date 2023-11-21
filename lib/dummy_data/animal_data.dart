@@ -89,7 +89,7 @@ const dummyAnimals = [
       breed: 'canary',
       age: 14,
       activityLevel: 'Low',
-      sex: "Male",
+      sex: "Female",
       location: "Spjelkavik, Ålesund"),
   Animal(
       name: 'OldBoi',
