@@ -68,7 +68,8 @@ class CategoriesScreenState extends State<CategoriesScreen> {
     } else if (attribute == 'breed') {
       // Handling for Breed
       selectedBreeds.clear(); // Clear existing breeds before adding new ones
-      selectedBreeds.add(value.toLowerCase());
+      selectedBreeds.add(value.split('.').last.toLowerCase().replaceAll(
+          '}', '')); // Extract breed name and remove extra characters
     } else if (attribute == 'age') {
       // Handling for Age
       final ageValues = value.split(' - ');

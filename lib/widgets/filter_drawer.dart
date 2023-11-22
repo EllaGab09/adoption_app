@@ -38,7 +38,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
   // Selected activity, sex, age, and types
   AnimalActivity _selectedActivity = AnimalActivity.unspecified;
   AnimalSex _selectedSex = AnimalSex.unspecified;
-  late List<AnimalType> selectedTypes;
+  late List<AnimalType> _selectedTypes;
   late RangeValues _selectedAge;
 
   // Function to capitalize the first letter of a string
@@ -56,9 +56,14 @@ class _FilterDrawerState extends State<FilterDrawer> {
     _selectedActivity = widget.selectedActivity;
     _selectedSex = widget.selectedSex;
     _selectedAge = widget.selectedAge;
-    selectedTypes = widget.selectedTypes;
+    _selectedTypes = widget.selectedTypes;
 
-    // Populate selected breeds map based on selected breeds
+    // Initialize isTypeCheckedMap with the selected types
+    isTypeCheckedMap = _selectedTypes.asMap().map((index, type) {
+      return MapEntry(type, true);
+    });
+
+    // Initialize _selectedBreedsMap with the selected breeds
     _selectedBreedsMap = widget.selectedBreeds.fold(
       <AnimalType, Set<dynamic>>{},
       (map, breed) {
@@ -70,11 +75,6 @@ class _FilterDrawerState extends State<FilterDrawer> {
         return map;
       },
     );
-
-    // Initialize type checkboxes
-    isTypeCheckedMap = selectedTypes.asMap().map((index, type) {
-      return MapEntry(type, true);
-    });
   }
 
   // Function to determine the type of a breed
@@ -170,22 +170,22 @@ class _FilterDrawerState extends State<FilterDrawer> {
                             const SizedBox(width: 10),
                             // Checkbox for each type
                             Checkbox(
-                              value: selectedTypes.contains(animalType),
+                              value: _selectedTypes.contains(animalType),
                               onChanged: (bool? value) {
                                 setState(() {
                                   if (value!) {
                                     // Update selectedTypes when the checkbox is checked
-                                    selectedTypes.add(animalType);
+                                    _selectedTypes.add(animalType);
                                   } else {
                                     // Uncheck the checkbox and remove the type from selectedTypes
-                                    selectedTypes.remove(animalType);
+                                    _selectedTypes.remove(animalType);
                                   }
                                   isTypeCheckedMap[animalType] = value;
                                 });
 
                                 // Call the 'type' filter callback whenever the checkbox state changes
                                 widget.onFilterOptionSelected('type',
-                                    value == true ? selectedTypes : null);
+                                    value == true ? _selectedTypes : null);
                               },
                             ),
                           ],
