@@ -10,20 +10,20 @@ class AnimalDetailScreen extends StatelessWidget {
 
   //Temp Dummy
   final dummyAdoptionCenter = AdoptionCenter(
-    id: '1',
+    //id: '1',
     imageUrl:
         "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
     name: 'Happy Paws Adoption Center',
     description: 'We provide a loving home for pets of all kinds.',
     phoneNo: '123456789',
     location: AdoptionCenterLocation(
-      location: LatLng(37.7749, -122.4194), // Replace with actual coordinates
+      //location: LatLng(37.7749, -122.4194), // Replace with actual coordinates
       street: '123 Main St',
       city: 'Anytown',
       zipCode: '12345',
       country: 'United States',
     ),
-    availableAnimalIds: ['1', '2', '3'], // Replace with actual animal IDs
+    animalIds: ['1', '2', '3'], // Replace with actual animal IDs
   );
 
   AnimalDetailScreen({super.key, required this.animal});
@@ -111,7 +111,7 @@ class AnimalDetailScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(animal.location),
+                //Text(animal.location),
                 const SizedBox(height: 20),
                 const Text(
                   'Description',
@@ -135,12 +135,12 @@ class AnimalDetailScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(
-                          'Type: ${animal.type}',
-                          style: const TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
+                        // Text(
+                        //   'Type: ${animal.type}',
+                        //   style: const TextStyle(
+                        //     fontSize: 16,
+                        //   ),
+                        // ),
                         const SizedBox(
                             width: 16), // Adjust the spacing between items
                         Text(
@@ -184,7 +184,7 @@ class AnimalDetailScreen extends StatelessWidget {
                 ),
                 ListTile(
                   title: const Text("Sex:"),
-                  subtitle: Text(animal.sex),
+                  // subtitle: Text(animal.sex),
                   leading: Icon(
                     animal.sex == "Male" ? Icons.male : Icons.female,
                     color: animal.sex == "Male" ? Colors.blue : Colors.pink,

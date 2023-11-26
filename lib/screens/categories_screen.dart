@@ -10,20 +10,20 @@ import 'package:adoption_app/models/user.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 final dummyAdoptionCenter = AdoptionCenter(
-  id: '1',
+  //id: '1',
   imageUrl:
       "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
   name: 'Happy Paws Adoption Center',
   description: 'We provide a loving home for pets of all kinds.',
   phoneNo: '123456789',
   location: AdoptionCenterLocation(
-    location: LatLng(37.7749, -122.4194), // Replace with actual coordinates
+    //location: LatLng(37.7749, -122.4194), // Replace with actual coordinates
     street: '123 Main St',
     city: 'Anytown',
     zipCode: '12345',
     country: 'United States',
   ),
-  availableAnimalIds: ['1', '2', '3'], // Replace with actual animal IDs
+  animalIds: ['1', '2', '3'], // Replace with actual animal IDs
 );
 
 //Temp Dummy

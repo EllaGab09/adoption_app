@@ -5,7 +5,7 @@ final uuid = Uuid();
 
 class AdoptionCenter {
   AdoptionCenter({
-    //required this.imageUrl,
+    required this.imageUrl,
     required this.name,
     required this.description,
     required this.phoneNo,
@@ -13,7 +13,7 @@ class AdoptionCenter {
     required this.animalIds,
   }) : id = uuid.v4();
 
-  //final String imageUrl;
+  final String imageUrl;
   final String id;
   final String name;
   final String phoneNo;
