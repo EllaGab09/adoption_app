@@ -4,7 +4,7 @@ enum AnimalType { cat, dog, bird, rodent }
 
 enum Sex { male, female }
 
-final uuid = Uuid();
+const uuid = Uuid();
 
 class Animal {
   Animal(

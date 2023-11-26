@@ -29,7 +29,7 @@ class AdoptionCenterScreen extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          Container(
+          SizedBox(
             height: 250,
             child: Image.network(
               adoptionCenter.imageUrl,
@@ -60,7 +60,7 @@ class AdoptionCenterScreen extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (ctx) => MapSample()));
+                        .push(MaterialPageRoute(builder: (ctx) => const MapSample()));
                   },
                   child: ListTile(
                     leading: const Icon(Icons.location_on),
@@ -71,9 +71,9 @@ class AdoptionCenterScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Column(
+                const Column(
                   children: [
-                    Container(
+                    SizedBox(
                       height: 300, // Adjust the height as needed
                       child: MapSample(), // Embed the GoogleMapScreen here
                     ),
