@@ -1,7 +1,4 @@
-import 'package:adoption_app/dummy_data/user_data.dart';
 import 'package:adoption_app/models/adoption_center.dart';
-import 'package:adoption_app/screens/user_profile_screen.dart';
-import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/models/animal.dart';
 
@@ -81,14 +78,8 @@ class AddAnimalForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: LogoAppBar(
-        onProfilePressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => UserProfileScreen(user: dummyUser),
-            ),
-          );
-        },
+      appBar: AppBar(
+        title: Text(adoptionCenter.name),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -97,10 +88,13 @@ class AddAnimalForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Text(
-                'Add Animal',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              Center(
+                child: Text('Add Animal',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                        )),
               ),
               TextFormField(
                 controller: _nameController,
