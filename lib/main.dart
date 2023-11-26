@@ -1,4 +1,5 @@
 import 'package:adoption_app/screens/login_screen.dart';
+//import 'package:adoption_app/widgets/add_animal_form.dart';
 //import 'screens/categories_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,5 +13,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(home: LoginScreen());
+    //return MaterialApp(home: AddAnimalForm());
   }
 }

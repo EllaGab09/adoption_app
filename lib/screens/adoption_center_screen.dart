@@ -1,3 +1,4 @@
+import 'package:adoption_app/screens/add_animal_screen.dart';
 import 'package:adoption_app/widgets/googleMapTest.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/models/adoption_center.dart';
@@ -36,6 +37,19 @@ class AdoptionCenterScreen extends StatelessWidget {
               fit: BoxFit.cover,
               width: double.infinity,
             ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (ctx) =>
+                      AddAnimalForm(key: key, adoptionCenter: adoptionCenter)));
+            },
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5), // Square button
+              ),
+            ),
+            child: const Text("Add a new animal"),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
