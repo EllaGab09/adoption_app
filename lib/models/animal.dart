@@ -9,7 +9,7 @@ final uuid = Uuid();
 class Animal {
   Animal(
       {required this.name,
-      //required this.imageUrl,
+      required this.imageUrl,
       required this.description,
       required this.animalType,
       required this.breed,
@@ -24,7 +24,7 @@ class Animal {
 
   final String animalId;
   final String name;
-  //final String imageUrl;
+  final String imageUrl;
   final String description;
   final AnimalType animalType;
   final String breed;

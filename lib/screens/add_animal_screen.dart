@@ -23,13 +23,15 @@ class AddAnimalForm extends StatelessWidget {
       name: "",
       imageUrl: "",
       description: "",
-      type: "",
+      animalType: AnimalType.cat,
       breed: "",
       color: "",
       age: 0,
+      sex: Sex.male,
       activityLevel: "",
-      sex: "",
-      location: "");
+      health: "",
+      applicationIds: [],
+      availability: true);
 
   AddAnimalForm({super.key, required this.adoptionCenter});
 
@@ -39,13 +41,15 @@ class AddAnimalForm extends StatelessWidget {
           name: _nameController.text,
           imageUrl: _imageURLController.text,
           description: _descriptionController.text,
-          type: _typeController.text,
+          animalType: AnimalType.cat, // TODO: change to controller
           color: _colorController.text,
           breed: _breedController.text,
           age: int.parse(_ageController.text),
           activityLevel: _activityLevelController.text,
-          sex: _sexController.text,
-          location: _locationController.text);
+          sex: Sex.female, //TODO: change to enum
+          health: "",
+          applicationIds: [],
+          availability: true);
 
       _nameController.clear();
       _imageURLController.clear();

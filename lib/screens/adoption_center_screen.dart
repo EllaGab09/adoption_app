@@ -12,7 +12,10 @@ class AdoptionCenterScreen extends StatelessWidget {
       : markers = <Marker>{
           Marker(
             markerId: MarkerId(adoptionCenter.id),
-            position: adoptionCenter.location.location,
+            position: const LatLng(
+              0,
+              0,
+            ),
             infoWindow: InfoWindow(
               title: adoptionCenter.name,
               snippet:
@@ -30,14 +33,14 @@ class AdoptionCenterScreen extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          Container(
-            height: 250,
-            child: Image.network(
-              adoptionCenter.imageUrl,
-              fit: BoxFit.cover,
-              width: double.infinity,
-            ),
-          ),
+          // Container(
+          //   height: 250,
+          //   child: Image.network(
+          //     adoptionCenter.imageUrl,
+          //     fit: BoxFit.cover,
+          //     width: double.infinity,
+          //   ),
+          // ),
           ElevatedButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
