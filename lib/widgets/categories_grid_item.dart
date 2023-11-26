@@ -15,7 +15,9 @@ class CategoryGridItem extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => AnimalDetailScreen(animal: animal),
+            builder: (context) => AnimalDetailScreen(
+              animal: animal,
+            ),
           ),
         );
       },

@@ -8,6 +8,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class AnimalDetailScreen extends StatelessWidget {
   final Animal animal;
 
+  AnimalDetailScreen({super.key, required this.animal});
+
   //Temp Dummy
   final dummyAdoptionCenter = AdoptionCenter(
     id: '1',
@@ -24,8 +26,6 @@ class AnimalDetailScreen extends StatelessWidget {
     ),
     availableAnimalIds: ['1', '2', '3'], // Replace with actual animal IDs
   );
-
-  AnimalDetailScreen({super.key, required this.animal});
 
   Color _getActivityLevelColor(String activityLevel) {
     if (activityLevel == "Low") {
