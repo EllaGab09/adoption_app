@@ -54,20 +54,33 @@ class AnimalDetailScreen extends ConsumerWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Apply for Adoption'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text(
-                  '${dummyUser.firstname}, please enter a message to apply for adoption.'),
-              TextField(
-                controller: _messageController,
-                decoration: const InputDecoration(
-                  labelText: 'Enter your message',
+          content: Form(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                    '${dummyUser.firstname}, please enter a message to apply for adoption.'),
+                TextFormField(
+                  controller: _messageController,
+                  decoration: const InputDecoration(
+                    labelText: 'Enter your message',
+                    errorStyle: TextStyle(color: Colors.redAccent),
+                  ),
+                  maxLines: null,
+                  maxLength: 50,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter a message.';
+                    }
+                    Pattern pattern = r'^[A-Za-z0-9 ]+$';
+                    RegExp regex = RegExp(pattern as String);
+                    if (!regex.hasMatch(value)) {
+                      return 'Please enter a valid message.';
+                    }
+                  },
                 ),
-                maxLines: null,
-                maxLength: 50,
-              ),
-            ],
+              ],
+            ),
           ),
           actions: <Widget>[
             ElevatedButton(
@@ -88,6 +101,25 @@ class AnimalDetailScreen extends ConsumerWidget {
                     .read(applicationProvider.notifier)
                     .addApplication(newApplication);
                 Navigator.of(context).pop();
+                // Show a dialog to confirm that the application was submitted
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Application Submitted'),
+                        content: Text(
+                            'Your application to adopt ${animal.name} has been submitted. You will be notified when your application is reviewed.'),
+                        actions: <Widget>[
+                          ElevatedButton(
+                            child: const Text('OK'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    });
+                _messageController.clear();
               },
             ),
           ],
