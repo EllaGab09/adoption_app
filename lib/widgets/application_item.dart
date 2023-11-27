@@ -1,6 +1,8 @@
+import 'package:adoption_app/providers/applications_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ApplicationItem extends StatelessWidget {
+class ApplicationItem extends ConsumerWidget {
   final String userName;
   final String message;
 
@@ -8,7 +10,8 @@ class ApplicationItem extends StatelessWidget {
       {super.key, required this.userName, required this.message});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final applications = ref.watch(applicationProvider);
     return Padding(
       padding: const EdgeInsets.only(top: 8),
       child: Card(
@@ -21,6 +24,19 @@ class ApplicationItem extends StatelessWidget {
             ),
             title: Text(userName),
             subtitle: Text(message),
+            trailing: IconButton(
+              iconSize: 30,
+              icon: const Icon(Icons.delete),
+              color: Colors.red,
+              highlightColor: Colors.yellow,
+              splashColor: Colors.green,
+              tooltip: 'Delete Application',
+              onPressed: () {
+                ref.read(applicationProvider.notifier).removeApplication(
+                    applications
+                        .firstWhere((element) => element.userName == userName));
+              },
+            ),
           ),
         ),
       ),
