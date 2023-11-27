@@ -32,17 +32,7 @@ class CategoriesScreen extends StatelessWidget {
       appBar: const LogoAppBar(),
       body: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              'Our Shelter Animals',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-          ),
+          const SizedBox(height: 20),
           Expanded(
             child: GridView(
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(

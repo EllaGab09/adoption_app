@@ -1,14 +1,19 @@
+import 'package:adoption_app/dummy_data/user_data.dart';
 import 'package:adoption_app/models/adoption_center.dart';
 import 'package:adoption_app/models/animal.dart';
+import 'package:adoption_app/models/application.dart';
 import 'package:adoption_app/screens/adoption_center_screen.dart';
 import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:adoption_app/providers/favorites_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:adoption_app/providers/applications_provider.dart';
 
 class AnimalDetailScreen extends ConsumerWidget {
   final Animal animal;
+
+  final TextEditingController _messageController = TextEditingController();
 
   AnimalDetailScreen({super.key, required this.animal});
 
@@ -20,7 +25,8 @@ class AnimalDetailScreen extends ConsumerWidget {
     name: 'Happy Paws Adoption Center',
     description: 'We provide a loving home for pets of all kinds.',
     location: AdoptionCenterLocation(
-      location: LatLng(37.7749, -122.4194), // Replace with actual coordinates
+      location:
+          const LatLng(37.7749, -122.4194), // Replace with actual coordinates
       street: '123 Main St',
       city: 'Anytown',
       zipCode: '12345',
@@ -42,20 +48,24 @@ class AnimalDetailScreen extends ConsumerWidget {
     }
   }
 
-  void showAdoptionDialog(BuildContext context) {
+  void showAdoptionDialog(BuildContext context, WidgetRef ref) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Apply for Adoption'),
-          content: const Column(
+          content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text('User Name'),
+              Text(
+                  '${dummyUser.firstname}, please enter a message to apply for adoption.'),
               TextField(
-                decoration: InputDecoration(
+                controller: _messageController,
+                decoration: const InputDecoration(
                   labelText: 'Enter your message',
                 ),
+                maxLines: null,
+                maxLength: 50,
               ),
             ],
           ),
@@ -69,7 +79,15 @@ class AnimalDetailScreen extends ConsumerWidget {
             ElevatedButton(
               child: const Text('Adopt'),
               onPressed: () {
-                // Handle adoption here
+                final newApplication = Application(
+                  id: DateTime.now().toString(),
+                  userName: dummyUser.firstname,
+                  message: _messageController.text,
+                );
+                ref
+                    .read(applicationProvider.notifier)
+                    .addApplication(newApplication);
+                Navigator.of(context).pop();
               },
             ),
           ],
@@ -138,7 +156,7 @@ class AnimalDetailScreen extends ConsumerWidget {
                     const Spacer(),
                     ElevatedButton(
                       onPressed: () {
-                        showAdoptionDialog(context);
+                        showAdoptionDialog(context, ref);
                       },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
