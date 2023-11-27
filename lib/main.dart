@@ -41,14 +41,14 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme,
-      home: const LoginScreen(),
-      // home: AdoptionApplicationDetailsAC(
-      //   adoptionCenter: "Happy Paws Adoption Center",
-      //   animalInfo: "Dog",
-      //   userName: "John Doe",
-      //   userMessage: "I would like to adopt a dog.",
-      //   animal: dummyAnimals[0],
-      // ),
+      //home: const LoginScreen(),
+      home: AdoptionApplicationDetailsAC(
+        adoptionCenter: "Happy Paws Adoption Center",
+        animalInfo: "Dog",
+        userName: "John Doe",
+        userMessage: "I would like to adopt a dog.",
+        animal: dummyAnimals[0],
+      ),
 
       routes: {
         '/login': (context) => const LoginScreen(),

@@ -1,8 +1,11 @@
 import 'package:adoption_app/screens/add_animal_screen.dart';
+import 'package:adoption_app/screens/adoption_application_details_user.dart';
 import 'package:adoption_app/widgets/googleMapTest.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/models/adoption_center.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../dummy_data/animal_data.dart';
 
 class AdoptionCenterScreen extends StatelessWidget {
   final AdoptionCenter adoptionCenter;
@@ -102,12 +105,18 @@ class AdoptionCenterScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Column(
+                Column(
                   children: [
                     SizedBox(
-                      height: 300, // Adjust the height as needed
-                      child: MapSample(), // Embed the GoogleMapScreen here
-                    ),
+                        height: 300, // Adjust the height as needed
+                        //child: MapSample(), // Embed the GoogleMapScreen here
+                        child: AdoptionApplicationDetails(
+                          adoptionCenter: "Happy Paws Adoption Center",
+                          animalInfo: "Dog",
+                          userName: "John Doe",
+                          userMessage: "I would like to adopt a dog.",
+                          animal: dummyAnimals[0],
+                        )),
                   ],
                 ),
                 /* GoogleMap(
