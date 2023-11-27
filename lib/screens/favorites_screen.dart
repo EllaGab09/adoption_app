@@ -24,8 +24,31 @@ class FavoritesScreen extends ConsumerWidget {
     return Scaffold(
       appBar: const LogoAppBar(),
       body: favoriteAnimals.isEmpty
-          ? const Center(
-              child: Text('Nothing is here. Please add your favorite animals'),
+          ? Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Here you can add your favorite animals! Please add your favorite animals by tapping the heart icon on animals details screen!',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall!
+                          .copyWith(
+                              color: Colors.black,
+                              fontFamily: 'Lato',
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 20),
+                    const Icon(Icons.favorite_border,
+                        size: 100, color: Colors.black)
+                  ],
+                ),
+              ),
             )
           : ListView.builder(
               itemCount: favoriteAnimals.length,
