@@ -23,6 +23,8 @@ class AnimalDetailScreen extends StatelessWidget {
       zipCode: '12345',
       country: 'United States',
     ),
+    email: 'test@email.com',
+    password: "1234",
     animalIds: ['1', '2', '3'], // Replace with actual animal IDs
   );
 
@@ -156,12 +158,6 @@ class AnimalDetailScreen extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Text(
-                          'Color: ${animal.color}',
-                          style: const TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
                         const SizedBox(
                             width: 16), // Adjust the spacing between items
                         Text(
@@ -176,10 +172,11 @@ class AnimalDetailScreen extends StatelessWidget {
                 ),
                 ListTile(
                   title: const Text("Activity Level"),
-                  subtitle: Text(animal.activityLevel),
+                  subtitle: Text(animal.activityLevel.toString()),
                   leading: Icon(
                     Icons.directions_run,
-                    color: _getActivityLevelColor(animal.activityLevel),
+                    color:
+                        _getActivityLevelColor(animal.activityLevel.toString()),
                   ),
                 ),
                 ListTile(

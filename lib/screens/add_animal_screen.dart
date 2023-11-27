@@ -2,51 +2,76 @@ import 'package:adoption_app/models/adoption_center.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/models/animal.dart';
 
-class AddAnimalForm extends StatelessWidget {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _imageURLController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _typeController = TextEditingController();
-  final TextEditingController _breedController = TextEditingController();
-  final TextEditingController _colorController = TextEditingController();
-  final TextEditingController _ageController = TextEditingController();
-  final TextEditingController _activityLevelController =
-      TextEditingController();
-  final TextEditingController _sexController = TextEditingController();
-  final TextEditingController _locationController = TextEditingController();
+// TODO: add labels to each dropdown
 
+class AddAnimalForm extends StatefulWidget {
   final AdoptionCenter adoptionCenter;
-
-  // Animal object to be saved in database
   Animal animal = Animal(
       name: "",
       imageUrl: "",
       description: "",
       animalType: AnimalType.cat,
       breed: "",
-      color: "",
       age: 0,
-      sex: Sex.male,
-      activityLevel: "",
+      activityLevel: ActivityLevel.high,
+      sex: Sex.female,
       health: "",
       applicationIds: [],
       availability: true);
 
   AddAnimalForm({super.key, required this.adoptionCenter});
 
+  @override
+  _AddAnimalFormState createState() => _AddAnimalFormState();
+}
+
+class _AddAnimalFormState extends State<AddAnimalForm> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _imageURLController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _typeController = TextEditingController();
+  final TextEditingController _breedController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _activityLevelController =
+      TextEditingController();
+  final TextEditingController _sexController = TextEditingController();
+  final TextEditingController _locationController = TextEditingController();
+
+  // Dropdown values set to an inital default value
+  AnimalType animalType = AnimalType.cat;
+  Sex animalSex = Sex.female;
+  ActivityLevel activityLevel = ActivityLevel.high;
+
+  void _setAnimalType(AnimalType value) {
+    setState(() {
+      animalType = AnimalType.values.firstWhere((type) => type == value);
+    });
+  }
+
+  void _setAnimalActivityLevel(ActivityLevel value) {
+    setState(() {
+      activityLevel = ActivityLevel.values.firstWhere((type) => type == value);
+    });
+  }
+
+  void _setAnimalSex(Sex value) {
+    setState(() {
+      animalSex = Sex.values.firstWhere((type) => type == value);
+    });
+  }
+
   void onPressed(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      animal = Animal(
+      widget.animal = Animal(
           name: _nameController.text,
           imageUrl: _imageURLController.text,
           description: _descriptionController.text,
-          animalType: AnimalType.cat, // TODO: change to controller
-          color: _colorController.text,
+          animalType: animalType,
           breed: _breedController.text,
           age: int.parse(_ageController.text),
-          activityLevel: _activityLevelController.text,
-          sex: Sex.female, //TODO: change to enum
+          activityLevel: ActivityLevel.high, // TODO change to dropdown
+          sex: animalSex,
           health: "",
           applicationIds: [],
           availability: true);
@@ -55,7 +80,6 @@ class AddAnimalForm extends StatelessWidget {
       _imageURLController.clear();
       _descriptionController.clear();
       _typeController.clear();
-      _colorController.clear();
       _breedController.clear();
       _ageController.clear();
       _activityLevelController.clear();
@@ -72,18 +96,18 @@ class AddAnimalForm extends StatelessWidget {
     // TODO: Replace the print statement with crud operation
 
     debugPrint("Name: " +
-        animal.name +
+        widget.animal!.name +
         ", Age: " +
-        (animal.age).toString() +
+        (widget.animal!.age).toString() +
         ", Breed: " +
-        animal.breed);
+        widget.animal!.breed);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(adoptionCenter.name),
+        title: Text(widget.adoptionCenter.name),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -100,6 +124,7 @@ class AddAnimalForm extends StatelessWidget {
                           fontSize: 24,
                         )),
               ),
+              // NAME
               TextFormField(
                 controller: _nameController,
                 decoration: const InputDecoration(labelText: 'Name'),
@@ -110,6 +135,7 @@ class AddAnimalForm extends StatelessWidget {
                   return null;
                 },
               ),
+              // IMAGE URL
               TextFormField(
                 controller: _imageURLController,
                 decoration: const InputDecoration(labelText: 'Image URL'),
@@ -120,6 +146,7 @@ class AddAnimalForm extends StatelessWidget {
                   return null;
                 },
               ),
+              // DESCRIPTION
               TextFormField(
                 controller: _descriptionController,
                 decoration: const InputDecoration(labelText: 'Description'),
@@ -130,6 +157,58 @@ class AddAnimalForm extends StatelessWidget {
                   return null;
                 },
               ),
+              // ANIMAL TYPE
+              DropdownButton<AnimalType>(
+                value: animalType,
+                onChanged: (AnimalType? newValue) {
+                  if (newValue != null) {
+                    _setAnimalType(newValue);
+                  }
+                },
+                items: widget.animal!
+                    .getAnimalTypes()
+                    .map<DropdownMenuItem<AnimalType>>((AnimalType value) {
+                  return DropdownMenuItem<AnimalType>(
+                    value: value,
+                    child: Text(value.toString().split('.').last),
+                  );
+                }).toList(),
+              ),
+              DropdownButton<ActivityLevel>(
+                value: activityLevel,
+                onChanged: (ActivityLevel? newValue) {
+                  if (newValue != null) {
+                    _setAnimalActivityLevel(newValue);
+                  }
+                },
+                items: widget.animal!
+                    .getActivityLevels()
+                    .map<DropdownMenuItem<ActivityLevel>>(
+                        (ActivityLevel value) {
+                  return DropdownMenuItem<ActivityLevel>(
+                    value: value,
+                    child: Text(value.toString().split('.').last),
+                  );
+                }).toList(),
+              ),
+              // ANIMAL SEX
+              DropdownButton<Sex>(
+                value: animalSex,
+                onChanged: (Sex? newValue) {
+                  if (newValue != null) {
+                    _setAnimalSex(newValue);
+                  }
+                },
+                items: widget.animal!
+                    .getSex()
+                    .map<DropdownMenuItem<Sex>>((Sex value) {
+                  return DropdownMenuItem<Sex>(
+                    value: value,
+                    child: Text(value.toString().split('.').last),
+                  );
+                }).toList(),
+              ),
+              // BREED
               TextFormField(
                 controller: _breedController,
                 decoration: const InputDecoration(labelText: 'Breed'),
@@ -140,6 +219,7 @@ class AddAnimalForm extends StatelessWidget {
                   return null;
                 },
               ),
+              // AGE
               TextFormField(
                 controller: _ageController,
                 decoration: const InputDecoration(labelText: 'Age'),

@@ -4,6 +4,8 @@ enum AnimalType { cat, dog, bird, rodent }
 
 enum Sex { male, female }
 
+enum ActivityLevel { low, medium, high }
+
 const uuid = Uuid();
 
 class Animal {
@@ -13,7 +15,6 @@ class Animal {
       required this.description,
       required this.animalType,
       required this.breed,
-      required this.color,
       required this.age,
       required this.activityLevel,
       required this.sex,
@@ -26,13 +27,24 @@ class Animal {
   final String name;
   final String imageUrl;
   final String description;
-  final AnimalType animalType;
+  AnimalType animalType;
   final String breed;
-  final String color;
   final int age;
-  final String activityLevel;
-  final Sex sex;
+  ActivityLevel activityLevel;
+  Sex sex;
   final String health;
   final List<String>? applicationIds;
   bool availability = true;
+
+  List<AnimalType> getAnimalTypes() {
+    return AnimalType.values;
+  }
+
+  List<ActivityLevel> getActivityLevels() {
+    return ActivityLevel.values;
+  }
+
+  List<Sex> getSex() {
+    return Sex.values;
+  }
 }
