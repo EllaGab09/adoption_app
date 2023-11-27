@@ -18,11 +18,11 @@ class UserProfileScreen extends StatelessWidget {
           children: [
             Container(
               height: 250, // Set the image container height
-              child: Image.network(
-                user.imageUrl,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
+              // child: Image.network(
+              //   user.imageUrl,
+              //   fit: BoxFit.cover,
+              //   width: double.infinity,
+              // ),
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),

@@ -23,14 +23,16 @@ final dummyAdoptionCenter = AdoptionCenter(
     zipCode: '12345',
     country: 'United States',
   ),
+  email: 'test@email.com',
+  password: "1234",
   animalIds: ['1', '2', '3'], // Replace with actual animal IDs
 );
 
 //Temp Dummy
 final dummyUser = User(
-  id: '1',
-  imageUrl:
-      "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
+  //id: '1',
+  //imageUrl:
+  //    "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
   firstname: 'John',
   surname: 'Doe',
   email: 'john@example.com',
