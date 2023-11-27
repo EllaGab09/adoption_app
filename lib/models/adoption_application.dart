@@ -1,6 +1,6 @@
 import 'package:uuid/uuid.dart';
 
-final uuid = Uuid();
+const uuid = Uuid();
 
 class Adoption_Application {
   Adoption_Application({

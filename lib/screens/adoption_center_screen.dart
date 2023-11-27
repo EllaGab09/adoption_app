@@ -11,7 +11,7 @@ class AdoptionCenterScreen extends StatelessWidget {
   AdoptionCenterScreen({Key? key, required this.adoptionCenter})
       : markers = <Marker>{
           Marker(
-            markerId: MarkerId(adoptionCenter.id),
+            markerId: MarkerId(adoptionCenter.adoptionCenterId),
             position: const LatLng(
               0,
               0,
@@ -33,14 +33,14 @@ class AdoptionCenterScreen extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          // Container(
-          //   height: 250,
-          //   child: Image.network(
-          //     adoptionCenter.imageUrl,
-          //     fit: BoxFit.cover,
-          //     width: double.infinity,
-          //   ),
-          // ),
+          Container(
+            height: 250,
+            child: Image.network(
+              adoptionCenter.imageUrl,
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ),
+          ),
           ElevatedButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
@@ -89,8 +89,8 @@ class AdoptionCenterScreen extends StatelessWidget {
                 const Divider(),
                 InkWell(
                   onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (ctx) => MapSample()));
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (ctx) => const MapSample()));
                   },
                   child: ListTile(
                     leading: const Icon(Icons.location_on),
@@ -101,9 +101,9 @@ class AdoptionCenterScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Column(
+                const Column(
                   children: [
-                    Container(
+                    SizedBox(
                       height: 300, // Adjust the height as needed
                       child: MapSample(), // Embed the GoogleMapScreen here
                     ),
