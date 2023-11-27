@@ -7,9 +7,7 @@ class FavoritesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: LogoAppBar(
-        onProfilePressed: () {},
-      ),
+      appBar: LogoAppBar(),
       body: const Center(
         child: Text('Nothing is here. Please add your favorite animals'),
       ),

@@ -1,11 +1,13 @@
 import 'package:adoption_app/models/adoption_center.dart';
 import 'package:adoption_app/models/animal.dart';
 import 'package:adoption_app/screens/adoption_center_screen.dart';
-import 'package:adoption_app/widgets/animal_logo_appbar.dart';
+import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:adoption_app/providers/favorites_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AnimalDetailScreen extends StatelessWidget {
+class AnimalDetailScreen extends ConsumerWidget {
   final Animal animal;
 
   AnimalDetailScreen({super.key, required this.animal});
@@ -77,11 +79,36 @@ class AnimalDetailScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final favoriteAnimals = ref.watch(favoritesAnimalProvider);
+    final isFavorite = favoriteAnimals.contains(animal);
     return Scaffold(
-      appBar: AnimalLogoAppBar(
-        onFavoriteToggle: () => {},
-      ),
+      appBar: LogoAppBar(actions: [
+        IconButton(
+          iconSize: 40,
+          onPressed: () {
+            final wasAdded = ref
+                .read(favoritesAnimalProvider.notifier)
+                .toggleFavoriteAnimal(animal);
+            ScaffoldMessenger.of(context).clearSnackBars();
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  wasAdded
+                      ? '${animal.name} was added to favorites.'
+                      : '${animal.name} was removed from favorites.',
+                ),
+                duration: const Duration(seconds: 2),
+              ),
+            );
+          },
+          icon: Icon(
+            isFavorite ? Icons.favorite : Icons.favorite_border,
+            color: isFavorite ? Colors.red : Colors.white,
+            key: ValueKey(isFavorite),
+          ),
+        ),
+      ]),
       body: ListView(
         children: <Widget>[
           SizedBox(

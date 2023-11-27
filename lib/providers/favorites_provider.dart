@@ -1,5 +1,5 @@
 import 'package:adoption_app/models/animal.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FavoritesAnimalsProvider extends StateNotifier<List<Animal>> {
   FavoritesAnimalsProvider() : super([]);
@@ -16,7 +16,7 @@ class FavoritesAnimalsProvider extends StateNotifier<List<Animal>> {
   }
 }
 
-final favoritesProvider =
+final favoritesAnimalProvider =
     StateNotifierProvider<FavoritesAnimalsProvider, List<Animal>>(
   (ref) => FavoritesAnimalsProvider(),
 );

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 class LogoAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final VoidCallback onProfilePressed;
-
+  final List<Widget>? actions;
   const LogoAppBar({
     Key? key,
-    required this.onProfilePressed,
+    this.actions,
   }) : super(key: key);
 
   @override
@@ -14,8 +13,9 @@ class LogoAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      actions: actions,
       backgroundColor: Theme.of(context).colorScheme.primary,
-      elevation: 0,
+      elevation: 2,
       title: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Image.asset('assets/images/petAdoptLogo.png'),

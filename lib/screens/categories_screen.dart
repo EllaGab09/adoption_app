@@ -30,15 +30,7 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: LogoAppBar(
-        onProfilePressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => UserProfileScreen(user: dummyUser),
-            ),
-          );
-        },
-      ),
+      appBar: LogoAppBar(),
       body: Column(
         children: [
           const Padding(

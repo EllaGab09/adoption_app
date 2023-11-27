@@ -10,9 +10,7 @@ class UserProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: LogoAppBar(
-        onProfilePressed: () {},
-      ),
+      appBar: const LogoAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -7,9 +7,7 @@ class InboxScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: LogoAppBar(
-        onProfilePressed: () {},
-      ),
+      appBar: const LogoAppBar(),
       body: const Center(
         child: Text('Application history will be here'),
       ),
