@@ -1,3 +1,6 @@
+import 'package:adoption_app/dummy_data/animal_data.dart';
+import 'package:adoption_app/screens/adoption_application_details_adoption_center.dart';
+import 'package:adoption_app/screens/adoption_application_details_user.dart';
 import 'package:adoption_app/screens/login_screen.dart';
 import 'package:adoption_app/screens/tabs.dart';
 
@@ -15,9 +18,12 @@ final theme = ThemeData(
     primarySwatch: Colors.lightGreen,
     accentColor: Colors.lightGreenAccent,
     backgroundColor: Colors.white,
-    brightness: Brightness.dark,
+    brightness: Brightness.light,
   ),
   textTheme: GoogleFonts.robotoTextTheme(),
+  inputDecorationTheme: InputDecorationTheme(
+    hintStyle: TextStyle(color: Colors.grey),
+  ),
 );
 
 void main() async {
@@ -36,6 +42,14 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: theme,
       home: const LoginScreen(),
+      // home: AdoptionApplicationDetailsAC(
+      //   adoptionCenter: "Happy Paws Adoption Center",
+      //   animalInfo: "Dog",
+      //   userName: "John Doe",
+      //   userMessage: "I would like to adopt a dog.",
+      //   animal: dummyAnimals[0],
+      // ),
+
       routes: {
         '/login': (context) => const LoginScreen(),
         '/tabs': (context) => const TabsScreen(),

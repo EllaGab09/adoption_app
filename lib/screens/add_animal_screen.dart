@@ -2,7 +2,8 @@ import 'package:adoption_app/models/adoption_center.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/models/animal.dart';
 
-// TODO: add labels to each dropdown
+// TODO: change breed to dropdown
+// TODO: make age a number input and limit to 0-18
 
 class AddAnimalForm extends StatefulWidget {
   final AdoptionCenter adoptionCenter;
@@ -124,10 +125,17 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                           fontSize: 24,
                         )),
               ),
+
               // NAME
               TextFormField(
                 controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Name'),
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                  // Apply theme style for input field
+                  labelStyle: Theme.of(context).textTheme.titleMedium,
+                  // Apply theme style for error text
+                  errorStyle: Theme.of(context).textTheme.bodySmall,
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a name';
@@ -135,10 +143,50 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                   return null;
                 },
               ),
+
               // IMAGE URL
               TextFormField(
                 controller: _imageURLController,
-                decoration: const InputDecoration(labelText: 'Image URL'),
+                decoration: InputDecoration(
+                  labelText: 'Image URL',
+                  // Apply theme style for input field
+                  labelStyle: Theme.of(context).textTheme.titleMedium,
+                  // Apply theme style for error text
+                  errorStyle: Theme.of(context).textTheme.bodySmall,
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter an image URL';
+                  }
+                  return null;
+                },
+              ),
+
+              // DESCRIPTION
+              TextFormField(
+                controller: _descriptionController,
+                decoration: InputDecoration(
+                  labelText: 'Description',
+                  // Apply theme style for input field
+                  labelStyle: Theme.of(context).textTheme.titleMedium,
+                  // Apply theme style for error text
+                  errorStyle: Theme.of(context).textTheme.bodySmall,
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a description';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: _imageURLController,
+                decoration: InputDecoration(
+                  labelText: 'Image URL', // Apply theme style for input field
+                  labelStyle: Theme.of(context).textTheme.titleMedium,
+                  // Apply theme style for error text
+                  errorStyle: Theme.of(context).textTheme.bodySmall,
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a image URL';
@@ -149,7 +197,12 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
               // DESCRIPTION
               TextFormField(
                 controller: _descriptionController,
-                decoration: const InputDecoration(labelText: 'Description'),
+                decoration: InputDecoration(
+                  labelText: 'Description', // Apply theme style for input field
+                  labelStyle: Theme.of(context).textTheme.titleMedium,
+                  // Apply theme style for error text
+                  errorStyle: Theme.of(context).textTheme.bodySmall,
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a description';
@@ -211,7 +264,12 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
               // BREED
               TextFormField(
                 controller: _breedController,
-                decoration: const InputDecoration(labelText: 'Breed'),
+                decoration: InputDecoration(
+                  labelText: 'Breed', // Apply theme style for input field
+                  labelStyle: Theme.of(context).textTheme.titleMedium,
+                  // Apply theme style for error text
+                  errorStyle: Theme.of(context).textTheme.bodySmall,
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a breed';
@@ -222,7 +280,12 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
               // AGE
               TextFormField(
                 controller: _ageController,
-                decoration: const InputDecoration(labelText: 'Age'),
+                decoration: InputDecoration(
+                  labelText: 'Age', // Apply theme style for input field
+                  labelStyle: Theme.of(context).textTheme.titleMedium,
+                  // Apply theme style for error text
+                  errorStyle: Theme.of(context).textTheme.bodySmall,
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter an age';
