@@ -93,7 +93,7 @@ class AnimalDetailScreen extends ConsumerWidget {
               child: const Text('Adopt'),
               onPressed: () {
                 final newApplication = Application(
-                  id: DateTime.now().toString(),
+                  id: DateTime.now().toString(), // TODO replace with UUID
                   userName: dummyUser.firstname,
                   message: _messageController.text,
                 );
