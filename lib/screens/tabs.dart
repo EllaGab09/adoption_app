@@ -1,21 +1,25 @@
+import 'package:adoption_app/providers/favorites_provider.dart';
 import 'package:adoption_app/screens/categories_screen.dart';
 import 'package:adoption_app/screens/favorites_screen.dart';
 import 'package:adoption_app/screens/inbox_screen.dart';
 
 import 'package:adoption_app/screens/user_profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TabsScreen extends StatefulWidget {
+class TabsScreen extends ConsumerStatefulWidget {
   const TabsScreen({super.key});
   @override
-  State<TabsScreen> createState() => _TabsScreenState();
+  ConsumerState<TabsScreen> createState() => _TabsScreenState();
 }
 
-class _TabsScreenState extends State<TabsScreen> {
+class _TabsScreenState extends ConsumerState<TabsScreen> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     const CategoriesScreen(),
-    const FavoritesScreen(),
+    const FavoritesScreen(
+      animals: [],
+    ),
     const InboxScreen(),
     UserProfileScreen(user: dummyUser),
   ];

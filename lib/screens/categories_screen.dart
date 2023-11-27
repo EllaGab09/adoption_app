@@ -1,4 +1,3 @@
-import 'package:adoption_app/screens/user_profile_screen.dart';
 import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/widgets/categories_grid_item.dart';
@@ -30,7 +29,7 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: LogoAppBar(),
+      appBar: const LogoAppBar(),
       body: Column(
         children: [
           const Padding(

@@ -15,7 +15,7 @@ class LogoAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       actions: actions,
       backgroundColor: Theme.of(context).colorScheme.primary,
-      elevation: 2,
+      elevation: 8,
       title: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Image.asset('assets/images/petAdoptLogo.png'),
