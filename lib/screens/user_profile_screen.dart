@@ -10,13 +10,11 @@ class UserProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: LogoAppBar(
-        onProfilePressed: () {},
-      ),
+      appBar: const LogoAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 250, // Set the image container height
               // child: Image.network(
               //   user.imageUrl,
@@ -99,6 +97,24 @@ class UserProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
+            Stack(
+              children: <Widget>[
+                // ... other widgets here ...
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: FloatingActionButton.extended(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/login');
+                      },
+                      label: const Text('Logout'),
+                      icon: const Icon(Icons.logout),
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

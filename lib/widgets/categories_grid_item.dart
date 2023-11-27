@@ -15,20 +15,16 @@ class CategoryGridItem extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => AnimalDetailScreen(animal: animal),
+            builder: (context) => AnimalDetailScreen(
+              animal: animal,
+            ),
           ),
         );
       },
       child: Card(
-        //color: Colors.amber,
-        /* shape: const RoundedRectangleBorder(
-          side: BorderSide(
-             color: Colors.lightBlue,
-            width: 1.0,
-          ),
-        ), */
+        color: Theme.of(context).colorScheme.primary,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(6.0),
           child: Column(
             children: [
               SizedBox(
@@ -63,7 +59,10 @@ class CategoryGridItem extends StatelessWidget {
                 "${animal.sex} ${animal.breed}",
                 style: const TextStyle(
                   fontSize: 11,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.bold,
                 ),
+                overflow: TextOverflow.ellipsis,
               )
             ],
           ),
