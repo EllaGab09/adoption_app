@@ -1,4 +1,3 @@
-import 'package:adoption_app/providers/favorites_provider.dart';
 import 'package:adoption_app/screens/categories_screen.dart';
 import 'package:adoption_app/screens/favorites_screen.dart';
 import 'package:adoption_app/screens/inbox_screen.dart';
@@ -17,9 +16,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     const CategoriesScreen(),
-    const FavoritesScreen(
-      animals: [],
-    ),
+    const FavoritesScreen(),
     const InboxScreen(),
     UserProfileScreen(user: dummyUser),
   ];
