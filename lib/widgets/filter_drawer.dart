@@ -173,7 +173,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                       }
                     });
                   },
-                  icon: Column(
+                  icon: const Column(
                     children: [
                       Expanded(
                         child: Icon(Icons.restart_alt),
