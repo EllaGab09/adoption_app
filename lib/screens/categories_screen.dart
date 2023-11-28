@@ -46,14 +46,11 @@ class CategoriesScreenState extends State<CategoriesScreen> {
     if (attribute == 'type') {
       // Handling for Type
       if (value is List<AnimalType>) {
-        // If values is a list, use it directly
         selectedTypes = value;
       } else if (value is AnimalType) {
-        // If values is a single value, convert it to a list
         selectedTypes = [value];
       } else if (value == null) {
-        // If the type filter is turned off, set selectedTypes to an empty list
-        selectedTypes.clear(); // Clear the selectedTypes list
+        selectedTypes.clear();
       }
     } else if (attribute == 'Sex') {
       // Handling for Sex
@@ -68,20 +65,15 @@ class CategoriesScreenState extends State<CategoriesScreen> {
     } else if (attribute == 'breed') {
       // Handling for Breed
       if (value is String) {
-        // If value is a single value, add it to the selectedBreeds set
         setState(() {
-          selectedBreeds
-              .add(value.split('.').last.toLowerCase().replaceAll('}', ''));
-        });
-      } else if (value is List<String>) {
-        // If value is a list, add each breed to the selectedBreeds set
-        setState(() {
-          // selectedBreeds.clear(); // Clear the selectedBreeds set
-          selectedBreeds.addAll(value.map((breed) =>
-              breed.split('.').last.toLowerCase().replaceAll('}', '')));
+          final cleanBreed = value.split('.').last.trim().toLowerCase();
+          if (selectedBreeds.contains(cleanBreed)) {
+            selectedBreeds.remove(cleanBreed);
+          } else {
+            selectedBreeds.add(cleanBreed);
+          }
         });
       } else if (value == null) {
-        // If the breed filter is turned off, set selectedBreeds to an empty set
         setState(() {
           selectedBreeds.clear();
         });
@@ -125,13 +117,11 @@ class CategoriesScreenState extends State<CategoriesScreen> {
       print('Breed Filter Applied: $selectedBreeds');
       filteredList = filteredList.where((animal) {
         String animalBreed = animal.breed.trim().toLowerCase();
-        bool breedCondition = selectedBreeds.contains(animalBreed);
-        print(
-            'Animal Breed: $animalBreed, Selected Breeds: $selectedBreeds, Breed Condition: $breedCondition');
-        return breedCondition;
+        return selectedBreeds.contains(animalBreed);
       }).toList();
       print('After Breed Filter: $filteredList');
     } else {
+      // If no breeds are selected, include all breeds in the result
       print('No Breeds Selected');
     }
 

@@ -211,29 +211,13 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           breed: breed.toString(),
                           selectedBreeds: widget.selectedBreeds,
                           onChanged: (bool? value) {
-                            print('Breed checkmark bool: $value');
-                            print(
-                                'Selected Animal Type: $animalType, Selected Breed: $breed');
                             setState(() {
                               if (value!) {
-                                widget.selectedBreeds.add(breed
-                                    .toString()
-                                    .split('.')
-                                    .last
-                                    .toLowerCase()
-                                    .replaceAll('}', ''));
+                                widget.onFilterOptionSelected(
+                                    'breed', breed.toString());
                               } else {
-                                widget.selectedBreeds.remove(breed
-                                    .toString()
-                                    .split('.')
-                                    .last
-                                    .toLowerCase()
-                                    .replaceAll('}', ''));
+                                widget.onFilterOptionSelected('breed', null);
                               }
-                              widget.onFilterOptionSelected(
-                                'breed',
-                                widget.selectedBreeds.join(', '),
-                              );
                             });
                           },
                         );
