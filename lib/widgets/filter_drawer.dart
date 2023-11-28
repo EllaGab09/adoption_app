@@ -137,7 +137,8 @@ class _FilterDrawerState extends State<FilterDrawer> {
         children: [
           SizedBox(
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment:
+                  CrossAxisAlignment.center, // Center vertically
               children: [
                 const Text(
                   'Filters',
@@ -147,37 +148,39 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 ),
                 const Spacer(),
                 // Reset filters button
-                ElevatedButton(
-                  onPressed: () {
-                    // Reset filters by calling the filter callback with null values
-                    widget.onFilterOptionSelected('resetFilters', null);
+                Align(
+                  alignment: Alignment.center, // Center vertically
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Reset filters by calling the filter callback with null values
+                      widget.onFilterOptionSelected('resetFilters', null);
 
-                    // Reset local state variables
-                    setState(() {
-                      _selectedActivity = AnimalActivity.unspecified;
-                      _selectedSex = AnimalSex.unspecified;
-                      _selectedAge = const RangeValues(0, 15);
-                      _selectedTypes = [];
-                      _selectedBreeds = {};
-                      isTypeCheckedMap = {
-                        for (var type in AnimalType.values)
-                          type: widget.selectedTypes.contains(type)
-                      };
-                      _selectedBreedsMap = {};
+                      // Reset local state variables
+                      setState(() {
+                        _selectedActivity = AnimalActivity.unspecified;
+                        _selectedSex = AnimalSex.unspecified;
+                        _selectedAge = const RangeValues(0, 15);
+                        _selectedTypes = [];
+                        _selectedBreeds = {};
+                        isTypeCheckedMap = {
+                          for (var type in AnimalType.values)
+                            type: widget.selectedTypes.contains(type)
+                        };
+                        _selectedBreedsMap = {};
 
-                      // Close all ExpansionPanel widgets
-                      for (var type in AnimalType.values) {
-                        isTypeCheckedMap[type] = false;
-                      }
-                    });
-                  },
-                  child: const Text('Reset Filters'),
-                ),
+                        // Close all ExpansionPanel widgets
+                        for (var type in AnimalType.values) {
+                          isTypeCheckedMap[type] = false;
+                        }
+                      });
+                    },
+                    child: const Text('Reset Filters'),
+                  ),
+                )
               ],
             ),
           ),
 
-          // Container for filter options
           // Container for filter options
           Container(
             color: Colors.transparent,
@@ -209,11 +212,10 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     // Build the header of each ExpansionPanel
                     headerBuilder: (BuildContext context, bool isExpanded) {
                       return ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 0), // Adjust vertical padding
                         title: Row(
                           children: [
-                            Text(capitalize(
-                                animalType.toString().split('.').last)),
-                            const SizedBox(width: 10),
                             // Checkbox for each type
                             Checkbox(
                               value: _selectedTypes.contains(animalType),
@@ -234,6 +236,8 @@ class _FilterDrawerState extends State<FilterDrawer> {
                                     value == true ? _selectedTypes : null);
                               },
                             ),
+                            Text(capitalize(
+                                animalType.toString().split('.').last)),
                           ],
                         ),
                       );
