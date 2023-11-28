@@ -1,25 +1,22 @@
 name: adoption_app
 description: A new Flutter project.
-publish_to: "none"
+publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: ">=3.1.0 <4.0.0"
+  sdk: '>=3.1.0 <4.0.0'
 
 dependencies:
-  cloud_firestore: ^4.13.0
-  firebase_core: ^2.22.0
   flutter:
     sdk: flutter
-  google_fonts: ^6.1.0
   google_maps_flutter: ^2.5.0
-<<<<<<< HEAD
   http: ^1.1.0
-=======
+  sign_in_button: ^3.2.0
+  cloud_firestore: ^4.13.0
+  firebase_core: ^2.22.0
+  google_fonts: ^6.1.0
   intl: ^0.18.1
   flutter_riverpod: ^2.4.8
->>>>>>> adoption-application-history
-  sign_in_button: ^3.2.0
   uuid: ^4.2.1
 
 dev_dependencies:
@@ -28,6 +25,11 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
-  uses-material-design: true
-  assets:
-    - assets/images/petAdoptLogo.png
+ uses-material-design: true
+ assets:
+   - assets/images/petAdoptLogo.png
+
+
+
+
+
