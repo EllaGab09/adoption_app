@@ -113,4 +113,60 @@ const dummyAnimals = [
       activityLevel: 'Low',
       sex: "Female",
       location: "Spjelkavik, Ålesund"),
+  Animal(
+      name: 'Bunni',
+      imageUrl:
+          "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
+      description: 'Adorable and energetic. Loves hopping around.',
+      type: 'Rodent',
+      breed: 'Rabbit',
+      age: 1,
+      activityLevel: 'Moderate',
+      sex: "Female",
+      location: "Spjelkavik, Ålesund"),
+  Animal(
+      name: 'Piggo',
+      imageUrl:
+          "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
+      description:
+          'Sweet and sociable. Enjoys cuddling and nibbling on veggies.',
+      type: 'Rodent',
+      breed: 'guineaPig',
+      age: 1,
+      activityLevel: 'Low',
+      sex: "Male",
+      location: "Spjelkavik, Ålesund"),
+  Animal(
+      name: 'Nibbles',
+      imageUrl:
+          "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
+      description: 'Tiny and curious. Loves running on the wheel.',
+      type: 'Rodent',
+      breed: 'Hamster',
+      age: 5,
+      activityLevel: 'Moderate',
+      sex: "Female",
+      location: "Spjelkavik, Ålesund"),
+  Animal(
+      name: 'Shadow',
+      imageUrl:
+          "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
+      description: 'Intelligent and social. Enjoys climbing and snuggling.',
+      type: 'Rodent',
+      breed: 'Mice',
+      age: 2,
+      activityLevel: 'High',
+      sex: "Male",
+      location: "Spjelkavik, Ålesund"),
+  Animal(
+      name: 'Ratto',
+      imageUrl:
+          "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",
+      description: 'Intelligent and social. Enjoys climbing and snuggling.',
+      type: 'Rodent',
+      breed: 'Rat',
+      age: 7,
+      activityLevel: 'High',
+      sex: "Male",
+      location: "Spjelkavik, Ålesund"),
 ];

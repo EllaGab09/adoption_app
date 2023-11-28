@@ -63,8 +63,8 @@ class _FilterDrawerState extends State<FilterDrawer> {
       return AnimalType.reptile;
     } else if (FishType.values.map((e) => e.toString()).contains(breed)) {
       return AnimalType.fish;
-    } else if (SmallAnimals.values.map((e) => e.toString()).contains(breed)) {
-      return AnimalType.smallAnimals;
+    } else if (RodentsType.values.map((e) => e.toString()).contains(breed)) {
+      return AnimalType.rodent;
     } else {
       return AnimalType.dog;
     }
@@ -118,8 +118,8 @@ class _FilterDrawerState extends State<FilterDrawer> {
         return ReptileType.values;
       case AnimalType.fish:
         return FishType.values;
-      case AnimalType.smallAnimals:
-        return SmallAnimals.values;
+      case AnimalType.rodent:
+        return RodentsType.values;
       default:
         return [];
     }
@@ -130,7 +130,8 @@ class _FilterDrawerState extends State<FilterDrawer> {
     double statusBarHeight = MediaQuery.of(context).padding.top;
 
     return Drawer(
-      width: 240,
+      // backgroundColor: Colors.white.withOpacity(0.5),
+      width: 195,
       child: ListView(
         padding:
             EdgeInsets.only(top: statusBarHeight + 10), // Dynamic top padding
@@ -277,12 +278,6 @@ class _FilterDrawerState extends State<FilterDrawer> {
           // Row for the 'Activity' filter dropdown
           Row(
             children: [
-              const Text(
-                'Activity:   ',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
               // Dropdown button for selecting activity
               DropdownButton<AnimalActivity>(
                 value: _selectedActivity,
@@ -305,17 +300,17 @@ class _FilterDrawerState extends State<FilterDrawer> {
                   );
                 }).toList(),
               ),
+              const Text(
+                ':Activity',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
             ],
           ),
           // Row for the 'Sex' filter dropdown
           Row(
             children: [
-              const Text(
-                'Sex:   ',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
               // Dropdown button for selecting sex
               DropdownButton<AnimalSex>(
                 value: _selectedSex,
@@ -336,6 +331,12 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     child: Text(capitalize(value.toString().split('.').last)),
                   );
                 }).toList(),
+              ),
+              const Text(
+                ':Sex',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
               ),
             ],
           ),
@@ -359,30 +360,33 @@ class _FilterDrawerState extends State<FilterDrawer> {
           Row(
             children: [
               const Text(
-                'Age:   ',
+                ' ',
                 style: TextStyle(
                   fontSize: 16,
                 ),
               ),
               // Range slider for selecting age range
-              RangeSlider(
-                values: _selectedAge,
-                onChanged: (RangeValues values) {
-                  setState(() {
-                    _selectedAge = values;
-                  });
-                  // Call filter callback and update selected age range
-                  widget.onFilterOptionSelected(
-                    'age',
-                    '${values.start.round()} - ${values.end.round()}',
-                  );
-                },
-                min: 0,
-                max: 15,
-                divisions: 15,
-                labels: RangeLabels(
-                  _selectedAge.start.round().toString(),
-                  _selectedAge.end.round().toString(),
+              SizedBox(
+                width: 180,
+                child: RangeSlider(
+                  values: _selectedAge,
+                  onChanged: (RangeValues values) {
+                    setState(() {
+                      _selectedAge = values;
+                    });
+                    // Call filter callback and update selected age range
+                    widget.onFilterOptionSelected(
+                      'age',
+                      '${values.start.round()} - ${values.end.round()}',
+                    );
+                  },
+                  min: 0,
+                  max: 15,
+                  divisions: 15,
+                  labels: RangeLabels(
+                    _selectedAge.start.round().toString(),
+                    _selectedAge.end.round().toString(),
+                  ),
                 ),
               ),
             ],
