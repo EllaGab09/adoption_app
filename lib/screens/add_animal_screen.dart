@@ -180,37 +180,7 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                   return null;
                 },
               ),
-              TextFormField(
-                controller: _imageURLController,
-                decoration: InputDecoration(
-                  labelText: 'Image URL', // Apply theme style for input field
-                  labelStyle: Theme.of(context).textTheme.titleMedium,
-                  // Apply theme style for error text
-                  errorStyle: Theme.of(context).textTheme.bodySmall,
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a image URL';
-                  }
-                  return null;
-                },
-              ),
-              // DESCRIPTION
-              TextFormField(
-                controller: _descriptionController,
-                decoration: InputDecoration(
-                  labelText: 'Description', // Apply theme style for input field
-                  labelStyle: Theme.of(context).textTheme.titleMedium,
-                  // Apply theme style for error text
-                  errorStyle: Theme.of(context).textTheme.bodySmall,
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a description';
-                  }
-                  return null;
-                },
-              ),
+
               // ANIMAL TYPE
               DropdownButton<AnimalType>(
                 value: animalType,
