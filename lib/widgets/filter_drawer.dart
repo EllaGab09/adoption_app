@@ -125,25 +125,54 @@ class _FilterDrawerState extends State<FilterDrawer> {
     }
   }
 
-  // Build the UI for the FilterDrawer widget
   @override
   Widget build(BuildContext context) {
+    double statusBarHeight = MediaQuery.of(context).padding.top;
+
     return Drawer(
+      width: 240,
       child: ListView(
-        padding: EdgeInsets.zero,
+        padding:
+            EdgeInsets.only(top: statusBarHeight + 10), // Dynamic top padding
         children: [
-          // Drawer header with the title 'Filters'
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-            ),
-            child: Text(
-              'Filters',
-              style: TextStyle(
-                fontSize: 24,
-              ),
+          SizedBox(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Filters',
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
+                ),
+                const Spacer(),
+                // Reset filters button
+                ElevatedButton(
+                  onPressed: () {
+                    // Reset filters by calling the filter callback with null values
+                    widget.onFilterOptionSelected('resetFilters', null);
+
+                    // Reset local state variables
+                    setState(() {
+                      _selectedActivity = AnimalActivity.unspecified;
+                      _selectedSex = AnimalSex.unspecified;
+                      _selectedAge = const RangeValues(0, 15);
+                      _selectedTypes = [];
+                      _selectedBreeds = {};
+                      isTypeCheckedMap = {
+                        for (var type in AnimalType.values)
+                          type: widget.selectedTypes.contains(type)
+                      };
+                      _selectedBreedsMap = {};
+                    });
+                  },
+                  child: const Text('Reset Filters'),
+                ),
+              ],
             ),
           ),
+
+          // Container for filter options
           // Container for filter options
           Container(
             color: Colors.transparent,
@@ -164,7 +193,11 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 });
               },
               // Map AnimalType values to ExpansionPanel widgets
-              children: AnimalType.values.map<ExpansionPanel>(
+              children: AnimalType.values
+                  .where((type) =>
+                      type !=
+                      AnimalType.unspecified) // Filter out unspecified type
+                  .map<ExpansionPanel>(
                 (AnimalType animalType) {
                   return ExpansionPanel(
                     canTapOnHeader: false,
@@ -231,6 +264,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
               ).toList(),
             ),
           ),
+
           // Row for the 'Activity' filter dropdown
           Row(
             children: [

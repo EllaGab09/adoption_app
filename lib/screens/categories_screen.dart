@@ -85,6 +85,13 @@ class CategoriesScreenState extends State<CategoriesScreen> {
         double.parse(ageValues[0]),
         double.parse(ageValues[1]),
       );
+    } else if (attribute == 'resetFilters') {
+      // Reset all filters
+      selectedTypes = [];
+      selectedBreeds = Set<String>();
+      selectedActivity = AnimalActivity.unspecified;
+      selectedSex = AnimalSex.unspecified;
+      selectedAge = RangeValues(0, 15);
     }
 
     // Apply filters
