@@ -236,21 +236,23 @@ class _FilterDrawerState extends State<FilterDrawer> {
                                       onChanged: (bool? value) {
                                         setState(() {
                                           if (value!) {
-                                            // Update selectedTypes when the checkbox is checked
+                                            // Checkbox is checked
                                             _selectedTypes.add(animalType);
                                           } else {
-                                            // Uncheck the checkbox and remove the type from selectedTypes
+                                            // Checkbox is unchecked
                                             _selectedTypes.remove(animalType);
                                           }
+                                          // Update isTypeCheckedMap for the current type
                                           isTypeCheckedMap[animalType] = value;
                                         });
 
-                                        // Call the 'type' filter callback whenever the checkbox state changes
+                                        // Call the 'type' filter callback with the updated selected types
                                         widget.onFilterOptionSelected(
-                                            'type',
-                                            value == true
-                                                ? _selectedTypes
-                                                : null);
+                                          'type',
+                                          _selectedTypes.isNotEmpty
+                                              ? _selectedTypes
+                                              : null,
+                                        );
                                       },
                                     ),
                                     Text(capitalize(
