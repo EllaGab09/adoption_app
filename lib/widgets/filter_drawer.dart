@@ -367,25 +367,24 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     height: 15,
                   ),
                   // Display selected age range
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 24,
-                      ),
-                      Text(
-                        (_selectedAge.start == _selectedAge.end)
-                            ? 'Filtering: Only ${_selectedAge.start.round()}'
-                            : (_selectedAge.start == 0 &&
-                                    _selectedAge.end == 15)
-                                ? 'Filtering: All ages'
-                                : (_selectedAge.start == 0)
-                                    ? 'Filtering:  Up to ${_selectedAge.end.round()}'
-                                    : (_selectedAge.end == 15)
-                                        ? 'Filtering:  From ${_selectedAge.start.round()} and up'
-                                        : 'Filtering:  Between ${_selectedAge.start.round()} and ${_selectedAge.end.round()}',
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ],
+                  const Text(
+                    'Age filter',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    (_selectedAge.start == _selectedAge.end)
+                        ? 'Only ${_selectedAge.start.round()}'
+                        : (_selectedAge.start == 0 && _selectedAge.end == 15)
+                            ? 'All ages'
+                            : (_selectedAge.start == 0)
+                                ? 'Up to ${_selectedAge.end.round()}'
+                                : (_selectedAge.end == 15)
+                                    ? 'From ${_selectedAge.start.round()} and up'
+                                    : 'Between ${_selectedAge.start.round()} and ${_selectedAge.end.round()}',
+                    style: const TextStyle(fontSize: 16),
                   ),
                   // Row for the 'Age' filter range slider
                   Row(
