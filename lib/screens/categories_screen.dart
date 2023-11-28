@@ -76,7 +76,7 @@ class CategoriesScreenState extends State<CategoriesScreen> {
       } else if (value is List<String>) {
         // If value is a list, add each breed to the selectedBreeds set
         setState(() {
-          selectedBreeds.clear(); // Clear the selectedBreeds set
+          // selectedBreeds.clear(); // Clear the selectedBreeds set
           selectedBreeds.addAll(value.map((breed) =>
               breed.split('.').last.toLowerCase().replaceAll('}', '')));
         });

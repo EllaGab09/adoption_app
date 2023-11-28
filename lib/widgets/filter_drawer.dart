@@ -207,23 +207,28 @@ class _FilterDrawerState extends State<FilterDrawer> {
                       itemCount: getBreedDropdownItems(animalType).length,
                       itemBuilder: (context, index) {
                         var breed = getBreedDropdownItems(animalType)[index];
-                        return CheckboxListTile(
-                          dense: true,
-                          title: Text(
-                            capitalize(breed.toString().split('.').last),
-                          ),
-                          contentPadding: EdgeInsets.zero,
-                          value:
-                              widget.selectedBreeds.contains(breed.toString()),
+                        return BreedCheckbox(
+                          breed: breed.toString(),
+                          selectedBreeds: widget.selectedBreeds,
                           onChanged: (bool? value) {
                             print('Breed checkmark bool: $value');
                             print(
                                 'Selected Animal Type: $animalType, Selected Breed: $breed');
                             setState(() {
                               if (value!) {
-                                widget.selectedBreeds.add(breed.toString());
+                                widget.selectedBreeds.add(breed
+                                    .toString()
+                                    .split('.')
+                                    .last
+                                    .toLowerCase()
+                                    .replaceAll('}', ''));
                               } else {
-                                widget.selectedBreeds.remove(breed.toString());
+                                widget.selectedBreeds.remove(breed
+                                    .toString()
+                                    .split('.')
+                                    .last
+                                    .toLowerCase()
+                                    .replaceAll('}', ''));
                               }
                               widget.onFilterOptionSelected(
                                 'breed',
@@ -357,6 +362,48 @@ class _FilterDrawerState extends State<FilterDrawer> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class BreedCheckbox extends StatefulWidget {
+  final String breed;
+  final Set<String> selectedBreeds;
+  final ValueChanged<bool?> onChanged;
+
+  const BreedCheckbox({
+    super.key,
+    required this.breed,
+    required this.selectedBreeds,
+    required this.onChanged,
+  });
+
+  @override
+  _BreedCheckboxState createState() => _BreedCheckboxState();
+
+  // Define the capitalize method within the BreedCheckbox class
+  String capitalize(String input) {
+    if (input.isEmpty) {
+      return input;
+    }
+    return input[0].toUpperCase() + input.substring(1);
+  }
+}
+
+class _BreedCheckboxState extends State<BreedCheckbox> {
+  @override
+  Widget build(BuildContext context) {
+    return CheckboxListTile(
+      dense: true,
+      title: Text(widget.capitalize(widget.breed.toString().split('.').last)),
+      contentPadding: EdgeInsets.zero,
+      value: widget.selectedBreeds.contains(widget.breed
+          .toString()
+          .split('.')
+          .last
+          .toLowerCase()
+          .replaceAll('}', '')),
+      onChanged: widget.onChanged,
     );
   }
 }
