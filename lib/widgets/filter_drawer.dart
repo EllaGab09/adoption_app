@@ -143,7 +143,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                   const Padding(
                     padding: EdgeInsets.only(left: 10), // Adjust left padding
                     child: Text(
-                      'Filters',
+                      'Animal Filter',
                       style: TextStyle(fontSize: 18, color: Colors.black),
                     ),
                   ),
@@ -295,8 +295,14 @@ class _FilterDrawerState extends State<FilterDrawer> {
                   ),
 
                   // Row for the 'Activity' filter dropdown
-                  Row(
+                  Column(
                     children: [
+                      const Text(
+                        'Activity:',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
                       // Dropdown button for selecting activity
                       DropdownButton<AnimalActivity>(
                         value: _selectedActivity,
@@ -321,17 +327,20 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           );
                         }).toList(),
                       ),
-                      const Text(
-                        ':Activity',
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
                     ],
                   ),
+                  const SizedBox(
+                    height: 30,
+                  ),
                   // Row for the 'Sex' filter dropdown
-                  Row(
+                  Column(
                     children: [
+                      const Text(
+                        'Sex:',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
                       // Dropdown button for selecting sex
                       DropdownButton<AnimalSex>(
                         value: _selectedSex,
@@ -355,12 +364,6 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           );
                         }).toList(),
                       ),
-                      const Text(
-                        ':Sex',
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
                     ],
                   ),
                   const SizedBox(
@@ -371,7 +374,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     'Age filter',
                     style: TextStyle(fontSize: 18),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
