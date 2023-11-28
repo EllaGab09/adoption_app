@@ -131,7 +131,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
 
     return Drawer(
       // backgroundColor: Colors.white.withOpacity(0.5),
-      width: 195,
+      width: 160,
       child: ListView(
         padding:
             EdgeInsets.only(top: statusBarHeight + 10), // Dynamic top padding
@@ -148,35 +148,31 @@ class _FilterDrawerState extends State<FilterDrawer> {
                   ),
                 ),
                 const Spacer(),
-                // Reset filters button
-                Align(
-                  alignment: Alignment.center, // Center vertically
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Reset filters by calling the filter callback with null values
-                      widget.onFilterOptionSelected('resetFilters', null);
+                IconButton(
+                  onPressed: () {
+                    // Reset filters by calling the filter callback with null values
+                    widget.onFilterOptionSelected('resetFilters', null);
 
-                      // Reset local state variables
-                      setState(() {
-                        _selectedActivity = AnimalActivity.unspecified;
-                        _selectedSex = AnimalSex.unspecified;
-                        _selectedAge = const RangeValues(0, 15);
-                        _selectedTypes = [];
-                        _selectedBreeds = {};
-                        isTypeCheckedMap = {
-                          for (var type in AnimalType.values)
-                            type: widget.selectedTypes.contains(type)
-                        };
-                        _selectedBreedsMap = {};
+                    // Reset local state variables
+                    setState(() {
+                      _selectedActivity = AnimalActivity.unspecified;
+                      _selectedSex = AnimalSex.unspecified;
+                      _selectedAge = const RangeValues(0, 15);
+                      _selectedTypes = [];
+                      _selectedBreeds = {};
+                      isTypeCheckedMap = {
+                        for (var type in AnimalType.values)
+                          type: widget.selectedTypes.contains(type)
+                      };
+                      _selectedBreedsMap = {};
 
-                        // Close all ExpansionPanel widgets
-                        for (var type in AnimalType.values) {
-                          isTypeCheckedMap[type] = false;
-                        }
-                      });
-                    },
-                    child: const Text('Reset Filters'),
-                  ),
+                      // Close all ExpansionPanel widgets
+                      for (var type in AnimalType.values) {
+                        isTypeCheckedMap[type] = false;
+                      }
+                    });
+                  },
+                  icon: Icon(Icons.restart_alt),
                 )
               ],
             ),
@@ -303,7 +299,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
               const Text(
                 ':Activity',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                 ),
               ),
             ],
@@ -367,7 +363,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
               ),
               // Range slider for selecting age range
               SizedBox(
-                width: 180,
+                width: 156,
                 child: RangeSlider(
                   values: _selectedAge,
                   onChanged: (RangeValues values) {

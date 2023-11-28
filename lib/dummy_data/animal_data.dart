@@ -121,7 +121,7 @@ const dummyAnimals = [
       type: 'Rodent',
       breed: 'Rabbit',
       age: 1,
-      activityLevel: 'Moderate',
+      activityLevel: 'Medium',
       sex: "Female",
       location: "Spjelkavik, Ålesund"),
   Animal(
@@ -144,7 +144,7 @@ const dummyAnimals = [
       type: 'Rodent',
       breed: 'Hamster',
       age: 5,
-      activityLevel: 'Moderate',
+      activityLevel: 'High',
       sex: "Female",
       location: "Spjelkavik, Ålesund"),
   Animal(
@@ -155,7 +155,7 @@ const dummyAnimals = [
       type: 'Rodent',
       breed: 'Mice',
       age: 2,
-      activityLevel: 'High',
+      activityLevel: 'Medium',
       sex: "Male",
       location: "Spjelkavik, Ålesund"),
   Animal(
