@@ -164,6 +164,11 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           type: widget.selectedTypes.contains(type)
                       };
                       _selectedBreedsMap = {};
+
+                      // Close all ExpansionPanel widgets
+                      for (var type in AnimalType.values) {
+                        isTypeCheckedMap[type] = false;
+                      }
                     });
                   },
                   child: const Text('Reset Filters'),
