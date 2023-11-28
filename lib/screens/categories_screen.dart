@@ -67,9 +67,25 @@ class CategoriesScreenState extends State<CategoriesScreen> {
           (activity) => activity.toString().split('.').last == value);
     } else if (attribute == 'breed') {
       // Handling for Breed
-      selectedBreeds.clear(); // Clear existing breeds before adding new ones
-      selectedBreeds.add(value.split('.').last.toLowerCase().replaceAll(
-          '}', '')); // Extract breed name and remove extra characters
+      if (value is String) {
+        // If value is a single value, add it to the selectedBreeds set
+        setState(() {
+          selectedBreeds
+              .add(value.split('.').last.toLowerCase().replaceAll('}', ''));
+        });
+      } else if (value is List<String>) {
+        // If value is a list, add each breed to the selectedBreeds set
+        setState(() {
+          selectedBreeds.clear(); // Clear the selectedBreeds set
+          selectedBreeds.addAll(value.map((breed) =>
+              breed.split('.').last.toLowerCase().replaceAll('}', '')));
+        });
+      } else if (value == null) {
+        // If the breed filter is turned off, set selectedBreeds to an empty set
+        setState(() {
+          selectedBreeds.clear();
+        });
+      }
     } else if (attribute == 'age') {
       // Handling for Age
       final ageValues = value.split(' - ');

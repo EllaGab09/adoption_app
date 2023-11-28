@@ -32,7 +32,7 @@ class FilterDrawer extends StatefulWidget {
 // Define the state for the FilterDrawer widget
 class _FilterDrawerState extends State<FilterDrawer> {
   // Maps to store selected breeds and type checkboxes
-  Map<AnimalType, Set<dynamic>> _selectedBreedsMap = {};
+  Map<AnimalType, Set<String>> _selectedBreedsMap = {};
   Map<AnimalType, bool> isTypeCheckedMap = {};
 
   // Selected activity, sex, age, and types
@@ -40,6 +40,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
   AnimalSex _selectedSex = AnimalSex.unspecified;
   late List<AnimalType> _selectedTypes;
   late RangeValues _selectedAge;
+  Set<String> _selectedBreeds = {};
 
   // Function to capitalize the first letter of a string
   String capitalize(String input) {
@@ -47,34 +48,6 @@ class _FilterDrawerState extends State<FilterDrawer> {
       return input;
     }
     return input[0].toUpperCase() + input.substring(1);
-  }
-
-  // Initialize state with selected filter options
-  @override
-  void initState() {
-    super.initState();
-    _selectedActivity = widget.selectedActivity;
-    _selectedSex = widget.selectedSex;
-    _selectedAge = widget.selectedAge;
-    _selectedTypes = widget.selectedTypes;
-
-    // Initialize isTypeCheckedMap with the selected types
-    isTypeCheckedMap = _selectedTypes.asMap().map((index, type) {
-      return MapEntry(type, true);
-    });
-
-    // Initialize _selectedBreedsMap with the selected breeds
-    _selectedBreedsMap = widget.selectedBreeds.fold(
-      <AnimalType, Set<dynamic>>{},
-      (map, breed) {
-        final type = getBreedType(breed);
-        if (!map.containsKey(type)) {
-          map[type] = <dynamic>{};
-        }
-        map[type]!.add(breed);
-        return map;
-      },
-    );
   }
 
   // Function to determine the type of a breed
@@ -95,6 +68,41 @@ class _FilterDrawerState extends State<FilterDrawer> {
     } else {
       return AnimalType.dog;
     }
+  }
+
+  // Initialize state with selected filter options
+  @override
+  void initState() {
+    super.initState();
+    _selectedActivity = widget.selectedActivity;
+    _selectedSex = widget.selectedSex;
+    _selectedAge = widget.selectedAge;
+    _selectedTypes = widget.selectedTypes;
+
+    // Initialize isTypeCheckedMap with the selected types
+    isTypeCheckedMap = _selectedTypes.asMap().map((index, type) {
+      return MapEntry(type, true);
+    });
+
+    // Initialize _selectedBreedsMap with the selected breeds
+    _selectedBreedsMap = {};
+    for (var type in AnimalType.values) {
+      if (_selectedTypes.contains(type)) {
+        _selectedBreedsMap[type] = {};
+      }
+    }
+
+    for (var breed in widget.selectedBreeds) {
+      var type = getBreedType(breed);
+      if (_selectedBreedsMap.containsKey(type)) {
+        _selectedBreedsMap[type]!.add(breed);
+      }
+    }
+
+    // Ensure that selected breeds are added to _selectedBreedsMap
+    _selectedBreedsMap.forEach((type, breeds) {
+      _selectedBreeds.addAll(breeds);
+    });
   }
 
   // Function to get a list of breed items based on the animal type
@@ -151,7 +159,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 setState(() {
                   isTypeCheckedMap[animalType] = !isExpanded;
                   if (!isExpanded) {
-                    _selectedBreedsMap[animalType] = <dynamic>{};
+                    _selectedBreedsMap[animalType] = <String>{};
                   }
                 });
               },
@@ -206,27 +214,22 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           ),
                           contentPadding: EdgeInsets.zero,
                           value:
-                              _selectedBreedsMap[animalType]?.contains(breed) ??
-                                  false,
+                              widget.selectedBreeds.contains(breed.toString()),
                           onChanged: (bool? value) {
+                            print('Breed checkmark bool: $value');
                             print(
                                 'Selected Animal Type: $animalType, Selected Breed: $breed');
                             setState(() {
                               if (value!) {
-                                _selectedBreedsMap.putIfAbsent(
-                                    animalType, () => <dynamic>{});
-                                _selectedBreedsMap[animalType]!.add(breed);
+                                widget.selectedBreeds.add(breed.toString());
                               } else {
-                                _selectedBreedsMap[animalType]!.remove(breed);
-                                if (_selectedBreedsMap[animalType]!.isEmpty) {
-                                  _selectedBreedsMap.remove(animalType);
-                                }
+                                widget.selectedBreeds.remove(breed.toString());
                               }
+                              widget.onFilterOptionSelected(
+                                'breed',
+                                widget.selectedBreeds.join(', '),
+                              );
                             });
-                            widget.onFilterOptionSelected(
-                              'breed',
-                              _selectedBreedsMap.values.join(', '),
-                            );
                           },
                         );
                       },
