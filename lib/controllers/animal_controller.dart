@@ -20,7 +20,7 @@ class AnimalController {
       "animalId": animal.animalId, // Include the animalId in the document
       "animal_name": animal.name,
       "animal_description": animal.description,
-      "animal_type": animal.animalType,
+      "animal_type": animal.type,
       "animal_breed": animal.breed,
       "animal_color": animal.age,
       "animal_activity_level": animal.activityLevel,
@@ -75,7 +75,7 @@ class AnimalController {
       "animalId": animal.animalId, // Include the animalId in the document
       "animal_name": animal.name,
       "animal_description": animal.description,
-      "animal_type": animal.animalType,
+      "animal_type": animal.type,
       "animal_breed": animal.breed,
       "animal_color": animal.age,
       "animal_activity_level": animal.activityLevel,

@@ -64,7 +64,6 @@ class Animal {
       required this.sex,
       required this.health,
       required this.availability,
-      required this.location,
       this.applicationIds})
       : animalId = uuid.v4();
 
@@ -79,7 +78,7 @@ class Animal {
   String sex;
   final String health;
   final List<String>? applicationIds;
-  String location;
+
   bool availability = true;
 
   List<AnimalType> getAnimalTypes() {

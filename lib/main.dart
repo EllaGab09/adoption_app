@@ -12,7 +12,7 @@ import 'firebase_options.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-/* final theme = ThemeData(
+final theme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSwatch(
     primarySwatch: Colors.blue,
@@ -24,7 +24,7 @@ import 'package:google_fonts/google_fonts.dart';
   inputDecorationTheme: const InputDecorationTheme(
     hintStyle: TextStyle(color: Colors.grey),
   ),
-); */
+);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,7 +40,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // theme: theme,
+      //theme: theme,
       home: const LoginScreen(),
       /* home: AdoptionApplicationDetailsAC(
         adoptionCenter: "Happy Paws Adoption Center",

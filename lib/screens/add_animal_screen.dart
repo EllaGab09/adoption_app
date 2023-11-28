@@ -11,11 +11,11 @@ class AddAnimalForm extends StatefulWidget {
       name: "",
       imageUrl: "",
       description: "",
-      animalType: AnimalType.cat,
+      type: "Cat",
       breed: "",
       age: 0,
-      activityLevel: ActivityLevel.high,
-      sex: Sex.female,
+      activityLevel: "low",
+      sex: "Female",
       health: "",
       applicationIds: [],
       availability: true);
@@ -40,9 +40,9 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
   final TextEditingController _locationController = TextEditingController();
 
   // Dropdown values set to an inital default value
-  AnimalType animalType = AnimalType.cat;
-  Sex animalSex = Sex.female;
-  ActivityLevel activityLevel = ActivityLevel.high;
+  AnimalType animalType = AnimalType.unspecified;
+  AnimalSex animalSex = AnimalSex.unspecified;
+  AnimalActivity activityLevel = AnimalActivity.unspecified;
 
   void _setAnimalType(AnimalType value) {
     setState(() {
@@ -50,15 +50,15 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
     });
   }
 
-  void _setAnimalActivityLevel(ActivityLevel value) {
+  void _setAnimalActivityLevel(AnimalActivity value) {
     setState(() {
-      activityLevel = ActivityLevel.values.firstWhere((type) => type == value);
+      activityLevel = AnimalActivity.values.firstWhere((type) => type == value);
     });
   }
 
-  void _setAnimalSex(Sex value) {
+  void _setAnimalSex(AnimalSex value) {
     setState(() {
-      animalSex = Sex.values.firstWhere((type) => type == value);
+      animalSex = AnimalSex.values.firstWhere((type) => type == value);
     });
   }
 
@@ -68,11 +68,12 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
           name: _nameController.text,
           imageUrl: _imageURLController.text,
           description: _descriptionController.text,
-          animalType: animalType,
+          type: animalType.toString(),
           breed: _breedController.text,
           age: int.parse(_ageController.text),
-          activityLevel: ActivityLevel.high, // TODO change to dropdown
-          sex: animalSex,
+          activityLevel:
+              AnimalActivity.high.toString(), // TODO change to dropdown
+          sex: animalSex.toString(),
           health: "",
           applicationIds: [],
           availability: true);
@@ -227,35 +228,35 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                   );
                 }).toList(),
               ),
-              DropdownButton<ActivityLevel>(
+              DropdownButton<AnimalActivity>(
                 value: activityLevel,
-                onChanged: (ActivityLevel? newValue) {
+                onChanged: (AnimalActivity? newValue) {
                   if (newValue != null) {
                     _setAnimalActivityLevel(newValue);
                   }
                 },
                 items: widget.animal!
                     .getActivityLevels()
-                    .map<DropdownMenuItem<ActivityLevel>>(
-                        (ActivityLevel value) {
-                  return DropdownMenuItem<ActivityLevel>(
+                    .map<DropdownMenuItem<AnimalActivity>>(
+                        (AnimalActivity value) {
+                  return DropdownMenuItem<AnimalActivity>(
                     value: value,
                     child: Text(value.toString().split('.').last),
                   );
                 }).toList(),
               ),
               // ANIMAL SEX
-              DropdownButton<Sex>(
+              DropdownButton<AnimalSex>(
                 value: animalSex,
-                onChanged: (Sex? newValue) {
+                onChanged: (AnimalSex? newValue) {
                   if (newValue != null) {
                     _setAnimalSex(newValue);
                   }
                 },
                 items: widget.animal!
                     .getSex()
-                    .map<DropdownMenuItem<Sex>>((Sex value) {
-                  return DropdownMenuItem<Sex>(
+                    .map<DropdownMenuItem<AnimalSex>>((AnimalSex value) {
+                  return DropdownMenuItem<AnimalSex>(
                     value: value,
                     child: Text(value.toString().split('.').last),
                   );
