@@ -1,6 +1,7 @@
 import 'package:adoption_app/screens/categories_screen.dart';
 import 'package:adoption_app/screens/forgot_password_screen.dart';
 import 'package:adoption_app/screens/sign_up_screen.dart';
+import 'package:adoption_app/screens/tabs.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class LoginScreen extends StatelessWidget {
               child: Image.asset('assets/images/petAdoptLogo.png'),
             ),
             const SizedBox(height: 20),
-            LoginForm(),
+            const LoginForm(),
           ],
         ),
       ),
@@ -28,6 +29,8 @@ class LoginScreen extends StatelessWidget {
 }
 
 class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
+
   @override
   _LoginFormState createState() => _LoginFormState();
 }
@@ -101,8 +104,8 @@ class _LoginFormState extends State<LoginForm> {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (ctx) => const CategoriesScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (ctx) => const TabsScreen()));
 
               String email = emailController.text;
               String password = passwordController.text;

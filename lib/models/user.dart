@@ -1,22 +1,28 @@
+import 'package:uuid/uuid.dart';
+
+const uuid = Uuid();
+
 class User {
-  final String id;
-  final String imageUrl;
+  User({
+    //required this.imageUrl,
+    required this.firstname,
+    required this.surname,
+    required this.email,
+    required this.password,
+    required this.age,
+    required this.address,
+    this.applicationIds,
+  }) : userId = uuid.v4();
+
+  final String userId;
+  //final String imageUrl;
   final String firstname;
   final String surname;
   final String email;
   final String password;
   final int age;
   final UserAddress address;
-
-  User(
-      {required this.id,
-      required this.imageUrl,
-      required this.firstname,
-      required this.surname,
-      required this.email,
-      required this.password,
-      required this.age,
-      required this.address});
+  final List<String>? applicationIds;
 }
 
 class UserAddress {

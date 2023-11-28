@@ -1,28 +1,46 @@
 import 'package:adoption_app/widgets/googleMap.dart';
+import 'package:adoption_app/screens/add_animal_screen.dart';
+import 'package:adoption_app/screens/adoption_application_details_user.dart';
+import 'package:adoption_app/widgets/googleMap.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/models/adoption_center.dart';
+
+import '../dummy_data/animal_data.dart';
 
 class AdoptionCenterScreen extends StatelessWidget {
   final AdoptionCenter adoptionCenter;
 
-  AdoptionCenterScreen({Key? key, required this.adoptionCenter})
-      : super(key: key);
+  AdoptionCenterScreen({Key? key, required this.adoptionCenter});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(adoptionCenter.name),
       ),
       body: ListView(
         children: <Widget>[
-          Container(
+          SizedBox(
             height: 250,
             /* child: Image.network(
               adoptionCenter.imageUrl,
               fit: BoxFit.cover,
               width: double.infinity,
             ), */
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (ctx) =>
+                      AddAnimalForm(key: key, adoptionCenter: adoptionCenter)));
+            },
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5), // Square button
+              ),
+            ),
+            child: const Text("Add a new animal"),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -62,7 +80,7 @@ class AdoptionCenterScreen extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (ctx) => MapScreen(
-                          adoptionCenterLocation: adoptionCenter.adress,
+                          adoptionCenterLocation: adoptionCenter.location,
                         ),
                       ),
                     );
@@ -71,7 +89,7 @@ class AdoptionCenterScreen extends StatelessWidget {
                     leading: const Icon(Icons.location_on),
                     title: const Text("Click for interactive map"),
                     subtitle: Text(
-                      '${adoptionCenter.adress.street}, ${adoptionCenter.adress.city}, ${adoptionCenter.adress.zipCode}, ${adoptionCenter.adress.country}',
+                      '${adoptionCenter.location.street}, ${adoptionCenter.location.city}, ${adoptionCenter.location.zipCode}, ${adoptionCenter.location.country}',
                     ),
                   ),
                 ),
@@ -80,7 +98,7 @@ class AdoptionCenterScreen extends StatelessWidget {
                 SizedBox(
                   height: 300,
                   child: MapScreen(
-                    adoptionCenterLocation: adoptionCenter.adress,
+                    adoptionCenterLocation: adoptionCenter.location,
                   ),
                 ),
               ],

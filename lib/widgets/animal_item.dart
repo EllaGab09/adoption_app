@@ -2,20 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:adoption_app/models/animal.dart';
 
 class AnimalItem extends StatelessWidget {
-  const AnimalItem({super.key, required this.animal});
+  const AnimalItem(
+      {super.key, required this.animal, required this.onSelectAnimal});
 
   final Animal animal;
-  // final void Function(Animal animal) onSelectAnimal;
+  final void Function(Animal animal) onSelectAnimal;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       clipBehavior: Clip.hardEdge,
       elevation: 2,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          onSelectAnimal(animal);
+        },
         child: Stack(
           children: [
             Image.network(

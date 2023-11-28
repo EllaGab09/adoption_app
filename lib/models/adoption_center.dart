@@ -1,26 +1,31 @@
+import 'package:uuid/uuid.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
-
 import 'dart:convert';
 
-class AdoptionCenter {
-  final String id;
-  //final String imageUrl;
-  final String name;
-  final String description;
-  final String phoneNo;
-  final AdoptionCenterLocation adress;
-  final List<String> availableAnimalIds;
+const uuid = Uuid();
 
+class AdoptionCenter {
   AdoptionCenter({
-    required this.id,
-    //required this.imageUrl,
+    //  required this.imageUrl,
     required this.name,
     required this.description,
     required this.phoneNo,
-    required this.adress,
-    required this.availableAnimalIds,
-  });
+    required this.location,
+    required this.email,
+    required this.password,
+    this.animalIds,
+  }) : adoptionCenterId = uuid.v4();
+
+//  final String imageUrl;
+  final String adoptionCenterId;
+  final String name;
+  final String phoneNo;
+  final String description;
+  final AdoptionCenterLocation location;
+  final String email;
+  final String password;
+  final List<String>? animalIds;
 }
 
 class AdoptionCenterLocation {
