@@ -10,7 +10,7 @@ import '../dummy_data/animal_data.dart';
 class AdoptionCenterScreen extends StatelessWidget {
   final AdoptionCenter adoptionCenter;
 
-  AdoptionCenterScreen({Key? key, required this.adoptionCenter});
+  AdoptionCenterScreen({super.key, required this.adoptionCenter});
 
   @override
   Widget build(BuildContext context) {

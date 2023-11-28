@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class LogoAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget>? actions;
   const LogoAppBar({
-    Key? key,
+    super.key,
     this.actions,
-  }) : super(key: key);
+  });
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -38,6 +38,24 @@ class LogoAppBar extends StatelessWidget implements PreferredSizeWidget {
       //     ),
       //   ),
       // ],
+      /*     actions: [
+        Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: Colors.white,
+              width: 2, // Border width
+            ),
+          ),
+          child: IconButton(
+            icon: const Icon(
+              Icons.person,
+              size: 32,
+            ),
+            onPressed: onProfilePressed,
+          ),
+        ),
+      ], */
     );
   }
 }

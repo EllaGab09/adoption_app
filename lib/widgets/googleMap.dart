@@ -7,7 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class MapScreen extends StatefulWidget {
   final AdoptionCenterLocation adoptionCenterLocation;
 
-  MapScreen({Key? key, required this.adoptionCenterLocation}) : super(key: key);
+  MapScreen({super.key, required this.adoptionCenterLocation});
 
   @override
   State<MapScreen> createState() => MapState();
