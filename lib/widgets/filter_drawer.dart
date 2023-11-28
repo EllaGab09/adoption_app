@@ -134,7 +134,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
       width: 160,
       child: ListView(
         padding:
-            EdgeInsets.only(top: statusBarHeight + 10), // Dynamic top padding
+            EdgeInsets.only(top: statusBarHeight + 15), // Dynamic top padding
         children: [
           SizedBox(
             child: Row(
@@ -148,6 +148,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                   ),
                 ),
                 const Spacer(),
+                // Reset filters IconButton with restart_alt icon, label, and tooltip
                 IconButton(
                   onPressed: () {
                     // Reset filters by calling the filter callback with null values
@@ -172,7 +173,20 @@ class _FilterDrawerState extends State<FilterDrawer> {
                       }
                     });
                   },
-                  icon: Icon(Icons.restart_alt),
+                  icon: Column(
+                    children: [
+                      Expanded(
+                        child: Icon(Icons.restart_alt),
+                      ),
+                      Text(
+                        'Reset',
+                        style: TextStyle(
+                          fontSize: 10,
+                        ),
+                      ),
+                    ],
+                  ),
+                  tooltip: 'Reset Filters',
                 )
               ],
             ),

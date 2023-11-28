@@ -20,7 +20,7 @@ class LogoAppBar extends StatelessWidget implements PreferredSizeWidget {
         padding: const EdgeInsets.all(8.0),
         child: Image.asset('assets/images/petAdoptLogo.png'),
       ),
-      actions: [
+      /*     actions: [
         Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
@@ -37,7 +37,7 @@ class LogoAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: onProfilePressed,
           ),
         ),
-      ],
+      ], */
     );
   }
 }
