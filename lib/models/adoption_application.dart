@@ -7,7 +7,6 @@ class AdoptionApplication {
     required this.userId,
     required this.animalId,
     required this.applicationStatus,
-    required this.applicationDate,
     required this.applicationMessage,
   }) : applicationId = uuid.v4();
 
@@ -15,6 +14,5 @@ class AdoptionApplication {
   final String userId;
   final String animalId;
   final String applicationStatus;
-  final String applicationDate; //?
   final String applicationMessage;
 }
