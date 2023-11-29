@@ -210,10 +210,10 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                   if (newValue != null) {
                     setState(() {
                       _setAnimalType(newValue);
-
-                      // Set the initial value of the breed dropdown when the type changes
-                      _breedController.text =
-                          breedOptions[newValue]?.first ?? "";
+                      _breedController.text = (newValue ==
+                              AnimalType.unspecified)
+                          ? "" // Clear the breed controller if the type is unspecified
+                          : breedOptions[newValue]?.first ?? "";
                     });
                   }
                 },
@@ -228,24 +228,30 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
               ),
 
               // BREED
-              Visibility(
-                visible: showBreedDropdown,
-                child: DropdownButton<String>(
-                  value: _breedController.text,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      _breedController.text = newValue!;
-                    });
-                  },
-                  items: breedOptions[animalType]
-                          ?.map<DropdownMenuItem<String>>((String breed) {
-                        return DropdownMenuItem<String>(
-                          value: breed,
-                          child: Text(breed),
-                        );
-                      }).toList() ??
-                      [],
-                ),
+
+              DropdownButton<String>(
+                value: _breedController.text,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _breedController.text = newValue!;
+                  });
+                },
+                items: (animalType == AnimalType.unspecified)
+                    ? [
+                        DropdownMenuItem(
+                          value: "",
+                          child: Text(
+                              "Select Type First"), // Placeholder for unspecified type
+                        ),
+                      ]
+                    : breedOptions[animalType]
+                            ?.map<DropdownMenuItem<String>>((String breed) {
+                          return DropdownMenuItem<String>(
+                            value: breed,
+                            child: Text(breed),
+                          );
+                        }).toList() ??
+                        [],
               ),
 
               DropdownButton<AnimalActivity>(
