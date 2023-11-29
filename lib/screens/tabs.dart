@@ -50,6 +50,9 @@ class _TabsScreenState extends State<TabsScreen> {
             label: 'Profile',
           ),
         ],
+        selectedItemColor: Theme.of(context).colorScheme.primary,
+        unselectedItemColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(context).colorScheme.background,
       ),
     );
   }
