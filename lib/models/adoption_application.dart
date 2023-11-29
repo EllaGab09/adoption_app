@@ -2,8 +2,8 @@ import 'package:uuid/uuid.dart';
 
 const uuid = Uuid();
 
-class Adoption_Application {
-  Adoption_Application({
+class AdoptionApplication {
+  AdoptionApplication({
     required this.userId,
     required this.animalId,
     required this.applicationStatus,
