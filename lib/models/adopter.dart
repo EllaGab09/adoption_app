@@ -3,7 +3,7 @@ import 'package:uuid/uuid.dart';
 const uuid = Uuid();
 
 // Model representing a user in the adoption application system
-class User {
+class Adopter {
   final String userId; // Unique identifier for the user
   final String firstname; // First name of the user
   final String surname; // Last name of the user
@@ -14,8 +14,8 @@ class User {
   final List<String>?
       applicationIds; // List of application IDs associated with the user
 
-  // Constructor to initialize the user with required parameters
-  User({
+  Adopter({
+    //required this.imageUrl,
     required this.firstname,
     required this.surname,
     required this.email,
@@ -40,4 +40,12 @@ class UserAddress {
     required this.zipCode,
     required this.country,
   });
+  Map<String, dynamic> toMap() {
+    return {
+      'street': street,
+      'city': city,
+      'zipCode': zipCode,
+      'country': country,
+    };
+  }
 }

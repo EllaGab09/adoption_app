@@ -9,6 +9,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:adoption_app/firebase_options.dart';
+import 'package:adoption_app/screens/login_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+//import 'package:adoption_app/widgets/add_animal_form.dart';
+//import 'screens/categories_screen.dart';
+import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,6 +33,7 @@ final theme = ThemeData(
 );
 
 void main() async {
+  runApp(const App());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

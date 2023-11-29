@@ -1,8 +1,10 @@
+import 'package:adoption_app/screens/categories_screen.dart';
 import 'package:adoption_app/screens/forgot_password_screen.dart';
 import 'package:adoption_app/screens/sign_up_screen.dart';
 import 'package:adoption_app/screens/tabs.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:flutter/material.dart';
+import 'package:adoption_app/services/firebase_authentication.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key});
@@ -31,7 +33,7 @@ class LoginScreen extends StatelessWidget {
 }
 
 class LoginForm extends StatefulWidget {
-  const LoginForm({Key? key});
+  const LoginForm({super.key});
 
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -111,14 +113,32 @@ class _LoginFormState extends State<LoginForm> {
           ),
           // Login Button
           ElevatedButton(
-            onPressed: () {
-              // Navigate to the TabsScreen on button press
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (ctx) => const TabsScreen()));
+            onPressed: () async {
+              String? result = await AuthService().login(
+                  email: emailController.text,
+                  password: passwordController.text);
 
-              // Retrieve email and password from controllers
-              String email = emailController.text;
-              String password = passwordController.text;
+              if (result!.contains('Success')) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Login Successful'),
+                  ),
+                );
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (ctx) => const CategoriesScreen()));
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(result.toString()),
+                  ),
+                );
+              }
+
+              //String email = emailController.text;
+              //String password = passwordController.text;
+
+              print(
+                  'Email: $emailController.text, Password: $passwordController.text');
             },
             style: ElevatedButton.styleFrom(
               shape: const StadiumBorder(), // Make the button rounder
@@ -162,9 +182,8 @@ class _LoginFormState extends State<LoginForm> {
                 const Text("Need an account? "),
                 TextButton(
                   onPressed: () {
-                    // Navigate to the SignUpScreen on button press
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (ctx) => const SignUpScreen()));
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (ctx) => SignUpScreen()));
                   },
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
