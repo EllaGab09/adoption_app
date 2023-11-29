@@ -43,6 +43,8 @@ class SignUpScreen extends StatelessWidget {
           country: _countryController.text,
         ),
         adopter: adopter);
+    //Close The screen on user registered
+    Navigator.pop(context);
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
