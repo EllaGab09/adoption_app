@@ -3,6 +3,7 @@ import 'package:adoption_app/screens/favorites_screen.dart';
 import 'package:adoption_app/screens/inbox_screen.dart';
 import 'package:adoption_app/screens/user_profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:adoption_app/dummy_data/user_data.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
