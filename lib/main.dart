@@ -1,5 +1,5 @@
 import 'package:adoption_app/screens/login_screen.dart';
-import 'package:adoption_app/screens/tabs.dart';
+import 'package:adoption_app/widgets/tabs.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
