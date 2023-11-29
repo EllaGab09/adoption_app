@@ -38,15 +38,37 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
       TextEditingController();
   final TextEditingController _sexController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
-
+  bool showBreedDropdown = false;
   // Dropdown values set to an inital default value
   AnimalType animalType = AnimalType.unspecified;
   AnimalSex animalSex = AnimalSex.unspecified;
   AnimalActivity activityLevel = AnimalActivity.unspecified;
 
+  final Map<AnimalType, List<String>> breedOptions = {
+    AnimalType.dog: DogBreed.values
+        .map((breed) => breed.toString().split('.').last)
+        .toList(),
+    AnimalType.cat: CatBreed.values
+        .map((breed) => breed.toString().split('.').last)
+        .toList(),
+    AnimalType.bird: BirdBreed.values
+        .map((breed) => breed.toString().split('.').last)
+        .toList(),
+    AnimalType.reptile: ReptileType.values
+        .map((breed) => breed.toString().split('.').last)
+        .toList(),
+    AnimalType.fish: FishType.values
+        .map((breed) => breed.toString().split('.').last)
+        .toList(),
+    AnimalType.rodent: RodentsType.values
+        .map((breed) => breed.toString().split('.').last)
+        .toList(),
+  };
+
   void _setAnimalType(AnimalType value) {
     setState(() {
       animalType = AnimalType.values.firstWhere((type) => type == value);
+      showBreedDropdown = true; // Show the breed dropdown when a type is chosen
     });
   }
 
@@ -186,7 +208,13 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                 value: animalType,
                 onChanged: (AnimalType? newValue) {
                   if (newValue != null) {
-                    _setAnimalType(newValue);
+                    setState(() {
+                      _setAnimalType(newValue);
+
+                      // Set the initial value of the breed dropdown when the type changes
+                      _breedController.text =
+                          breedOptions[newValue]?.first ?? "";
+                    });
                   }
                 },
                 items: widget.animal!
@@ -198,6 +226,28 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                   );
                 }).toList(),
               ),
+
+              // BREED
+              Visibility(
+                visible: showBreedDropdown,
+                child: DropdownButton<String>(
+                  value: _breedController.text,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _breedController.text = newValue!;
+                    });
+                  },
+                  items: breedOptions[animalType]
+                          ?.map<DropdownMenuItem<String>>((String breed) {
+                        return DropdownMenuItem<String>(
+                          value: breed,
+                          child: Text(breed),
+                        );
+                      }).toList() ??
+                      [],
+                ),
+              ),
+
               DropdownButton<AnimalActivity>(
                 value: activityLevel,
                 onChanged: (AnimalActivity? newValue) {
@@ -232,22 +282,7 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                   );
                 }).toList(),
               ),
-              // BREED
-              TextFormField(
-                controller: _breedController,
-                decoration: InputDecoration(
-                  labelText: 'Breed', // Apply theme style for input field
-                  labelStyle: Theme.of(context).textTheme.titleMedium,
-                  // Apply theme style for error text
-                  errorStyle: Theme.of(context).textTheme.bodySmall,
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a breed';
-                  }
-                  return null;
-                },
-              ),
+
               // AGE
               TextFormField(
                 controller: _ageController,

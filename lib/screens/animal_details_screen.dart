@@ -293,9 +293,10 @@ class AnimalDetailScreen extends ConsumerWidget {
                 ),
                 ListTile(
                   title: const Text("Sex:"),
-                  // subtitle: Text(animal.sex),
+                  subtitle: Text(animal.sex),
                   leading: Icon(
-                    animal.sex.toString() == "Male" ? Icons.male : Icons.female,
+                    animal.sex == "Male" ? Icons.male : Icons.female,
+                    color: animal.sex == "Male" ? Colors.blue : Colors.pink,
                   ),
                 )
               ],
