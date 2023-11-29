@@ -20,9 +20,12 @@ class AdoptionCenterScreen extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          // Image Section
-          const SizedBox(
-            height: 250,
+          // Map Section
+          SizedBox(
+            height: 300,
+            child: MapScreen(
+              adoptionCenterLocation: adoptionCenter.location,
+            ),
           ),
           // Button to add a new animal
           ElevatedButton(
@@ -96,13 +99,6 @@ class AdoptionCenterScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                // Map Section
-                SizedBox(
-                  height: 300,
-                  child: MapScreen(
-                    adoptionCenterLocation: adoptionCenter.location,
-                  ),
-                ),
               ],
             ),
           ),
