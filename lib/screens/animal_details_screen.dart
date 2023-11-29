@@ -127,32 +127,16 @@ class AnimalDetailScreen extends ConsumerWidget {
     final favoriteAnimals = ref.watch(favoritesAnimalProvider);
     final isFavorite = favoriteAnimals.contains(animal);
     return Scaffold(
-      appBar: LogoAppBar(actions: [
-        /*   IconButton(
-          iconSize: 40,
-          onPressed: () {
-            final wasAdded = ref
-                .read(favoritesAnimalProvider.notifier)
-                .toggleFavoriteAnimal(animal);
-            ScaffoldMessenger.of(context).clearSnackBars();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  wasAdded
-                      ? '${animal.name} was added to favorites.'
-                      : '${animal.name} was removed from favorites.',
-                ),
-                duration: const Duration(seconds: 2),
-              ),
-            );
-          },
-          icon: Icon(
-            isFavorite ? Icons.favorite : Icons.favorite_border,
-            color: isFavorite ? Colors.red : Colors.white,
-            key: ValueKey(isFavorite),
-          ),
-        ), */
-      ]),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        elevation: 8,
+        title:
+            //  padding: const EdgeInsets.only(left: 1),
+            Image.asset(
+          'assets/images/petAdoptLogo.png',
+          width: 240,
+        ),
+      ),
       body: ListView(
         children: <Widget>[
           SizedBox(
