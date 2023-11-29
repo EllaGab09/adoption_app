@@ -1,6 +1,11 @@
 import 'package:adoption_app/models/animal.dart';
 import 'package:flutter/material.dart';
 
+/// A widget that displays the details of an adoption application.
+///
+/// This widget is used to show the details of an adoption application,
+/// including information about the applicant and the pet they are applying for.
+/// It is typically used within the context of an adoption application screen.
 class AdoptionApplicationDetails extends StatelessWidget {
   //final AdoptionApplication adoptionApplication;
   final String userName;

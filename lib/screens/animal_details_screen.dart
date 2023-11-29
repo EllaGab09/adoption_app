@@ -189,6 +189,12 @@ class AnimalDetailScreen extends ConsumerWidget {
   }
 
   @override
+
+  /// Builds the widget for the animal details screen.
+  ///
+  /// This method is responsible for constructing the UI for the animal details screen.
+  /// It takes in the [BuildContext] and [WidgetRef] as parameters.
+  /// Returns a [Widget] representing the constructed UI.
   Widget build(BuildContext context, WidgetRef ref) {
     final favoriteAnimals = ref.watch(favoritesAnimalProvider);
     final isFavorite = favoriteAnimals.contains(animal);
@@ -229,6 +235,7 @@ class AnimalDetailScreen extends ConsumerWidget {
                     ),
                     IconButton(
                       iconSize: 30,
+                      // Toggle the favorite status of the animal
                       onPressed: () {
                         final wasAdded = ref
                             .read(favoritesAnimalProvider.notifier)

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:adoption_app/models/animal.dart';
 
+/// A widget that represents an animal item.
+///
+/// This widget is used to display information about an animal in the adoption app.
+/// It is typically used in a list or grid view to show multiple animal items.
 class AnimalItem extends StatelessWidget {
   const AnimalItem(
       {super.key, required this.animal, required this.onSelectAnimal});

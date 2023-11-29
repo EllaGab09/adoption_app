@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// A custom app bar widget that displays a logo.
+///
+/// This widget extends [StatelessWidget] and implements [PreferredSizeWidget],
+/// allowing it to be used as an app bar in Flutter applications.
 class LogoAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget>? actions;
   const LogoAppBar({

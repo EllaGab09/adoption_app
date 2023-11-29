@@ -10,6 +10,7 @@ import 'firebase_options.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
+/// The theme data for the application.
 final theme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSwatch(

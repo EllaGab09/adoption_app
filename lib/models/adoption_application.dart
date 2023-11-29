@@ -2,6 +2,7 @@ import 'package:uuid/uuid.dart';
 
 const uuid = Uuid();
 
+/// Represents an adoption application for a pet.
 class AdoptionApplication {
   AdoptionApplication({
     required this.userId,

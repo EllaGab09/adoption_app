@@ -4,10 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:adoption_app/providers/applications_provider.dart';
 
+/// A screen that displays the inbox for applications.
+///
+/// This screen is responsible for showing the user's applications, where they can view and manage their applications.
+/// It extends the [ConsumerWidget] class, allowing it to rebuild when the state of the underlying data changes.
 class InboxScreen extends ConsumerWidget {
   const InboxScreen({super.key});
 
   @override
+
+  /// Builds the inbox screen widget.
+  ///
+  /// This method is responsible for constructing the UI of the inbox screen.
+  /// It takes in the [context] and [ref] parameters and returns a widget.
   Widget build(BuildContext context, WidgetRef ref) {
     final applications = ref.watch(applicationProvider);
     return Scaffold(

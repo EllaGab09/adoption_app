@@ -1,5 +1,6 @@
 import 'package:uuid/uuid.dart';
 
+/// Represents an application for adoption.
 class Application {
   final String id;
   final String animalName;

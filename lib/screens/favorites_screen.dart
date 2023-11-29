@@ -6,9 +6,19 @@ import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+/// A screen that displays the user's favorite animals.
+///
+/// This screen is a [ConsumerWidget] that listens to changes in the favorite animals state
+/// and updates the UI accordingly. It provides a visual representation of the user's
+/// favorite animals and allows them to interact with those animals.
 class FavoritesScreen extends ConsumerWidget {
   const FavoritesScreen({super.key});
 
+  /// Selects an animal and navigates to the details screen.
+  ///
+  /// This method is called when an animal is selected from the favorites screen.
+  /// It takes the [BuildContext] and the selected [Animal] as parameters.
+  /// It navigates to the details screen to display more information about the selected animal.
   void selectAnimal(BuildContext context, Animal animal) {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -18,6 +28,12 @@ class FavoritesScreen extends ConsumerWidget {
   }
 
   @override
+
+  /// Builds the favorites screen widget.
+  ///
+  /// This method is responsible for constructing the UI of the favorites screen.
+  /// It takes in the [BuildContext] and [WidgetRef] as parameters.
+  /// Returns a [Widget] representing the favorites screen.
   Widget build(BuildContext context, WidgetRef ref) {
     final favoriteAnimals = ref.watch(favoritesAnimalProvider);
 

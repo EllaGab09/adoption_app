@@ -2,6 +2,11 @@ import 'package:adoption_app/providers/applications_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+/// A widget that represents an application item.
+///
+/// This widget is used to display information about an application in a list.
+/// It extends the [ConsumerWidget] class, which allows it to automatically rebuild
+/// whenever the state of the application changes.
 class ApplicationItem extends ConsumerWidget {
   final String id;
   final String userName;

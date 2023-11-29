@@ -5,6 +5,8 @@ import 'package:adoption_app/widgets/categories_grid_item.dart';
 import 'package:adoption_app/dummy_data/animal_data.dart';
 import 'package:adoption_app/widgets/filter_drawer.dart';
 
+/// This class represents the screen that displays categories for adoption.
+/// It is a stateful widget that can be updated dynamically.
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});
 
@@ -127,7 +129,7 @@ class CategoriesScreenState extends State<CategoriesScreen> {
       filteredList = filteredList.where((animal) {
         return ((animal.age >= selectedAge.start &&
                 animal.age <= selectedAge.end) ||
-            (selectedAge.end == 15 && animal.age>= 15));
+            (selectedAge.end == 15 && animal.age >= 15));
       }).toList();
     }
 
