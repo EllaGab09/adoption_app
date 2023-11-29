@@ -46,6 +46,13 @@ class AnimalDetailScreen extends ConsumerWidget {
     }
   }
 
+  String capitalize(String s) {
+    if (s.isEmpty) {
+      return s;
+    }
+    return s[0].toUpperCase() + s.substring(1);
+  }
+
   /// Generates an application for adoption.
   ///
   /// This method takes a [BuildContext] and a [WidgetRef] as parameters.
@@ -300,7 +307,14 @@ class AnimalDetailScreen extends ConsumerWidget {
                       children: [
                         const SizedBox(width: 16),
                         Text(
-                          'Breed: ${animal.breed}',
+                          'Breed: ${capitalize(animal.breed)}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        const Spacer(),
+                        Text(
+                          'Health:  ${capitalize(animal.health)}',
                           style: const TextStyle(
                             fontSize: 16,
                           ),
@@ -317,6 +331,16 @@ class AnimalDetailScreen extends ConsumerWidget {
                           'Age: ${animal.age} years',
                           style: const TextStyle(
                             fontSize: 16,
+                          ),
+                        ),
+                        const Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 45),
+                          child: Text(
+                            animal.availability ? "Available" : "Unavailable",
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ],
