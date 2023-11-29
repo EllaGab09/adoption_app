@@ -2,8 +2,8 @@ import 'package:uuid/uuid.dart';
 
 const uuid = Uuid();
 
-class User {
-  User({
+class Adopter {
+  Adopter({
     //required this.imageUrl,
     required this.firstname,
     required this.surname,

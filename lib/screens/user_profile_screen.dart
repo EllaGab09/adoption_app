@@ -1,9 +1,9 @@
-import 'package:adoption_app/models/user.dart';
+import 'package:adoption_app/models/adopter.dart';
 import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class UserProfileScreen extends StatelessWidget {
-  final User user;
+  final Adopter user;
 
   const UserProfileScreen({super.key, required this.user});
 

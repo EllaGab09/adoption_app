@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:adoption_app/widgets/categories_grid_item.dart';
 import 'package:adoption_app/dummy_data/animal_data.dart';
 
-import 'package:adoption_app/models/user.dart';
+import 'package:adoption_app/models/adopter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 final dummyAdoptionCenter = AdoptionCenter(
@@ -29,7 +29,7 @@ final dummyAdoptionCenter = AdoptionCenter(
 );
 
 //Temp Dummy
-final dummyUser = User(
+final dummyUser = Adopter(
   //id: '1',
   //imageUrl:
   //    "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg",

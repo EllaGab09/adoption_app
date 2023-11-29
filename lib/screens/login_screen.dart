@@ -10,24 +10,28 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 30), // Logo Padding from the top of the screen
-              child: Image.asset('assets/images/petAdoptLogo.png'),
-            ),
-            const SizedBox(height: 20),
-            LoginForm(),
-          ],
-        ),
-      ),
+      body: Builder(builder: (context) {
+        return Center(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 30), // Logo Padding from the top of the screen
+                child: Image.asset('assets/images/petAdoptLogo.png'),
+              ),
+              const SizedBox(height: 20),
+              const LoginForm(),
+            ],
+          ),
+        );
+      }),
     );
   }
 }
 
 class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
+
   @override
   _LoginFormState createState() => _LoginFormState();
 }
@@ -148,8 +152,8 @@ class _LoginFormState extends State<LoginForm> {
                 const Text("Need an account? "),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (ctx) => const SignUpScreen()));
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (ctx) => SignUpScreen()));
                   },
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
