@@ -1,6 +1,7 @@
 import 'package:adoption_app/screens/forgot_password_screen.dart';
 import 'package:adoption_app/screens/sign_up_screen.dart';
 import 'package:adoption_app/widgets/tabs.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/services/firebase_authentication.dart';
@@ -43,6 +44,32 @@ class _LoginFormState extends State<LoginForm> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool rememberMe = false; // Track the state of the "Remember me" checkbox
+
+  @override
+  void initState() {
+    super.initState();
+    loadRememberMeState();
+  }
+
+  void loadRememberMeState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      rememberMe = prefs.getBool('rememberMe') ?? false;
+      if (rememberMe) {
+        emailController.text = prefs.getString('email') ?? '';
+        passwordController.text = prefs.getString('password') ?? '';
+      }
+    });
+  }
+
+  void saveRememberMeState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('rememberMe', rememberMe);
+    if (rememberMe) {
+      prefs.setString('email', emailController.text);
+      prefs.setString('password', passwordController.text);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,8 +150,10 @@ class _LoginFormState extends State<LoginForm> {
                     content: Text('Login Successful'),
                   ),
                 );
+                saveRememberMeState(); // Save the state after successful login
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (ctx) => const TabsScreen()));
+                  MaterialPageRoute(builder: (ctx) => const TabsScreen()),
+                );
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
