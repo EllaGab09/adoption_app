@@ -64,14 +64,13 @@ class CategoryGridItem extends StatelessWidget {
                 maxLines: 2, // Set the maximum number of lines
                 overflow: TextOverflow.ellipsis, // Overflow style
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 7),
               Row(
                 children: [
                   Text(
                     "${animal.sex} ${capitalize(animal.breed)}",
                     style: const TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -79,8 +78,7 @@ class CategoryGridItem extends StatelessWidget {
                   Text(
                     "Age: ${animal.age}",
                     style: const TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -91,8 +89,7 @@ class CategoryGridItem extends StatelessWidget {
                   Text(
                     "Activity: ${animal.activityLevel}",
                     style: const TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -100,8 +97,7 @@ class CategoryGridItem extends StatelessWidget {
                   Text(
                     animal.health,
                     style: const TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
