@@ -133,12 +133,6 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                 );
               }
-
-              //String email = emailController.text;
-              //String password = passwordController.text;
-
-              print(
-                  'Email: $emailController.text, Password: $passwordController.text');
             },
             style: ElevatedButton.styleFrom(
               shape: const StadiumBorder(), // Make the button rounder
