@@ -47,7 +47,7 @@ class CategoryGridItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 5,
               ),
               Text(
                 animal.name,
@@ -64,7 +64,7 @@ class CategoryGridItem extends StatelessWidget {
                 maxLines: 2, // Set the maximum number of lines
                 overflow: TextOverflow.ellipsis, // Overflow style
               ),
-              const SizedBox(height: 7),
+              const SizedBox(height: 12),
               Row(
                 children: [
                   Text(
