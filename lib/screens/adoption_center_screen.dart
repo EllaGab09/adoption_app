@@ -63,19 +63,81 @@ class AdoptionCenterScreen extends StatelessWidget {
                   ),
                 ),
                 // Contact Section
-                const Text(
-                  'Contact ',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                const SizedBox(
+                  height: 30,
                 ),
-                Text(
-                  adoptionCenter.phoneNo,
-                  style: const TextStyle(
-                    fontSize: 16,
-                  ),
+                Row(
+                  children: [
+                    Column(
+                      children: [
+                        const Text(
+                          'Contact ',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          adoptionCenter.phoneNo,
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          adoptionCenter.email,
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      width: 70,
+                    ),
+                    Column(
+                      children: [
+                        const Text(
+                          'Adress',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          adoptionCenter.location.street,
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          adoptionCenter.location.city,
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          adoptionCenter.location.zipCode,
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          adoptionCenter.location.country,
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
+
                 const SizedBox(height: 20),
                 const Divider(),
                 // Interactive Map Section
