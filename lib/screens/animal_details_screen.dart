@@ -313,10 +313,13 @@ class AnimalDetailScreen extends ConsumerWidget {
                           ),
                         ),
                         const Spacer(),
-                        Text(
-                          'Health:  ${capitalize(animal.health)}',
-                          style: const TextStyle(
-                            fontSize: 16,
+                        Padding(
+                          padding: const EdgeInsets.only(right: 55),
+                          child: Text(
+                            animal.health,
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ],
