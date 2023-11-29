@@ -1,4 +1,5 @@
 import 'package:adoption_app/screens/login_screen.dart';
+import 'package:adoption_app/services/login_state_authentication.dart';
 import 'package:adoption_app/widgets/tabs.dart';
 
 import 'package:flutter/material.dart';
@@ -6,8 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-//import 'package:adoption_app/widgets/add_animal_form.dart';
-//import 'screens/categories_screen.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,32 +23,32 @@ final theme = ThemeData(
     hintStyle: TextStyle(color: Colors.grey),
   ),
 );
-
 void main() async {
-  runApp(const App());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const ProviderScope(child: App()));
+
+  // Check if the user is already logged in
+  bool stayLoggedIn = await StayLogedInService.isLoggedIn();
+  print("Stay logged in: $stayLoggedIn");
+
+  Widget initialScreen =
+      stayLoggedIn ? const TabsScreen() : const LoginScreen();
+
+  runApp(ProviderScope(child: App(initialScreen: initialScreen)));
 }
 
 class App extends StatelessWidget {
-  const App({super.key});
+  final Widget initialScreen;
+
+  const App({super.key, required this.initialScreen});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      //theme: theme,
-      home: const LoginScreen(),
-      /* home: AdoptionApplicationDetailsAC(
-        adoptionCenter: "Happy Paws Adoption Center",
-        animalInfo: "Dog",
-        userName: "John Doe",
-        userMessage: "I would like to adopt a dog.",
-        animal: dummyAnimals[0],
-      ), */
-
+      home: initialScreen,
       routes: {
         '/login': (context) => const LoginScreen(),
         '/tabs': (context) => const TabsScreen(),

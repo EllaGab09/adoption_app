@@ -1,5 +1,6 @@
 import 'package:adoption_app/screens/forgot_password_screen.dart';
 import 'package:adoption_app/screens/sign_up_screen.dart';
+import 'package:adoption_app/services/login_state_authentication.dart';
 import 'package:adoption_app/widgets/tabs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_button/sign_in_button.dart';
@@ -145,6 +146,8 @@ class _LoginFormState extends State<LoginForm> {
                   password: passwordController.text);
 
               if (result!.contains('Success')) {
+                // Set the user as logged in
+                StayLogedInService.setLoggedIn(true);
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Login Successful'),

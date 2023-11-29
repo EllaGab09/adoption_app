@@ -1,4 +1,5 @@
 import 'package:adoption_app/models/adopter.dart';
+import 'package:adoption_app/services/login_state_authentication.dart';
 import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -67,6 +68,10 @@ class UserProfileScreen extends StatelessWidget {
                       onPressed: () {
                         // Sign out the user
                         FirebaseAuth.instance.signOut();
+
+                        // Set the user as logged out
+                        StayLogedInService.setLoggedIn(false);
+
                         // Navigate to the login screen
                         Navigator.pushNamed(context, '/login');
                       },
