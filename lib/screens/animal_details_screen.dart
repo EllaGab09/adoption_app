@@ -218,13 +218,7 @@ class AnimalDetailScreen extends ConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: 20),
-                const Text(
-                  'Location',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+
                 //Text(animal.location),
                 const SizedBox(height: 20),
                 const Text(
