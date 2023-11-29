@@ -238,7 +238,7 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                 },
                 items: (animalType == AnimalType.unspecified)
                     ? [
-                        DropdownMenuItem(
+                        const DropdownMenuItem(
                           value: "",
                           child: Text(
                               "Select Type First"), // Placeholder for unspecified type
