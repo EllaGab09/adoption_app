@@ -1,4 +1,3 @@
-import 'package:adoption_app/screens/categories_screen.dart';
 import 'package:adoption_app/screens/forgot_password_screen.dart';
 import 'package:adoption_app/screens/sign_up_screen.dart';
 import 'package:adoption_app/screens/tabs.dart';
@@ -12,16 +11,18 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 30), // Logo Padding from the top of the screen
-              child: Image.asset('assets/images/petAdoptLogo.png'),
-            ),
-            const SizedBox(height: 20),
-            const LoginForm(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 30), // Logo Padding from the top of the screen
+                child: Image.asset('assets/images/petAdoptLogo.png'),
+              ),
+              const SizedBox(height: 20),
+              const LoginForm(),
+            ],
+          ),
         ),
       ),
     );
@@ -38,14 +39,14 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  bool rememberMe = false; // Add rememberMe variable
+  bool rememberMe = false;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           const Align(
             alignment: Alignment.centerLeft,
@@ -109,8 +110,6 @@ class _LoginFormState extends State<LoginForm> {
 
               String email = emailController.text;
               String password = passwordController.text;
-
-              print('Email: $email, Password: $password');
             },
             style: ElevatedButton.styleFrom(
               shape: const StadiumBorder(), // Make the button rounder
@@ -156,8 +155,7 @@ class _LoginFormState extends State<LoginForm> {
                   },
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
-                    tapTargetSize: MaterialTapTargetSize
-                        .shrinkWrap, // Remove the minimum button size
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   child: const Text('SIGN UP'),
                 ),
