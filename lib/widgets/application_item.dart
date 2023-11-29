@@ -1,4 +1,3 @@
-import 'package:adoption_app/dummy_data/user_data.dart';
 import 'package:adoption_app/providers/applications_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,10 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ApplicationItem extends ConsumerWidget {
   final String id;
   final String userName;
+  final String animalName;
   final String message;
 
   const ApplicationItem(
       {super.key,
+      required this.animalName,
       required this.id,
       required this.userName,
       required this.message});
@@ -27,7 +28,7 @@ class ApplicationItem extends ConsumerWidget {
             leading: const CircleAvatar(
               child: Icon(Icons.person),
             ),
-            title: Text("Application from $userName"),
+            title: Text("Application for $animalName"),
             subtitle: Text(message),
             trailing: IconButton(
               iconSize: 30,

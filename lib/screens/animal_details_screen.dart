@@ -58,6 +58,7 @@ class AnimalDetailScreen extends ConsumerWidget {
     final newApplication = Application(
       // Generate a random ID
       userName: dummyUser.firstname,
+      animalName: animal.name,
       message: _messageController.text,
     );
     ref.read(applicationProvider.notifier).addApplication(newApplication);
