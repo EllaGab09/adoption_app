@@ -1,4 +1,3 @@
-import 'package:adoption_app/screens/categories_screen.dart';
 import 'package:adoption_app/screens/forgot_password_screen.dart';
 import 'package:adoption_app/screens/sign_up_screen.dart';
 import 'package:adoption_app/screens/tabs.dart';
@@ -7,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:adoption_app/services/firebase_authentication.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key});
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,7 @@ class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
 
   @override
-  _LoginFormState createState() => _LoginFormState();
+  State<LoginForm> createState() => _LoginFormState();
 }
 
 class _LoginFormState extends State<LoginForm> {

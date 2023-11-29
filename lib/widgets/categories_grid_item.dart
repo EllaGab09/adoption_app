@@ -39,7 +39,7 @@ class CategoryGridItem extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Text(
@@ -69,7 +69,7 @@ class CategoryGridItem extends StatelessWidget {
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     "Age: ${animal.age}",
                     style: const TextStyle(
@@ -92,7 +92,7 @@ class CategoryGridItem extends StatelessWidget {
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     "Health:  ${animal.health}",
                     style: const TextStyle(

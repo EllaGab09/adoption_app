@@ -1,6 +1,5 @@
 import 'package:adoption_app/models/adoption_center.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:adoption_app/controllers/adoption_center_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/response.dart';
 import '../models/adopter.dart';
@@ -56,10 +55,8 @@ class AuthService {
       "adopter_age": adopter.age ?? 0,
     };
 
-    if (adopter.address != null) {
-      data["adopter_address"] = adopter.address!.toMap();
-    }
-
+    data["adopter_address"] = adopter.address.toMap();
+  
     if (adopter.applicationIds != null) {
       data["adopter_application_ids"] = adopter.applicationIds!;
     }

@@ -15,7 +15,7 @@ class CategoriesScreen extends StatefulWidget {
 class CategoriesScreenState extends State<CategoriesScreen> {
   List<Animal> displayedAnimals = dummyAnimals; // Initial list to display
   List<Animal> filteredAnimals = [];
-  Set<String> selectedBreeds = Set();
+  Set<String> selectedBreeds = {};
   AnimalActivity selectedActivity = AnimalActivity.unspecified;
   AnimalSex selectedSex = AnimalSex.unspecified;
   RangeValues selectedAge = const RangeValues(0, 15);
@@ -67,10 +67,10 @@ class CategoriesScreenState extends State<CategoriesScreen> {
     } else if (attribute == 'resetFilters') {
       // Reset all filters
       selectedTypes = [];
-      selectedBreeds = Set<String>();
+      selectedBreeds = <String>{};
       selectedActivity = AnimalActivity.unspecified;
       selectedSex = AnimalSex.unspecified;
-      selectedAge = RangeValues(0, 15);
+      selectedAge = const RangeValues(0, 15);
     }
 
     // Apply filters
@@ -127,7 +127,7 @@ class CategoriesScreenState extends State<CategoriesScreen> {
       filteredList = filteredList.where((animal) {
         return ((animal.age >= selectedAge.start &&
                 animal.age <= selectedAge.end) ||
-            (selectedAge.end == 15 && animal.age! >= 15));
+            (selectedAge.end == 15 && animal.age>= 15));
       }).toList();
     }
 
@@ -141,7 +141,7 @@ class CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: LogoAppBar(),
+      appBar: const LogoAppBar(),
       drawer: FilterDrawer(
         onFilterOptionSelected: handleFilterOptionSelected,
         selectedSex: selectedSex,

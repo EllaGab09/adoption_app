@@ -122,12 +122,7 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
 
     // TODO: Replace the print statement with crud operation
 
-    debugPrint("Name: " +
-        widget.animal!.name +
-        ", Age: " +
-        (widget.animal!.age).toString() +
-        ", Breed: " +
-        widget.animal!.breed);
+    debugPrint("Name: ${widget.animal.name}, Age: ${widget.animal.age}, Breed: ${widget.animal.breed}");
   }
 
   @override
@@ -223,8 +218,7 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                         });
                       }
                     },
-                    items: widget.animal!
-                        .getAnimalTypes()
+                    items: widget.animal.getAnimalTypes()
                         .map<DropdownMenuItem<AnimalType>>((AnimalType value) {
                       return DropdownMenuItem<AnimalType>(
                         value: value,
@@ -267,8 +261,7 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                         _setAnimalActivityLevel(newValue);
                       }
                     },
-                    items: widget.animal!
-                        .getActivityLevels()
+                    items: widget.animal.getActivityLevels()
                         .map<DropdownMenuItem<AnimalActivity>>(
                             (AnimalActivity value) {
                       return DropdownMenuItem<AnimalActivity>(
@@ -285,8 +278,7 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                         _setAnimalSex(newValue);
                       }
                     },
-                    items: widget.animal!
-                        .getSex()
+                    items: widget.animal.getSex()
                         .map<DropdownMenuItem<AnimalSex>>((AnimalSex value) {
                       return DropdownMenuItem<AnimalSex>(
                         value: value,
