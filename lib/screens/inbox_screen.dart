@@ -29,6 +29,7 @@ class InboxScreen extends ConsumerWidget {
               itemCount: applications.length,
               itemBuilder: (ctx, i) => ApplicationItem(
                 id: applications[i].id,
+                userName: applications[i].userName,
                 message: applications[i].message,
               ),
             ),

@@ -9,9 +9,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:adoption_app/providers/favorites_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:adoption_app/providers/applications_provider.dart';
+import 'package:uuid/uuid.dart';
 
 class AnimalDetailScreen extends ConsumerWidget {
   final Animal animal;
+  final uuid = const Uuid();
 
   final TextEditingController _messageController = TextEditingController();
 
@@ -46,6 +48,61 @@ class AnimalDetailScreen extends ConsumerWidget {
       // Default color if the activity level is not recognized
       return Colors.grey;
     }
+  }
+
+  /// Generates an application for adoption.
+  ///
+  /// This method takes a [BuildContext] and a [WidgetRef] as parameters.
+  /// It is responsible for generating an application for adoption in the given [BuildContext] using the [WidgetRef].
+  void generateApplication(BuildContext context, WidgetRef ref) {
+    final newApplication = Application(
+      // Generate a random ID
+      userName: dummyUser.firstname,
+      message: _messageController.text,
+    );
+    ref.read(applicationProvider.notifier).addApplication(newApplication);
+    _messageController.clear();
+  }
+
+  /// Shows a confirmation dialog.
+  ///
+  /// This method displays a confirmation dialog in the given [context].
+  /// The [ref] parameter is a reference to the widget tree, which can be used
+  /// to access dependencies and state.
+  void showConfirmationDialog(BuildContext context, WidgetRef ref) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Application Submitted'),
+          content: RichText(
+            text: TextSpan(
+              text: 'Your application to adopt ',
+              style: const TextStyle(fontSize: 16, color: Colors.black),
+              children: <TextSpan>[
+                TextSpan(
+                  text: animal.name,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                const TextSpan(
+                    text:
+                        ' has been submitted. You will be notified when your application is reviewed.',
+                    style: TextStyle(fontSize: 16)),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void showAdoptionDialog(BuildContext context, WidgetRef ref) {
@@ -92,34 +149,11 @@ class AnimalDetailScreen extends ConsumerWidget {
             ElevatedButton(
               child: const Text('Adopt'),
               onPressed: () {
-                final newApplication = Application(
-                  id: DateTime.now().toString(), // TODO replace with UUID
-                  userName: dummyUser.firstname,
-                  message: _messageController.text,
-                );
-                ref
-                    .read(applicationProvider.notifier)
-                    .addApplication(newApplication);
+                // Generate the application
+                generateApplication(context, ref);
                 Navigator.of(context).pop();
                 // Show a dialog to confirm that the application was submitted
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Application Submitted'),
-                        content: Text(
-                            'Your application to adopt ${animal.name} has been submitted. You will be notified when your application is reviewed.'),
-                        actions: <Widget>[
-                          ElevatedButton(
-                            child: const Text('OK'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
-                    });
-                _messageController.clear();
+                showConfirmationDialog(context, ref);
               },
             ),
           ],
