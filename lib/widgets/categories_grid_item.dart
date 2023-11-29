@@ -9,6 +9,13 @@ class CategoryGridItem extends StatelessWidget {
   // Define a constant variable for borderRadius
   static BorderRadius gridItemBorderRadius = BorderRadius.circular(15);
 
+  String capitalize(String s) {
+    if (s.isEmpty) {
+      return s;
+    }
+    return s[0].toUpperCase() + s.substring(1);
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -61,7 +68,7 @@ class CategoryGridItem extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${animal.sex} ${animal.breed}",
+                    "${animal.sex} ${capitalize(animal.breed)}",
                     style: const TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
