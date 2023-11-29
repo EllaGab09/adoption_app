@@ -32,7 +32,7 @@ class AnimalItem extends StatelessWidget {
               left: 0,
               right: 0,
               child: Container(
-                color: Colors.black45,
+                // color: Color.fromARGB(0, 0, 0, 0),
                 padding:
                     const EdgeInsets.symmetric(vertical: 6, horizontal: 44),
                 child: Column(children: [
@@ -43,9 +43,16 @@ class AnimalItem extends StatelessWidget {
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                      fontSize: 20,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      // color: Colors.white
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(
+                          offset: Offset(2, 2),
+                          blurRadius: 3,
+                          color: Colors.black,
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(
