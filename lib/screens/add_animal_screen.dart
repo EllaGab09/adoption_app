@@ -100,6 +100,9 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
           applicationIds: [],
           availability: true);
 
+      // Close the screen
+      Navigator.pop(context);
+
       _nameController.clear();
       _imageURLController.clear();
       _descriptionController.clear();
@@ -295,9 +298,10 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                 decoration: InputDecoration(
                   labelText: 'Age', // Apply theme style for input field
                   labelStyle: Theme.of(context).textTheme.titleMedium,
-                  // Apply theme style for error text
                   errorStyle: Theme.of(context).textTheme.bodySmall,
                 ),
+                keyboardType:
+                    TextInputType.number, // Set the keyboard type to number
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter an age';
@@ -308,6 +312,7 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                   return null;
                 },
               ),
+
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
