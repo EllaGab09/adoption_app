@@ -37,4 +37,12 @@ class UserAddress {
     required this.zipCode,
     required this.country,
   });
+  Map<String, dynamic> toMap() {
+    return {
+      'street': street,
+      'city': city,
+      'zipCode': zipCode,
+      'country': country,
+    };
+  }
 }

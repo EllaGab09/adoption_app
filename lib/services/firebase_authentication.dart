@@ -49,22 +49,30 @@ class AuthService {
     DocumentReference userDocumentReferencer = _users.doc();
 
     Map<String, dynamic> data = <String, dynamic>{
-      "adopter_first_name": adopter.firstname,
-      "adopter_surname": adopter.surname,
-      "adopter_email": adopter.email,
-      "adopter_password": adopter.password,
-      "adopter_age": adopter.age,
-      "adopter_address": adopter.address,
-      "adopter_application_ids": adopter.applicationIds,
+      "adopter_first_name": adopter.firstname ?? "",
+      "adopter_surname": adopter.surname ?? "",
+      "adopter_email": adopter.email ?? "",
+      "adopter_password": adopter.password ?? "",
+      "adopter_age": adopter.age ?? 0,
     };
 
-    var result = await userDocumentReferencer.set(data).whenComplete(() {
+    if (adopter.address != null) {
+      data["adopter_address"] = adopter.address!.toMap();
+    }
+
+    if (adopter.applicationIds != null) {
+      data["adopter_application_ids"] = adopter.applicationIds!;
+    }
+
+    try {
+      await userDocumentReferencer.set(data);
       response.code = 200;
       response.message = "Successfully added to the database";
-    }).catchError((e) {
+    } catch (e) {
       response.code = 500;
-      response.message = e;
-    });
+      response.message = e.toString();
+    }
+
     return response;
   }
 
