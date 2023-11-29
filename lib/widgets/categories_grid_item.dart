@@ -64,7 +64,6 @@ class CategoryGridItem extends StatelessWidget {
                     "${animal.sex} ${animal.breed}",
                     style: const TextStyle(
                       fontSize: 11,
-                      fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.bold,
                     ),
                     overflow: TextOverflow.ellipsis,
@@ -74,7 +73,6 @@ class CategoryGridItem extends StatelessWidget {
                     "Age: ${animal.age}",
                     style: const TextStyle(
                       fontSize: 11,
-                      fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.bold,
                     ),
                     overflow: TextOverflow.ellipsis,
@@ -87,17 +85,15 @@ class CategoryGridItem extends StatelessWidget {
                     "Activity: ${animal.activityLevel}",
                     style: const TextStyle(
                       fontSize: 11,
-                      fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.bold,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
                   const Spacer(),
                   Text(
-                    "Health:  ${animal.health}",
+                    animal.health,
                     style: const TextStyle(
                       fontSize: 11,
-                      fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.bold,
                     ),
                     overflow: TextOverflow.ellipsis,
