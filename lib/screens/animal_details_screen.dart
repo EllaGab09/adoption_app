@@ -54,13 +54,13 @@ class AnimalDetailScreen extends ConsumerWidget {
   ///
   /// This method takes a [BuildContext] and a [WidgetRef] as parameters.
   /// It is responsible for generating an application for adoption in the given [BuildContext] using the [WidgetRef].
-  void generateApplication(BuildContext context, WidgetRef ref) {
+  void generateApplication(BuildContext context, WidgetRef ref, Animal animal) {
     final newApplication = Application(
-      // Generate a random ID
       userName: dummyUser.firstname,
       animalName: animal.name,
       message: _messageController.text,
     );
+
     ref.read(applicationProvider.notifier).addApplication(newApplication);
     _messageController.clear();
   }
@@ -106,6 +106,10 @@ class AnimalDetailScreen extends ConsumerWidget {
     );
   }
 
+  /// Shows a dialog for adopting an animal.
+  ///
+  /// This method displays a dialog box for adopting an animal. It takes the [BuildContext] and [WidgetRef] as parameters.
+  /// The [BuildContext] is used to show the dialog, while the [WidgetRef] is used to access dependencies.
   void showAdoptionDialog(BuildContext context, WidgetRef ref) {
     showDialog(
       context: context,
@@ -150,11 +154,31 @@ class AnimalDetailScreen extends ConsumerWidget {
             ElevatedButton(
               child: const Text('Adopt'),
               onPressed: () {
-                // Generate the application
-                generateApplication(context, ref);
-                Navigator.of(context).pop();
-                // Show a dialog to confirm that the application was submitted
-                showConfirmationDialog(context, ref);
+                // Check for existing applications
+                final existingApplications = ref.read(applicationProvider);
+                final isDuplicateApplication = existingApplications.any(
+                    (application) =>
+                        application.userName == dummyUser.firstname &&
+                        application.animalName == animal.name);
+
+                if (isDuplicateApplication) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'You have already applied for ${animal.name}.',
+                      ),
+                      duration: const Duration(seconds: 2),
+                    ),
+                  );
+                } else {
+                  // Generate the application
+                  generateApplication(context, ref, animal);
+                  // Close the dialog
+                  Navigator.of(context).pop();
+                  // Show the confirmation dialog
+                  showConfirmationDialog(context, ref);
+                }
+                ;
               },
             ),
           ],
