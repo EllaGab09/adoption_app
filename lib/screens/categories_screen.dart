@@ -1,4 +1,5 @@
 import 'package:adoption_app/models/animal.dart';
+import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/widgets/categories_grid_item.dart';
 import 'package:adoption_app/dummy_data/animal_data.dart';
@@ -140,17 +141,7 @@ class CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          elevation: 8,
-          automaticallyImplyLeading: false,
-          title: Padding(
-            padding: const EdgeInsets.only(left: 55),
-            child: Image.asset(
-              'assets/images/petAdoptLogo.png',
-              width: 240,
-            ),
-          )),
+      appBar: LogoAppBar(),
       drawer: FilterDrawer(
         onFilterOptionSelected: handleFilterOptionSelected,
         selectedSex: selectedSex,
