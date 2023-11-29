@@ -145,8 +145,11 @@ class CategoriesScreenState extends State<CategoriesScreen> {
           elevation: 8,
           automaticallyImplyLeading: false,
           title: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/images/petAdoptLogo.png'),
+            padding: const EdgeInsets.only(left: 55),
+            child: Image.asset(
+              'assets/images/petAdoptLogo.png',
+              width: 240,
+            ),
           )),
       drawer: FilterDrawer(
         onFilterOptionSelected: handleFilterOptionSelected,
