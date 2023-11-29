@@ -22,43 +22,6 @@ class LogoAppBar extends StatelessWidget implements PreferredSizeWidget {
             'assets/images/petAdoptLogo.png',
             width: 240,
           ),
-        )
-        // actions: [
-        //   Container(
-        //     decoration: BoxDecoration(
-        //       shape: BoxShape.circle,
-        //       border: Border.all(
-        //         color: Colors.white,
-        //         width: 2, // Border width
-        //       ),
-        //     ),
-        //     child: IconButton(
-        //       icon: const Icon(
-        //         Icons.person,
-        //         size: 32,
-        //       ),
-        //       onPressed: onProfilePressed,
-        //     ),
-        //   ),
-        // ],
-        /*     actions: [
-        Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: Colors.white,
-              width: 2, // Border width
-            ),
-          ),
-          child: IconButton(
-            icon: const Icon(
-              Icons.person,
-              size: 32,
-            ),
-            onPressed: onProfilePressed,
-          ),
-        ),
-      ], */
-        );
+        ));
   }
 }
