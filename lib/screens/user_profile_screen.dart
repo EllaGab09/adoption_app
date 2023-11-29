@@ -15,12 +15,7 @@ class UserProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(
-              height: 250, // Set the image container height
-              // child: Image.network(
-              //   user.imageUrl,
-              //   fit: BoxFit.cover,
-              //   width: double.infinity,
-              // ),
+              height: 50,
             ),
             // Display user details here
             ListTile(
