@@ -6,32 +6,38 @@ import 'package:flutter/material.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
+
   @override
   State<TabsScreen> createState() => _TabsScreenState();
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  int _currentIndex = 0;
+  int _currentIndex = 0; // Index of the currently selected tab
   final List<Widget> _children = [
-    const CategoriesScreen(),
-    const FavoritesScreen(),
-    const InboxScreen(),
-    UserProfileScreen(user: dummyUser),
+    const CategoriesScreen(), // Screen for displaying pet categories
+    const FavoritesScreen(), // Screen for displaying favorite pets
+    const InboxScreen(), // Screen for displaying adoption applications
+    UserProfileScreen(
+        user: dummyUser), // Screen for user profile with a dummy user
   ];
 
+  // Callback function for handling tab selection
   void onTabTapped(int index) {
     setState(() {
-      _currentIndex = index;
+      _currentIndex = index; // Update the selected tab index
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Body: Display the current screen based on the selected tab index
       body: _children[_currentIndex],
+
+      // Bottom Navigation Bar: Tabs for navigating between screens
       bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped,
-        currentIndex: _currentIndex,
+        onTap: onTabTapped, // Callback function when a tab is tapped
+        currentIndex: _currentIndex, // Index of the currently selected tab
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.pets),
