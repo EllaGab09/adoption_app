@@ -295,7 +295,10 @@ class _FilterDrawerState extends State<FilterDrawer> {
                       ).toList(),
                     ),
                   ),
-
+                  //Space between Type/Breed Panel List and Dropdowns
+                  const SizedBox(
+                    height: 12,
+                  ),
                   // Row for the 'Activity' filter dropdown
                   Column(
                     children: [
@@ -310,24 +313,45 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         value: _selectedActivity,
                         onChanged: (AnimalActivity? value) {
                           setState(() {
-                            // Call filter callback and update selected activity
                             widget.onFilterOptionSelected(
-                              'Activity',
-                              value?.toString() ?? '',
-                            );
+                                'Activity', value?.toString() ?? '');
                             _selectedActivity =
                                 value ?? AnimalActivity.unspecified;
                           });
                         },
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 16),
+                        underline: Container(), // Removes the underline
                         items: AnimalActivity.values
                             .map<DropdownMenuItem<AnimalActivity>>(
-                                (AnimalActivity value) {
-                          return DropdownMenuItem<AnimalActivity>(
-                            value: value,
-                            child: Text(
-                                capitalize(value.toString().split('.').last)),
-                          );
-                        }).toList(),
+                          (AnimalActivity value) {
+                            Color textColor;
+
+                            // Set text color based on the value
+                            switch (value) {
+                              case AnimalActivity.low:
+                                textColor = Colors.green;
+                                break;
+                              case AnimalActivity.medium:
+                                textColor = Colors.orange;
+                                break;
+                              case AnimalActivity.high:
+                                textColor = Colors.red;
+                                break;
+                              default:
+                                textColor = Colors.black; // Unspecified
+                                break;
+                            }
+
+                            return DropdownMenuItem<AnimalActivity>(
+                              value: value,
+                              child: Text(
+                                capitalize(value.toString().split('.').last),
+                                style: TextStyle(color: textColor),
+                              ),
+                            );
+                          },
+                        ).toList(),
                       ),
                     ],
                   ),
@@ -345,26 +369,43 @@ class _FilterDrawerState extends State<FilterDrawer> {
                       ),
                       // Dropdown button for selecting sex
                       DropdownButton<AnimalSex>(
+                        underline: Container(), // Removes the underline
                         value: _selectedSex,
                         onChanged: (AnimalSex? value) {
                           setState(() {
                             // Call filter callback and update selected sex
                             widget.onFilterOptionSelected(
-                              'Sex',
-                              value?.toString() ?? '',
-                            );
+                                'Sex', value?.toString() ?? '');
                             _selectedSex = value ?? AnimalSex.unspecified;
                           });
                         },
-                        items: AnimalSex.values
-                            .map<DropdownMenuItem<AnimalSex>>(
-                                (AnimalSex value) {
-                          return DropdownMenuItem<AnimalSex>(
-                            value: value,
-                            child: Text(
-                                capitalize(value.toString().split('.').last)),
-                          );
-                        }).toList(),
+                        items:
+                            AnimalSex.values.map<DropdownMenuItem<AnimalSex>>(
+                          (AnimalSex value) {
+                            Color textColor;
+
+                            // Set text color based on the value
+                            switch (value) {
+                              case AnimalSex.male:
+                                textColor = Colors.lightBlue;
+                                break;
+                              case AnimalSex.female:
+                                textColor = Colors.pink;
+                                break;
+                              default:
+                                textColor = Colors.black; // Unspecified
+                                break;
+                            }
+
+                            return DropdownMenuItem<AnimalSex>(
+                              value: value,
+                              child: Text(
+                                capitalize(value.toString().split('.').last),
+                                style: TextStyle(color: textColor),
+                              ),
+                            );
+                          },
+                        ).toList(),
                       ),
                     ],
                   ),
