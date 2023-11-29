@@ -3,6 +3,7 @@ import 'package:adoption_app/screens/forgot_password_screen.dart';
 import 'package:adoption_app/screens/sign_up_screen.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:flutter/material.dart';
+import 'package:adoption_app/services/firebase_authentication.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -104,14 +105,32 @@ class _LoginFormState extends State<LoginForm> {
             ],
           ),
           ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (ctx) => const CategoriesScreen()));
+            onPressed: () async {
+              String? result = await AuthService().login(
+                  email: emailController.text,
+                  password: passwordController.text);
 
-              String email = emailController.text;
-              String password = passwordController.text;
+              if (result!.contains('Success')) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Login Successful'),
+                  ),
+                );
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (ctx) => const CategoriesScreen()));
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(result.toString()),
+                  ),
+                );
+              }
 
-              print('Email: $email, Password: $password');
+              //String email = emailController.text;
+              //String password = passwordController.text;
+
+              print(
+                  'Email: $emailController.text, Password: $passwordController.text');
             },
             style: ElevatedButton.styleFrom(
               shape: const StadiumBorder(), // Make the button rounder
