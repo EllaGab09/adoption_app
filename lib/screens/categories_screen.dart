@@ -1,6 +1,4 @@
 import 'package:adoption_app/models/animal.dart';
-import 'package:adoption_app/screens/user_profile_screen.dart';
-import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/widgets/categories_grid_item.dart';
 import 'package:adoption_app/dummy_data/animal_data.dart';
