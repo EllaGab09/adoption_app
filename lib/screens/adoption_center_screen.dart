@@ -1,6 +1,5 @@
 import 'package:adoption_app/widgets/googleMap.dart';
 import 'package:adoption_app/screens/add_animal_screen.dart';
-import 'package:adoption_app/screens/adoption_application_details_user.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/models/adoption_center.dart';
 
@@ -9,7 +8,7 @@ class AdoptionCenterScreen extends StatelessWidget {
   final AdoptionCenter adoptionCenter; // Adoption center data to be displayed
 
   // Constructor to initialize the AdoptionCenterScreen widget with the required adoption center data
-  AdoptionCenterScreen({super.key, required this.adoptionCenter});
+  const AdoptionCenterScreen({super.key, required this.adoptionCenter});
 
   @override
   Widget build(BuildContext context) {

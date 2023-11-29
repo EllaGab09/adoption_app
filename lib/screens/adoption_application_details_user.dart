@@ -9,7 +9,7 @@ class AdoptionApplicationDetails extends StatelessWidget {
   final String animalInfo;
   final Animal animal;
 
-  AdoptionApplicationDetails({
+  const AdoptionApplicationDetails({super.key, 
     required this.userName,
     required this.userMessage,
     required this.adoptionCenter,
@@ -21,31 +21,31 @@ class AdoptionApplicationDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Application Details'),
+        title: const Text('Application Details'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'User Name: $userName',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               'User Message: $userMessage',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               'Adoption Center: $adoptionCenter',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               'Animal Info: $animalInfo',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
           ],
         ),

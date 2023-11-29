@@ -14,6 +14,8 @@ class SignUpScreen extends StatelessWidget {
   final TextEditingController _countryController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
 
+  SignUpScreen({super.key});
+
   void registerAndAddUser(BuildContext context) async {
     final age = int.tryParse(_ageController.text) ?? 0;
 
@@ -106,13 +108,13 @@ class SignUpScreen extends StatelessWidget {
                 onPressed: () {
                   registerAndAddUser(context);
                 },
-                child: const Text('Sign Up'),
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   minimumSize: const Size(double.infinity, 50),
                 ),
+                child: const Text('Sign Up'),
               ),
             ],
           ),

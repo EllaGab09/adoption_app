@@ -3,9 +3,7 @@ import 'package:adoption_app/models/adoption_center.dart';
 import 'package:adoption_app/models/animal.dart';
 import 'package:adoption_app/models/application.dart';
 import 'package:adoption_app/screens/adoption_center_screen.dart';
-import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:adoption_app/providers/favorites_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:adoption_app/providers/applications_provider.dart';
@@ -142,6 +140,7 @@ class AnimalDetailScreen extends ConsumerWidget {
                     if (!regex.hasMatch(value)) {
                       return 'Please enter a valid message.';
                     }
+                    return null;
                   },
                 ),
               ],
@@ -181,7 +180,6 @@ class AnimalDetailScreen extends ConsumerWidget {
                   // Show the confirmation dialog
                   showConfirmationDialog(context, ref);
                 }
-                ;
               },
             ),
           ],

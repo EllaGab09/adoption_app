@@ -14,7 +14,7 @@ class AdoptionApplicationDetailsAC extends StatefulWidget {
   final String animalInfo;
   final Animal animal;
 
-  AdoptionApplicationDetailsAC({
+  const AdoptionApplicationDetailsAC({super.key, 
     required this.userName,
     required this.userMessage,
     required this.adoptionCenter,
@@ -39,10 +39,10 @@ class _AdoptionApplicationDetailsACState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Application Details'),
+        title: const Text('Application Details'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: SizedBox(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
