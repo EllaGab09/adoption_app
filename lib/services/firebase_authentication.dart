@@ -52,6 +52,7 @@ class AuthService {
       "adopter_first_name": adopter.firstname ?? "",
       "adopter_surname": adopter.surname ?? "",
       "adopter_age": adopter.age ?? 0,
+      "adopter_id": adopter.userId
     };
 
     if (adopter.address != null) {
@@ -141,6 +142,7 @@ class AuthService {
       "adoption_center_phone": adoptionCenter.phoneNo ?? "",
       "adoption_center_address": adoptionCenter.location ?? "",
       "adoption_center_animals": adoptionCenter.animalIds ?? "",
+      "adoption_center_id": adoptionCenter.adoptionCenterId
     };
 
     if (adoptionCenter.location != null) {
