@@ -56,7 +56,7 @@ class AuthService {
     };
 
     data["adopter_address"] = adopter.address.toMap();
-  
+
     if (adopter.applicationIds != null) {
       data["adopter_application_ids"] = adopter.applicationIds!;
     }

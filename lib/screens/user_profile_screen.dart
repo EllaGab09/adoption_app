@@ -1,6 +1,7 @@
 import 'package:adoption_app/models/adopter.dart';
 import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UserProfileScreen extends StatelessWidget {
   final Adopter user;
@@ -64,6 +65,9 @@ class UserProfileScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(16.0),
                     child: FloatingActionButton.extended(
                       onPressed: () {
+                        // Sign out the user
+                        FirebaseAuth.instance.signOut();
+                        // Navigate to the login screen
                         Navigator.pushNamed(context, '/login');
                       },
                       label: const Text('Logout'),
