@@ -204,12 +204,6 @@ class CategoriesScreenState extends State<CategoriesScreen> {
           child: Image.asset('assets/images/petAdoptLogo.png'),
         ),
       ),
-      /*          backgroundColor: Theme.of(context).colorScheme.primary,
-      elevation: 8,
-      title: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Image.asset('assets/images/petAdoptLogo.png'), */
-
       drawer: FilterDrawer(
         onFilterOptionSelected: handleFilterOptionSelected,
         selectedSex: selectedSex,

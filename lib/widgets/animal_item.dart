@@ -43,9 +43,10 @@ class AnimalItem extends StatelessWidget {
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      // color: Colors.white
+                    ),
                   ),
                   const SizedBox(
                     height: 12,

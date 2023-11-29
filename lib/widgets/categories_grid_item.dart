@@ -22,7 +22,7 @@ class CategoryGridItem extends StatelessWidget {
         );
       },
       child: Card(
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
         child: Padding(
           padding: const EdgeInsets.all(6.0),
           child: Column(
