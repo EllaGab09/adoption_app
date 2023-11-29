@@ -12,15 +12,11 @@ import 'package:adoption_app/providers/applications_provider.dart';
 
 class AnimalDetailScreen extends ConsumerWidget {
   final Animal animal;
-
   final TextEditingController _messageController = TextEditingController();
 
   AnimalDetailScreen({super.key, required this.animal});
 
-  //Temp Dummy
   final dummyAdoptionCenter = AdoptionCenter(
-    /*  imageUrl:
-        "https://nebulae-assets.s3.amazonaws.com/3b56d17152bd46c295797a7eaab1f244.jpg", */
     name: 'Happy Paws Adoption Center',
     description: 'We provide a loving home for pets of all kinds.',
     phoneNo: '123456789',
@@ -32,7 +28,7 @@ class AnimalDetailScreen extends ConsumerWidget {
     ),
     email: 'test@email.com',
     password: "1234",
-    animalIds: ['1', '2', '3'], // Replace with actual animal IDs
+    animalIds: ['1', '2', '3'],
   );
 
   Color _getActivityLevelColor(String activityLevel) {
@@ -43,7 +39,6 @@ class AnimalDetailScreen extends ConsumerWidget {
     } else if (activityLevel == "High") {
       return Colors.red;
     } else {
-      // Default color if the activity level is not recognized
       return Colors.grey;
     }
   }
@@ -101,7 +96,6 @@ class AnimalDetailScreen extends ConsumerWidget {
                     .read(applicationProvider.notifier)
                     .addApplication(newApplication);
                 Navigator.of(context).pop();
-                // Show a dialog to confirm that the application was submitted
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -134,7 +128,7 @@ class AnimalDetailScreen extends ConsumerWidget {
     final isFavorite = favoriteAnimals.contains(animal);
     return Scaffold(
       appBar: LogoAppBar(actions: [
-        IconButton(
+        /*   IconButton(
           iconSize: 40,
           onPressed: () {
             final wasAdded = ref
@@ -157,7 +151,7 @@ class AnimalDetailScreen extends ConsumerWidget {
             color: isFavorite ? Colors.red : Colors.white,
             key: ValueKey(isFavorite),
           ),
-        ),
+        ), */
       ]),
       body: ListView(
         children: <Widget>[
@@ -183,23 +177,30 @@ class AnimalDetailScreen extends ConsumerWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(
-                        width: 10), // Spacing between the name and the button
-                    const Spacer(),
-                    ElevatedButton(
+                    IconButton(
+                      iconSize: 30,
                       onPressed: () {
-                        showAdoptionDialog(context, ref);
+                        final wasAdded = ref
+                            .read(favoritesAnimalProvider.notifier)
+                            .toggleFavoriteAnimal(animal);
+                        ScaffoldMessenger.of(context).clearSnackBars();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              wasAdded
+                                  ? '${animal.name} was added to favorites.'
+                                  : '${animal.name} was removed from favorites.',
+                            ),
+                            duration: const Duration(seconds: 2),
+                          ),
+                        );
                       },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(5), // Square button
-                        ),
+                      icon: Icon(
+                        isFavorite ? Icons.favorite : Icons.favorite_border,
+                        color: isFavorite ? Colors.red : Colors.red,
+                        key: ValueKey(isFavorite),
                       ),
-                      child: const Text("Adopt"),
                     ),
-
-                    //TEMP BUTTON
                     ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
@@ -209,17 +210,26 @@ class AnimalDetailScreen extends ConsumerWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(5), // Square button
+                          borderRadius: BorderRadius.circular(5),
                         ),
                       ),
                       child: const Text("Adoption Center"),
                     ),
+                    const SizedBox(width: 5),
+                    ElevatedButton(
+                      onPressed: () {
+                        showAdoptionDialog(context, ref);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                      child: const Text("Adopt"),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 20),
-
-                //Text(animal.location),
                 const SizedBox(height: 20),
                 const Text(
                   'Description',
@@ -243,14 +253,7 @@ class AnimalDetailScreen extends ConsumerWidget {
                   children: [
                     Row(
                       children: [
-                        // Text(
-                        //   'Type: ${animal.type}',
-                        //   style: const TextStyle(
-                        //     fontSize: 16,
-                        //   ),
-                        // ),
-                        const SizedBox(
-                            width: 16), // Adjust the spacing between items
+                        const SizedBox(width: 16),
                         Text(
                           'Breed: ${animal.breed}',
                           style: const TextStyle(
@@ -264,8 +267,7 @@ class AnimalDetailScreen extends ConsumerWidget {
                     ),
                     Row(
                       children: [
-                        const SizedBox(
-                            width: 16), // Adjust the spacing between items
+                        const SizedBox(width: 16),
                         Text(
                           'Age: ${animal.age} years',
                           style: const TextStyle(
