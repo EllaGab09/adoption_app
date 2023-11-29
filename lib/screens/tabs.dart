@@ -36,30 +36,36 @@ class _TabsScreenState extends State<TabsScreen> {
       body: _children[_currentIndex],
 
       // Bottom Navigation Bar: Tabs for navigating between screens
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped, // Callback function when a tab is tapped
-        currentIndex: _currentIndex, // Index of the currently selected tab
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.pets),
-            label: 'Pets',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorites',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.inbox),
-            label: 'Applications',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-        selectedItemColor: Theme.of(context).colorScheme.primary,
-        unselectedItemColor: Theme.of(context).colorScheme.primary,
-        backgroundColor: Theme.of(context).colorScheme.background,
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Theme.of(context)
+              .colorScheme
+              .primary, // Replace with your desired color
+        ),
+        child: BottomNavigationBar(
+          onTap: onTabTapped,
+          currentIndex: _currentIndex,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.pets),
+              label: 'Pets',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: 'Favorites',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.inbox),
+              label: 'Applications',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+          ],
+          selectedItemColor: Theme.of(context).colorScheme.onSecondary,
+          unselectedItemColor: Theme.of(context).colorScheme.onPrimaryContainer,
+        ),
       ),
     );
   }
