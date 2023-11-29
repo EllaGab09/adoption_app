@@ -16,6 +16,7 @@ class SignUpScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // Title
               const Text(
                 'Create an Account',
                 style: TextStyle(
@@ -24,6 +25,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
+              // First Name Input
               TextField(
                 decoration: InputDecoration(
                   labelText: 'First Name',
@@ -36,6 +38,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
+              // Surname Input
               TextField(
                 decoration: InputDecoration(
                   labelText: 'Surname',
@@ -48,6 +51,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
+              // Email Input
               TextField(
                 decoration: InputDecoration(
                   labelText: 'Email',
@@ -60,6 +64,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
+              // Password Input
               TextField(
                 decoration: InputDecoration(
                   labelText: 'Password',
@@ -73,6 +78,7 @@ class SignUpScreen extends StatelessWidget {
                 obscureText: true,
               ),
               const SizedBox(height: 10),
+              // Birth Day Input
               TextField(
                 decoration: InputDecoration(
                   labelText: 'Birth Day',
@@ -85,6 +91,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
+              // Street Input
               TextField(
                 decoration: InputDecoration(
                   labelText: 'Street',
@@ -97,6 +104,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
+              // City Input
               TextField(
                 decoration: InputDecoration(
                   labelText: 'City',
@@ -109,6 +117,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
+              // Zip Code Input
               TextField(
                 decoration: InputDecoration(
                   labelText: 'Zip Code',
@@ -121,6 +130,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
+              // Country Input
               TextField(
                 decoration: InputDecoration(
                   labelText: 'Country',
@@ -133,6 +143,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
+              // Sign Up Button
               ElevatedButton(
                 onPressed: () {
                   // Handle sign up logic here
