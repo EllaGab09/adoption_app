@@ -28,6 +28,8 @@ class InboxScreen extends ConsumerWidget {
           : ListView.builder(
               itemCount: applications.length,
               itemBuilder: (ctx, i) => ApplicationItem(
+                animalName: applications[i].animalName,
+                id: applications[i].id,
                 userName: applications[i].userName,
                 message: applications[i].message,
               ),

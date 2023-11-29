@@ -9,9 +9,12 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:adoption_app/providers/favorites_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:adoption_app/providers/applications_provider.dart';
+import 'package:uuid/uuid.dart';
 
 class AnimalDetailScreen extends ConsumerWidget {
   final Animal animal;
+  final uuid = const Uuid();
+
   final TextEditingController _messageController = TextEditingController();
 
   AnimalDetailScreen({super.key, required this.animal});
@@ -43,6 +46,66 @@ class AnimalDetailScreen extends ConsumerWidget {
     }
   }
 
+  /// Generates an application for adoption.
+  ///
+  /// This method takes a [BuildContext] and a [WidgetRef] as parameters.
+  /// It is responsible for generating an application for adoption in the given [BuildContext] using the [WidgetRef].
+  void generateApplication(BuildContext context, WidgetRef ref, Animal animal) {
+    final newApplication = Application(
+      userName: dummyUser.firstname,
+      animalName: animal.name,
+      message: _messageController.text,
+    );
+
+    ref.read(applicationProvider.notifier).addApplication(newApplication);
+    _messageController.clear();
+  }
+
+  /// Shows a confirmation dialog.
+  ///
+  /// This method displays a confirmation dialog in the given [context].
+  /// The [ref] parameter is a reference to the widget tree, which can be used
+  /// to access dependencies and state.
+  void showConfirmationDialog(BuildContext context, WidgetRef ref) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Application Submitted'),
+          content: RichText(
+            text: TextSpan(
+              text: 'Your application to adopt ',
+              style: const TextStyle(fontSize: 16, color: Colors.black),
+              children: <TextSpan>[
+                TextSpan(
+                  text: animal.name,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                const TextSpan(
+                    text:
+                        ' has been submitted. You will be notified when your application is reviewed.',
+                    style: TextStyle(fontSize: 16)),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  /// Shows a dialog for adopting an animal.
+  ///
+  /// This method displays a dialog box for adopting an animal. It takes the [BuildContext] and [WidgetRef] as parameters.
+  /// The [BuildContext] is used to show the dialog, while the [WidgetRef] is used to access dependencies.
   void showAdoptionDialog(BuildContext context, WidgetRef ref) {
     showDialog(
       context: context,
@@ -87,33 +150,31 @@ class AnimalDetailScreen extends ConsumerWidget {
             ElevatedButton(
               child: const Text('Adopt'),
               onPressed: () {
-                final newApplication = Application(
-                  id: DateTime.now().toString(),
-                  userName: dummyUser.firstname,
-                  message: _messageController.text,
-                );
-                ref
-                    .read(applicationProvider.notifier)
-                    .addApplication(newApplication);
-                Navigator.of(context).pop();
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Application Submitted'),
-                        content: Text(
-                            'Your application to adopt ${animal.name} has been submitted. You will be notified when your application is reviewed.'),
-                        actions: <Widget>[
-                          ElevatedButton(
-                            child: const Text('OK'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
-                    });
-                _messageController.clear();
+                // Check for existing applications
+                final existingApplications = ref.read(applicationProvider);
+                final isDuplicateApplication = existingApplications.any(
+                    (application) =>
+                        application.userName == dummyUser.firstname &&
+                        application.animalName == animal.name);
+
+                if (isDuplicateApplication) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'You have already applied for ${animal.name}.',
+                      ),
+                      duration: const Duration(seconds: 2),
+                    ),
+                  );
+                } else {
+                  // Generate the application
+                  generateApplication(context, ref, animal);
+                  // Close the dialog
+                  Navigator.of(context).pop();
+                  // Show the confirmation dialog
+                  showConfirmationDialog(context, ref);
+                }
+                ;
               },
             ),
           ],

@@ -3,11 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ApplicationItem extends ConsumerWidget {
+  final String id;
   final String userName;
+  final String animalName;
   final String message;
 
   const ApplicationItem(
-      {super.key, required this.userName, required this.message});
+      {super.key,
+      required this.animalName,
+      required this.id,
+      required this.userName,
+      required this.message});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,7 +28,7 @@ class ApplicationItem extends ConsumerWidget {
             leading: const CircleAvatar(
               child: Icon(Icons.person),
             ),
-            title: Text(userName),
+            title: Text("Application for $animalName"),
             subtitle: Text(message),
             trailing: IconButton(
               iconSize: 30,
@@ -33,8 +39,7 @@ class ApplicationItem extends ConsumerWidget {
               tooltip: 'Delete Application',
               onPressed: () {
                 ref.read(applicationProvider.notifier).removeApplication(
-                    applications
-                        .firstWhere((element) => element.userName == userName));
+                    applications.firstWhere((element) => element.id == id));
               },
             ),
           ),

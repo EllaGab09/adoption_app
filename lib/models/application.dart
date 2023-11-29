@@ -1,13 +1,12 @@
-// Model representing an application for adopting an animal
-class Application {
-  final String id; // Unique identifier for the application
-  final String userName; // Name of the user submitting the application
-  final String message; // Message included in the application
+import 'package:uuid/uuid.dart';
 
-  // Constructor to initialize the application with required parameters
-  Application({
-    required this.id,
-    required this.userName,
-    required this.message,
-  });
+class Application {
+  final String id;
+  final String animalName;
+  final String userName;
+  final String message;
+
+  Application(
+      {required this.animalName, required this.userName, required this.message})
+      : id = const Uuid().v4();
 }
