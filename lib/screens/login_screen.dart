@@ -124,8 +124,8 @@ class _LoginFormState extends State<LoginForm> {
                     content: Text('Login Successful'),
                   ),
                 );
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (ctx) => const CategoriesScreen()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (ctx) => const TabsScreen()));
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
