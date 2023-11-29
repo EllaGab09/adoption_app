@@ -110,7 +110,7 @@ class CategoriesScreenState extends State<CategoriesScreen> {
       selectedBreeds = Set<String>();
       selectedActivity = AnimalActivity.unspecified;
       selectedSex = AnimalSex.unspecified;
-      selectedAge = RangeValues(0, 15);
+      selectedAge = const RangeValues(0, 15);
     }
 
     // Apply filters
@@ -195,15 +195,21 @@ class CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: LogoAppBar(
-          /* onProfilePressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => UserProfileScreen(user: dummyUser),
-            ),
-          );
-        }, */
-          ),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        elevation: 8,
+        automaticallyImplyLeading: false,
+        title: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset('assets/images/petAdoptLogo.png'),
+        ),
+      ),
+      /*          backgroundColor: Theme.of(context).colorScheme.primary,
+      elevation: 8,
+      title: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Image.asset('assets/images/petAdoptLogo.png'), */
+
       drawer: FilterDrawer(
         onFilterOptionSelected: handleFilterOptionSelected,
         selectedSex: selectedSex,
