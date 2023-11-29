@@ -290,6 +290,9 @@ class AnimalDetailScreen extends ConsumerWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   animal.description,
                   style: const TextStyle(
