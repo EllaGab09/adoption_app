@@ -7,7 +7,7 @@ class CategoryGridItem extends StatelessWidget {
   final Animal animal;
 
   // Define a constant variable for borderRadius
-  static BorderRadius gridItemBorderRadius = BorderRadius.circular(100);
+  static BorderRadius gridItemBorderRadius = BorderRadius.circular(15);
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +22,13 @@ class CategoryGridItem extends StatelessWidget {
         );
       },
       child: Card(
-        color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+        //color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
         child: Padding(
           padding: const EdgeInsets.all(6.0),
           child: Column(
             children: [
               SizedBox(
-                height: 150, // Set a fixed height for the image container
+                height: 130, // Set a fixed height for the image container
                 child: ClipRRect(
                   borderRadius: gridItemBorderRadius,
                   child: Image.network(
@@ -38,6 +38,9 @@ class CategoryGridItem extends StatelessWidget {
                     height: double.infinity,
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               Text(
                 animal.name,
@@ -54,15 +57,52 @@ class CategoryGridItem extends StatelessWidget {
                 maxLines: 2, // Set the maximum number of lines
                 overflow: TextOverflow.ellipsis, // Overflow style
               ),
-              const SizedBox(height: 10),
-              Text(
-                "${animal.sex} ${animal.breed}",
-                style: const TextStyle(
-                  fontSize: 11,
-                  fontStyle: FontStyle.italic,
-                  fontWeight: FontWeight.bold,
-                ),
-                overflow: TextOverflow.ellipsis,
+              const SizedBox(height: 5),
+              Row(
+                children: [
+                  Text(
+                    "${animal.sex} ${animal.breed}",
+                    style: const TextStyle(
+                      fontSize: 11,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Spacer(),
+                  Text(
+                    "Age: ${animal.age}",
+                    style: const TextStyle(
+                      fontSize: 11,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    "Activity: ${animal.activityLevel}",
+                    style: const TextStyle(
+                      fontSize: 11,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Spacer(),
+                  Text(
+                    "Health:  ${animal.health}",
+                    style: const TextStyle(
+                      fontSize: 11,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               )
             ],
           ),
