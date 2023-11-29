@@ -3,7 +3,7 @@ import 'package:adoption_app/services/firebase_authentication.dart';
 
 import '../models/adopter.dart';
 
-class SignUpScreen extends StatelessWidget {
+class AdopterRegistrationScreen extends StatelessWidget {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _surnameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();

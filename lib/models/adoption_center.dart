@@ -42,7 +42,16 @@ class AdoptionCenterLocation {
     required this.city,
     required this.zipCode,
     required this.country,
-  }) : coordinates = LatLng(0, 0); // Initialize coordinates to default (0, 0)
+  }) : coordinates = LatLng(0, 0);
+
+  Map<String, dynamic> toMap() {
+    return {
+      'street': street,
+      'city': city,
+      'zipCode': zipCode,
+      'country': country,
+    };
+  } // Initialize coordinates to default (0, 0)
 
   // Fetch coordinates for the given address using the Google Maps Geocoding API
   Future<void> fetchCoordinates() async {

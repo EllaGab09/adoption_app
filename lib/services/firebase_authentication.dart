@@ -51,8 +51,6 @@ class AuthService {
     Map<String, dynamic> data = <String, dynamic>{
       "adopter_first_name": adopter.firstname ?? "",
       "adopter_surname": adopter.surname ?? "",
-      "adopter_email": adopter.email ?? "",
-      "adopter_password": adopter.password ?? "",
       "adopter_age": adopter.age ?? 0,
     };
 
@@ -132,51 +130,35 @@ class AuthService {
     }
   }
 
-  Future<Response> addAdoptionCenter({
-    required AdoptionCenter adoptionCenter,
-  }) async {
+  Future<Response> addAdoptionCenter(
+      {required AdoptionCenter adoptionCenter}) async {
     Response response = Response();
     DocumentReference adoptionCenterDocumentReferencer = _adoptionCenters.doc();
 
     Map<String, dynamic> data = <String, dynamic>{
-      "adoption_center_name": adoptionCenter.name,
-      "adoption_center_description": adoptionCenter.description,
-      "adoption_center_phone": adoptionCenter.phoneNo,
-      "adoption_center_address": adoptionCenter.location,
-      "adoption_center_animals": adoptionCenter.animalIds
+      "adoption_center_name": adoptionCenter.name ?? "",
+      "adoption_center_description": adoptionCenter.description ?? "",
+      "adoption_center_phone": adoptionCenter.phoneNo ?? "",
+      "adoption_center_address": adoptionCenter.location ?? "",
+      "adoption_center_animals": adoptionCenter.animalIds ?? "",
     };
 
-    var result =
-        await adoptionCenterDocumentReferencer.set(data).whenComplete(() {
+    if (adoptionCenter.location != null) {
+      data["adoption_center_address"] = adoptionCenter.location!.toMap();
+    }
+
+    if (adoptionCenter.animalIds != null) {
+      data["adoption_center_animals"] = adoptionCenter.animalIds!;
+    }
+
+    try {
+      await adoptionCenterDocumentReferencer.set(data);
       response.code = 200;
       response.message = "Successfully added to the database";
-    }).catchError((e) {
+    } catch (e) {
       response.code = 500;
-      response.message = e;
-    });
+      response.message = e.toString();
+    }
     return response;
   }
 }
-
-/* Future<String?> loginAdoptionCenter({
-  required String email,
-  required String password,
-}) async {
-  try {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    return 'Success';
-  } on FirebaseAuthException catch (e) {
-    if (e.code == 'user-not-found') {
-      return 'No user found for that email.';
-    } else if (e.code == 'wrong-password') {
-      return 'Wrong password provided for that user.';
-    } else {
-      return e.message;
-    }
-  } catch (e) {
-    return e.toString();
-  }
-} */
