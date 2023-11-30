@@ -11,12 +11,17 @@ import 'package:uuid/uuid.dart';
 
 class AnimalDetailScreen extends ConsumerWidget {
   final Animal animal;
+
+  // Instance of the Uuid class for generating unique identifiers
   final uuid = const Uuid();
 
+  // Text controller for the adoption message
   final TextEditingController _messageController = TextEditingController();
 
+  // AnimalDetailScreen constructor
   AnimalDetailScreen({super.key, required this.animal});
 
+  // Dummy adoption center for demonstration purposes
   final dummyAdoptionCenter = AdoptionCenter(
     name: 'Happy Paws Adoption Center',
     description: 'We provide a loving home for pets of all kinds.',
@@ -32,6 +37,7 @@ class AnimalDetailScreen extends ConsumerWidget {
     animalIds: ['1', '2', '3'],
   );
 
+  // Function to get color based on activity level
   Color _getActivityLevelColor(String activityLevel) {
     if (activityLevel == "Low") {
       return Colors.green;
@@ -44,6 +50,7 @@ class AnimalDetailScreen extends ConsumerWidget {
     }
   }
 
+  // Function to capitalize the first letter of a string
   String capitalize(String s) {
     if (s.isEmpty) {
       return s;

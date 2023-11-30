@@ -7,14 +7,15 @@ class AdoptionApplicationDetailsAC extends StatefulWidget {
   _AdoptionApplicationDetailsACState createState() =>
       _AdoptionApplicationDetailsACState();
 
-  //final AdoptionApplication adoptionApplication;
   final String userName;
   final String userMessage;
   final String adoptionCenter;
   final String animalInfo;
   final Animal animal;
 
-  const AdoptionApplicationDetailsAC({super.key, 
+  // Constructor for the AdoptionApplicationDetailsAC widget
+  const AdoptionApplicationDetailsAC({
+    super.key,
     required this.userName,
     required this.userMessage,
     required this.adoptionCenter,
@@ -25,14 +26,17 @@ class AdoptionApplicationDetailsAC extends StatefulWidget {
 
 class _AdoptionApplicationDetailsACState
     extends State<AdoptionApplicationDetailsAC> {
+  // Variable to track if buttons should be disabled
   bool _isButtonDisabled = false;
 
   @override
   void initState() {
     super.initState();
+    // Initialize button disabled status based on the application status
     _isButtonDisabled = status == "Pending" ? false : true;
   }
 
+  // Application status
   var status = "Pending";
 
   @override
@@ -47,13 +51,14 @@ class _AdoptionApplicationDetailsACState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Display adoption application details
               AdoptionApplicationDetails(
                   userName: "John",
                   userMessage: "I would like to adopt!",
                   adoptionCenter: "Happy Paws",
                   animal: widget.animal),
               const Spacer(),
-              // ACCEPT ADOPTION
+              // ACCEPT ADOPTION Button
               ElevatedButton(
                 onPressed: _isButtonDisabled
                     ? null
