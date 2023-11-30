@@ -1,9 +1,11 @@
+import 'package:adoption_app/dummy_data/animal_data.dart';
 import 'package:adoption_app/models/animal.dart';
+import 'package:adoption_app/models/response.dart';
 import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/widgets/categories_grid_item.dart';
-import 'package:adoption_app/dummy_data/animal_data.dart';
 import 'package:adoption_app/widgets/filter_drawer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// This class represents the screen that displays categories for adoption.
 /// It is a stateful widget that can be updated dynamically.
@@ -15,7 +17,8 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class CategoriesScreenState extends State<CategoriesScreen> {
-  List<Animal> displayedAnimals = dummyAnimals; // Initial list to display
+  Response response = Response();
+  late List<Animal> displayedAnimals;
   List<Animal> filteredAnimals = [];
   Set<String> selectedBreeds = {};
   AnimalActivity selectedActivity = AnimalActivity.unspecified;
@@ -23,7 +26,88 @@ class CategoriesScreenState extends State<CategoriesScreen> {
   RangeValues selectedAge = const RangeValues(0, 15);
   List<AnimalType> selectedTypes = [];
 
-  void handleFilterOptionSelected(String attribute, dynamic value) {
+  @override
+  void initState() {
+    super.initState();
+    displayedAnimals = [];
+    fetchDataFromFirestore();
+  }
+
+  Future<void> fetchDataFromFirestore() async {
+    try {
+      Stream<QuerySnapshot> animalsSnapshotStream =
+          FirebaseFirestore.instance.collection('animals').snapshots();
+
+      animalsSnapshotStream.listen((QuerySnapshot querySnapshot) {
+        setState(() {
+          displayedAnimals = querySnapshot.docs.map((doc) {
+            return Animal(
+              activityLevel: (doc.data() as Map<String, dynamic>?)
+                          ?.containsKey('activityLevel') ??
+                      false
+                  ? doc['activityLevel']
+                  : '',
+              adoptionCenterId: (doc.data() as Map<String, dynamic>?)
+                          ?.containsKey('adoptionCenterID') ??
+                      false
+                  ? doc['adoptionCenterID']
+                  : '',
+              age: (doc.data() as Map<String, dynamic>?)?.containsKey('age') ??
+                      false
+                  ? doc['age']
+                  : 0,
+              availability: (doc.data() as Map<String, dynamic>?)
+                          ?.containsKey('availability') ??
+                      false
+                  ? doc['availability']
+                  : false,
+              breed:
+                  (doc.data() as Map<String, dynamic>?)?.containsKey('breed') ??
+                          false
+                      ? doc['breed']
+                      : '',
+              description: (doc.data() as Map<String, dynamic>?)
+                          ?.containsKey('description') ??
+                      false
+                  ? doc['description']
+                  : '',
+              health: (doc.data() as Map<String, dynamic>?)
+                          ?.containsKey('health') ??
+                      false
+                  ? doc['health']
+                  : '',
+              imageUrl: (doc.data() as Map<String, dynamic>?)
+                          ?.containsKey('imageUrl') ??
+                      false
+                  ? doc['imageUrl']
+                  : '',
+              name:
+                  (doc.data() as Map<String, dynamic>?)?.containsKey('name') ??
+                          false
+                      ? doc['name']
+                      : '',
+              sex: (doc.data() as Map<String, dynamic>?)?.containsKey('sex') ??
+                      false
+                  ? doc['sex']
+                  : '',
+              type:
+                  (doc.data() as Map<String, dynamic>?)?.containsKey('type') ??
+                          false
+                      ? doc['type']
+                      : '',
+            );
+          }).toList();
+
+          displayedAnimals = applyFilters();
+        });
+      });
+    } catch (error) {
+      response.message;
+    }
+  }
+
+  void handleFilterOptionSelected(String attribute, dynamic value) async {
+    await fetchDataFromFirestore(); // Reload data from Firestore
     if (attribute == 'type') {
       // Handling for Type
       if (value is List<AnimalType>) {
@@ -73,6 +157,9 @@ class CategoriesScreenState extends State<CategoriesScreen> {
       selectedActivity = AnimalActivity.unspecified;
       selectedSex = AnimalSex.unspecified;
       selectedAge = const RangeValues(0, 15);
+
+      // Fetch all animals from Firestore again
+      await fetchDataFromFirestore();
     }
 
     // Apply filters
@@ -82,7 +169,7 @@ class CategoriesScreenState extends State<CategoriesScreen> {
   }
 
   List<Animal> applyFilters() {
-    List<Animal> filteredList = dummyAnimals;
+    List<Animal> filteredList = displayedAnimals;
 
 // Apply type filter
     if (selectedTypes.isNotEmpty) {
@@ -94,7 +181,7 @@ class CategoriesScreenState extends State<CategoriesScreen> {
     } else {
       // If no types are selected, include all types in the result
 
-      filteredList = dummyAnimals;
+      filteredList = displayedAnimals;
     }
 
     // Breed filter
@@ -205,7 +292,7 @@ class CategoriesScreenState extends State<CategoriesScreen> {
               itemBuilder: (context, index) {
                 return CategoryGridItem(
                     animal: filteredAnimals.isEmpty
-                        ? dummyAnimals[index]
+                        ? displayedAnimals[index]
                         : filteredAnimals[index]);
               },
             ),
