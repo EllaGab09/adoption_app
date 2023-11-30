@@ -24,6 +24,26 @@ Our primary goal is to facilitate the adoption of pets in need of homes while pr
 
 <img src="https://github.com/EllaGab09/adoption_app/assets/77272818/0772baf4-c9c0-45ec-ae77-bb3fe1bcf075" width=250>
 
+## User stories
+- Adoption centers can create accounts with profiles containing their name, address, description, phone number.
+- Users can create accounts with profiles containing their name, age, address.
+- Adoption centers can create listings for animals available for adoption. Key information will include the animal's type, breed, age, gender, activity level, health and short description.
+- Users can search for animals using a range of filters such as animal type (dogs, cats, etc.), location, breed, color, age, and activity level. This simplifies the process of finding the perfect pet match.
+- Users can see an animal listing which will feature a photo to showcase the pet's appearance and general information.
+- Users can send an adoption application request for any given animal.
+- Users can view the list of sent adoption applications.
+- Users can review a sent application.
+- Users can withdraw(delete) an adoption application.
+- Users can favorite a pet.
+- Users can view the collection of favorite pets.
+- Adoption centers can update the status of adoption applications
+- Adoption centers can update the status of an animal listing
+- Adoption center can view it’s profile information
+- Adoption center can log out
+- User can view it’s profile information
+- User can log out
+
+
 
 ## Technology Stack
 - Flutter framework for developing iOS and Android apps
