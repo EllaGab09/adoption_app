@@ -135,18 +135,27 @@ class _FilterDrawerState extends State<FilterDrawer> {
           padding: EdgeInsets.only(top: statusBarHeight),
           child: CustomScrollView(slivers: [
             SliverAppBar(
+              backgroundColor: Theme.of(context).brightness == Brightness.dark
+                  ? Theme.of(context).primaryColor
+                  : Colors.white,
               pinned: true,
+              automaticallyImplyLeading: false,
               expandedHeight: 50.0,
-              backgroundColor: Colors.white,
               flexibleSpace: Row(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 10), // Adjust left padding
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       'Animal Filter',
-                      style: TextStyle(fontSize: 18, color: Colors.black),
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.black,
+                      ),
                     ),
                   ),
+                  const Spacer(),
                   const Spacer(),
                   IconButton(
                     onPressed: () {
@@ -167,19 +176,25 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         }
                       });
                     },
-                    icon: const Column(
+                    icon: Column(
                       children: [
                         Expanded(
                           child: Icon(
                             Icons.restart_alt,
-                            color: Colors.black,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
                           ),
                         ),
                         Text(
                           'Reset',
                           style: TextStyle(
                             fontSize: 12,
-                            color: Colors.black,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
                           ),
                         ),
                       ],
