@@ -5,9 +5,9 @@ import 'package:adoption_app/screens/categories_screen.dart';
 import 'package:adoption_app/screens/favorites_screen.dart';
 import 'package:adoption_app/screens/inbox_screen.dart';
 import 'package:adoption_app/screens/user_profile_screen.dart';
-
+import 'package:adoption_app/services/firebase_authentication.dart';
 import 'package:flutter/material.dart';
-
+import 'package:adoption_app/dummy_data/user_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 /// A StatefulWidget that represents a screen with tabs.
@@ -30,7 +30,8 @@ class _TabsScreenState extends State<TabsScreen> {
     const CategoriesScreen(), // Screen for displaying pet categories
     const FavoritesScreen(), // Screen for displaying favorite pets
     const InboxScreen(), // Screen for displaying adoption applications
-    AdoptionCenterScreen(
+    UserProfileScreen(user: dummyUser)
+    /*  AdoptionCenterScreen(
         adoptionCenter: AdoptionCenter(
             name: "name",
             description: "description",
@@ -38,7 +39,7 @@ class _TabsScreenState extends State<TabsScreen> {
             location: AdoptionCenterLocation(
                 city: "city", street: "", country: "", zipCode: ""),
             email: "email",
-            password: "password")), // Screen for user profile with a dummy user
+            password: "password")), // Screen for user profile with a dummy user */
   ];
   void setProfileScreen() {
     if (_role == "adopter") {
