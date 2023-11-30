@@ -32,6 +32,13 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Determine system brightness
+    Brightness systemBrightness = MediaQuery.of(context).platformBrightness;
+
+    // Use the system theme if it's dark, otherwise, use the light theme
+    ThemeData selectedTheme =
+        systemBrightness == Brightness.dark ? darkTheme : lightTheme;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: initialScreen,
@@ -39,7 +46,7 @@ class App extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/tabs': (context) => const TabsScreen(),
       },
-      theme: lightTheme,
+      theme: selectedTheme,
     );
   }
 }
