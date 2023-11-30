@@ -5,9 +5,9 @@ import 'package:adoption_app/screens/categories_screen.dart';
 import 'package:adoption_app/screens/favorites_screen.dart';
 import 'package:adoption_app/screens/inbox_screen.dart';
 import 'package:adoption_app/screens/user_profile_screen.dart';
-import 'package:adoption_app/services/firebase_authentication.dart';
+
 import 'package:flutter/material.dart';
-import 'package:adoption_app/dummy_data/user_data.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 /// A StatefulWidget that represents a screen with tabs.

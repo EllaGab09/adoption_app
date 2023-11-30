@@ -1,6 +1,9 @@
 import 'package:adoption_app/models/animal.dart';
 import 'package:adoption_app/models/response.dart';
+import 'package:adoption_app/services/login_state_authentication.dart';
 import 'package:adoption_app/widgets/logo_app_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/widgets/categories_grid_item.dart';
 import 'package:adoption_app/widgets/filter_drawer.dart';
