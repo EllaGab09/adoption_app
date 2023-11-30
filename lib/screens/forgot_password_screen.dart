@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
-  const ForgotPasswordScreen({super.key});
+  // ForgotPasswordScreen constructor
+  const ForgotPasswordScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // App bar with the title "Forgot Password"
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: const Text('Forgot Password'),
       ),
+      // Body of the screen
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            // Text explaining the purpose of the screen
             const Text(
               'Enter your email address to reset your password:',
               style: TextStyle(
@@ -23,6 +27,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
+            // Text field for entering the email address
             TextField(
               decoration: InputDecoration(
                 labelText: 'Email',
@@ -35,6 +40,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
+            // Elevated button to trigger the password reset logic
             ElevatedButton(
               onPressed: () {
                 // Handle the password reset logic here
@@ -44,12 +50,14 @@ class ForgotPasswordScreen extends StatelessWidget {
                   ),
                 );
               },
+              // Styling for the elevated button
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 minimumSize: const Size(double.infinity, 50),
               ),
+              // Text inside the button
               child: const Text('Reset Password'),
             ),
           ],
