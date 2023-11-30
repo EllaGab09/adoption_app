@@ -65,7 +65,7 @@ final ThemeData darkTheme = ThemeData(
   floatingActionButtonTheme:
       const FloatingActionButtonThemeData(backgroundColor: Color(0xFF00315B)),
   checkboxTheme: CheckboxThemeData(
-    checkColor: MaterialStateProperty.all(const Color(0xFF00315B)),
+    checkColor: MaterialStateProperty.all(const Color(0xFFFFFFFF)),
     fillColor: MaterialStateProperty.all(
       const Color(0xFF3C4758),
     ),
