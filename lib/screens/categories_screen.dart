@@ -275,20 +275,26 @@ class CategoriesScreenState extends State<CategoriesScreen> {
             ),
           ),
           Expanded(
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 3 / 4,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-              ),
-              itemCount: filteredAnimals.length,
-              itemBuilder: (context, index) {
-                return CategoryGridItem(
-                  animal: filteredAnimals[index],
-                );
-              },
-            ),
+            child: filteredAnimals.isEmpty
+                ? Center(
+                    // Display a message when the list is empty
+                    child: Text('No animals found.'),
+                  )
+                : GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200,
+                      childAspectRatio: 3 / 4,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                    ),
+                    itemCount: filteredAnimals.length,
+                    itemBuilder: (context, index) {
+                      return CategoryGridItem(
+                        animal: filteredAnimals[index],
+                      );
+                    },
+                  ),
           ),
         ],
       ),
