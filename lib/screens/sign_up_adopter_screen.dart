@@ -10,7 +10,10 @@ class AdopterRegistrationScreen extends StatefulWidget {
 }
 
 class _AdopterRegistrationScreenState extends State<AdopterRegistrationScreen> {
+  // GlobalKey to uniquely identify the Form widget
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  // Controllers for handling input fields
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _surnameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -21,9 +24,11 @@ class _AdopterRegistrationScreenState extends State<AdopterRegistrationScreen> {
   final TextEditingController _countryController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
 
+  // Method to handle registration and user addition
   void registerAndAddUser() async {
     final age = int.tryParse(_ageController.text) ?? 0;
 
+    // Create Adopter object with user input
     final adopter = Adopter(
       firstname: _firstNameController.text,
       surname: _surnameController.text,
@@ -37,6 +42,8 @@ class _AdopterRegistrationScreenState extends State<AdopterRegistrationScreen> {
         country: _countryController.text,
       ),
     );
+
+    // Call AuthService to register and add user
     final message = await AuthService().registerAndAddUser(
         firstname: _firstNameController.text,
         surname: _surnameController.text,
@@ -54,6 +61,7 @@ class _AdopterRegistrationScreenState extends State<AdopterRegistrationScreen> {
     // Close The screen on user registered
     Navigator.pop(context);
 
+    // Show a SnackBar with the registration result message
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message ?? 'An error occurred'),
@@ -132,6 +140,8 @@ class _AdopterRegistrationScreenState extends State<AdopterRegistrationScreen> {
                 buildTextField('Age', _ageController, 'Enter your age',
                     keyboardType: TextInputType.number),
                 const SizedBox(height: 20),
+
+                // Sign Up button
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState?.validate() ?? false) {
@@ -154,6 +164,7 @@ class _AdopterRegistrationScreenState extends State<AdopterRegistrationScreen> {
     );
   }
 
+  // Helper method to build text input fields
   Widget buildTextField(
     String labelText,
     TextEditingController controller,
