@@ -28,6 +28,7 @@ class AddAnimalForm extends StatefulWidget {
 
 class _AddAnimalFormState extends State<AddAnimalForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _imageURLController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
@@ -38,7 +39,10 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
       TextEditingController();
   final TextEditingController _sexController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
+  final TextEditingController _healthController = TextEditingController();
+
   bool showBreedDropdown = false;
+
   // Dropdown values set to an inital default value
   AnimalType animalType = AnimalType.unspecified;
   AnimalSex animalSex = AnimalSex.unspecified;
@@ -96,7 +100,7 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
           activityLevel:
               AnimalActivity.high.toString(), // TODO change to dropdown
           sex: animalSex.toString(),
-          health: "",
+          health: _healthController.text,
           applicationIds: [],
           availability: true);
 
@@ -112,6 +116,7 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
       _activityLevelController.clear();
       _sexController.clear();
       _locationController.clear();
+      _healthController.clear();
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -122,7 +127,8 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
 
     // TODO: Replace the print statement with crud operation
 
-    debugPrint("Name: ${widget.animal.name}, Age: ${widget.animal.age}, Breed: ${widget.animal.breed}");
+    debugPrint(
+        "Name: ${widget.animal.name}, Age: ${widget.animal.age}, Breed: ${widget.animal.breed}");
   }
 
   @override
@@ -204,6 +210,24 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                     },
                   ),
 
+                  // DESCRIPTION
+                  TextFormField(
+                    controller: _healthController,
+                    decoration: InputDecoration(
+                      labelText: 'Health',
+                      // Apply theme style for input field
+                      labelStyle: Theme.of(context).textTheme.titleMedium,
+                      // Apply theme style for error text
+                      errorStyle: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter the health of the animal';
+                      }
+                      return null;
+                    },
+                  ),
+
                   // ANIMAL TYPE
                   DropdownButton<AnimalType>(
                     value: animalType,
@@ -218,7 +242,8 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                         });
                       }
                     },
-                    items: widget.animal.getAnimalTypes()
+                    items: widget.animal
+                        .getAnimalTypes()
                         .map<DropdownMenuItem<AnimalType>>((AnimalType value) {
                       return DropdownMenuItem<AnimalType>(
                         value: value,
@@ -261,7 +286,8 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                         _setAnimalActivityLevel(newValue);
                       }
                     },
-                    items: widget.animal.getActivityLevels()
+                    items: widget.animal
+                        .getActivityLevels()
                         .map<DropdownMenuItem<AnimalActivity>>(
                             (AnimalActivity value) {
                       return DropdownMenuItem<AnimalActivity>(
@@ -278,7 +304,8 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                         _setAnimalSex(newValue);
                       }
                     },
-                    items: widget.animal.getSex()
+                    items: widget.animal
+                        .getSex()
                         .map<DropdownMenuItem<AnimalSex>>((AnimalSex value) {
                       return DropdownMenuItem<AnimalSex>(
                         value: value,
@@ -298,7 +325,10 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
                     keyboardType:
                         TextInputType.number, // Set the keyboard type to number
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null ||
+                          value.isEmpty ||
+                          int.parse(value) < 1 ||
+                          int.parse(value) > 25) {
                         return 'Please enter an age';
                       }
                       if (int.tryParse(value) == null) {

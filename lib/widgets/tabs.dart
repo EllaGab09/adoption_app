@@ -1,4 +1,5 @@
 import 'package:adoption_app/controllers/user_controller.dart';
+import 'package:adoption_app/models/adoption_center.dart';
 import 'package:adoption_app/screens/adoption_center_screen.dart';
 import 'package:adoption_app/screens/categories_screen.dart';
 import 'package:adoption_app/screens/favorites_screen.dart';
@@ -29,8 +30,15 @@ class _TabsScreenState extends State<TabsScreen> {
     const CategoriesScreen(), // Screen for displaying pet categories
     const FavoritesScreen(), // Screen for displaying favorite pets
     const InboxScreen(), // Screen for displaying adoption applications
-    UserProfileScreen(
-        user: dummyUser), // Screen for user profile with a dummy user
+    AdoptionCenterScreen(
+        adoptionCenter: AdoptionCenter(
+            name: "name",
+            description: "description",
+            phoneNo: "phoneNo",
+            location: AdoptionCenterLocation(
+                city: "city", street: "", country: "", zipCode: ""),
+            email: "email",
+            password: "password")), // Screen for user profile with a dummy user
   ];
   void setProfileScreen() {
     if (_role == "adopter") {

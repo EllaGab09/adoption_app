@@ -23,6 +23,7 @@ class AnimalController {
       "animal_type": animal.type,
       "animal_breed": animal.breed,
       "animal_color": animal.age,
+      "animal_health": animal.health,
       "animal_activity_level": animal.activityLevel,
       "animal_sex": animal.sex,
       "animal_availability": animal.availability
@@ -78,6 +79,7 @@ class AnimalController {
       "animal_type": animal.type,
       "animal_breed": animal.breed,
       "animal_color": animal.age,
+      "animal_health": animal.health,
       "animal_activity_level": animal.activityLevel,
       "animal_sex": animal.sex,
       "animal_availability": animal.availability,
