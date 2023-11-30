@@ -1,8 +1,6 @@
-// Import necessary packages and files
 import 'package:adoption_app/models/animal.dart';
 import 'package:flutter/material.dart';
 
-// Define a FilterDrawer widget
 class FilterDrawer extends StatefulWidget {
   // Constructor with required parameters for filter options
   const FilterDrawer({
@@ -215,6 +213,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                       expandedHeaderPadding: EdgeInsets.zero,
                       expandIconColor: Colors.transparent,
                       dividerColor: Colors.transparent,
+
                       // Callback for handling expansion and collapse of filter sections
                       expansionCallback: (int index, bool isExpanded) {
                         var animalType = AnimalType.values[index];
@@ -240,8 +239,8 @@ class _FilterDrawerState extends State<FilterDrawer> {
                             headerBuilder:
                                 (BuildContext context, bool isExpanded) {
                               return ListTile(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 0), // Adjust vertical padding
+                                contentPadding:
+                                    const EdgeInsets.symmetric(vertical: 0),
                                 title: Row(
                                   children: [
                                     // Checkbox for each type
@@ -528,7 +527,6 @@ class BreedCheckbox extends StatefulWidget {
   @override
   _BreedCheckboxState createState() => _BreedCheckboxState();
 
-  // Define the capitalize method within the BreedCheckbox class
   String capitalize(String input) {
     if (input.isEmpty) {
       return input;
