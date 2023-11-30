@@ -200,7 +200,7 @@ class AnimalDetailScreen extends ConsumerWidget {
     final isFavorite = favoriteAnimals.contains(animal);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         elevation: 8,
         title:
             //  padding: const EdgeInsets.only(left: 1),
