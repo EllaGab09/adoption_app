@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
-
 final ThemeData lightTheme = ThemeData(
   applyElevationOverlayColor: false,
   brightness: Brightness.light,
