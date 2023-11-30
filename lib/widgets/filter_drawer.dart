@@ -339,7 +339,11 @@ class _FilterDrawerState extends State<FilterDrawer> {
                                 textColor = Colors.red;
                                 break;
                               default:
-                                textColor = Colors.black; // Unspecified
+                                textColor = Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Colors
+                                        .white // Set text color for dark mode
+                                    : Colors.black; // Unspecified
                                 break;
                             }
 
@@ -393,7 +397,11 @@ class _FilterDrawerState extends State<FilterDrawer> {
                                 textColor = Colors.pink;
                                 break;
                               default:
-                                textColor = Colors.black; // Unspecified
+                                textColor = Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Colors
+                                        .white // Set text color for dark mode
+                                    : Colors.black; // Unspecified
                                 break;
                             }
 

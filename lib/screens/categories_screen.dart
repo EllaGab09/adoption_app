@@ -155,7 +155,7 @@ class CategoriesScreenState extends State<CategoriesScreen> {
       selectedSex = AnimalSex.unspecified;
       selectedAge = const RangeValues(0, 15);
 
-      // Fetch all animals from Firestore again
+      // Fetch all animals from Firestore
       List<Animal> animals = await fetchDataFromFirestore();
       setState(() {
         displayedAnimals = animals;
@@ -189,8 +189,6 @@ class CategoriesScreenState extends State<CategoriesScreen> {
         String animalBreed = animal.breed.trim().toLowerCase();
         return selectedBreeds.contains(animalBreed);
       }).toList();
-    } else {
-      // If no breeds are selected, include all breeds in the result
     }
 
     // Apply activity filter
@@ -276,7 +274,7 @@ class CategoriesScreenState extends State<CategoriesScreen> {
           ),
           Expanded(
             child: filteredAnimals.isEmpty
-                ? Center(
+                ? const Center(
                     // Display a message when the list is empty
                     child: Text('No animals found.'),
                   )

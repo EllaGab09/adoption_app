@@ -51,6 +51,25 @@ final ThemeData darkTheme = ThemeData(
     textTheme: ButtonTextTheme.normal,
     colorScheme: darkColorScheme,
   ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      primary: const Color(0xFF00315B),
+    ),
+  ),
+  sliderTheme: const SliderThemeData(
+    activeTrackColor: Color(0xFF00315B),
+    activeTickMarkColor: Color(0xFF00315B),
+    valueIndicatorColor: Color(0xFF00315B),
+    thumbColor: Color(0xFF00315B),
+  ),
+  floatingActionButtonTheme:
+      const FloatingActionButtonThemeData(backgroundColor: Color(0xFF00315B)),
+  checkboxTheme: CheckboxThemeData(
+    checkColor: MaterialStateProperty.all(const Color(0xFF00315B)),
+    fillColor: MaterialStateProperty.all(
+      const Color(0xFF3C4758),
+    ),
+  ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: Color.fromARGB(255, 255, 255, 255),
     selectedItemColor: Color.fromARGB(255, 252, 252, 252),
