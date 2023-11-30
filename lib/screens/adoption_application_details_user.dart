@@ -6,7 +6,7 @@ class AdoptionApplicationDetails extends StatelessWidget {
   final String userName;
   final String userMessage;
   final String adoptionCenter;
-  final String animalInfo;
+  //final String animalInfo;
   final String animal;
 
   const AdoptionApplicationDetails({
@@ -14,7 +14,7 @@ class AdoptionApplicationDetails extends StatelessWidget {
     required this.userName,
     required this.userMessage,
     required this.adoptionCenter,
-    required this.animalInfo,
+    //required this.animalInfo,
     required this.animal,
   });
 
@@ -44,8 +44,9 @@ class AdoptionApplicationDetails extends StatelessWidget {
               style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
-              'Animal Info: $animalInfo',
+              'Animal: $animal',
               style: const TextStyle(fontSize: 18),
             ),
           ],

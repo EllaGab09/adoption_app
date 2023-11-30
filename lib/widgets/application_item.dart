@@ -13,13 +13,16 @@ class ApplicationItem extends ConsumerWidget {
   final String userName;
   final String animalName;
   final String message;
+  final String adoptionCenter;
 
-  const ApplicationItem(
-      {super.key,
-      required this.animalName,
-      required this.id,
-      required this.userName,
-      required this.message});
+  const ApplicationItem({
+    super.key,
+    required this.animalName,
+    required this.id,
+    required this.userName,
+    required this.message,
+    this.adoptionCenter = "Happy Paws Adoption Center",
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -37,8 +40,7 @@ class ApplicationItem extends ConsumerWidget {
                 builder: (context) => AdoptionApplicationDetails(
                   userName: userName,
                   userMessage: message,
-                  adoptionCenter: "Adoption Center",
-                  animalInfo: "Animal Info",
+                  adoptionCenter: adoptionCenter,
                   animal: animalName,
                 ),
               ),
