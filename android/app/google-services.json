@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "244927801410",
+    "project_id": "adoption-app-59977",
+    "storage_bucket": "adoption-app-59977.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244927801410:android:a448999d91c897c72725db",
+        "android_client_info": {
+          "package_name": "com.example.adoption_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPAVdZeGijDeWPn11nraoyMlDYmSv8C8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

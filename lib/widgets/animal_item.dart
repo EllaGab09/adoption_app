@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:adoption_app/models/animal.dart';
 
+/// A widget that represents an animal item.
+///
+/// This widget is used to display information about an animal in the adoption app.
+/// It is typically used in a list or grid view to show multiple animal items.
 class AnimalItem extends StatelessWidget {
-  const AnimalItem({super.key, required this.animal});
+  const AnimalItem(
+      {super.key, required this.animal, required this.onSelectAnimal});
 
   final Animal animal;
-  // final void Function(Animal animal) onSelectAnimal;
+  final void Function(Animal animal) onSelectAnimal;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       clipBehavior: Clip.hardEdge,
       elevation: 2,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          onSelectAnimal(animal);
+        },
         child: Stack(
           children: [
             Image.network(
@@ -29,7 +36,7 @@ class AnimalItem extends StatelessWidget {
               left: 0,
               right: 0,
               child: Container(
-                color: Colors.black45,
+                // color: Color.fromARGB(0, 0, 0, 0),
                 padding:
                     const EdgeInsets.symmetric(vertical: 6, horizontal: 44),
                 child: Column(children: [
@@ -40,9 +47,17 @@ class AnimalItem extends StatelessWidget {
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(
+                          offset: Offset(2, 2),
+                          blurRadius: 3,
+                          color: Colors.black,
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(
                     height: 12,

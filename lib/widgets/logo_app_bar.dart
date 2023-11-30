@@ -1,43 +1,32 @@
 import 'package:flutter/material.dart';
 
+/// A custom app bar widget that displays a logo.
+///
+/// This widget extends [StatelessWidget] and implements [PreferredSizeWidget],
+/// allowing it to be used as an app bar in Flutter applications.
 class LogoAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final VoidCallback onProfilePressed;
+  final List<Widget>? actions;
 
   const LogoAppBar({
-    Key? key,
-    required this.onProfilePressed,
-  }) : super(key: key);
+    super.key,
+    this.actions,
+  });
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
-
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.blueGrey,
-      elevation: 0,
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+      elevation: 8,
+      automaticallyImplyLeading: false,
       title: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Image.asset('assets/images/petAdoptLogo.png'),
-      ),
-      actions: [
-        Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: Colors.white,
-              width: 2, // Border width
-            ),
-          ),
-          child: IconButton(
-            icon: const Icon(
-              Icons.person,
-              size: 32,
-            ),
-            onPressed: onProfilePressed,
-          ),
+        padding: const EdgeInsets.only(left: 55),
+        child: Image.asset(
+          'assets/images/petAdoptLogo.png',
+          width: 240,
         ),
-      ],
+      ),
     );
   }
 }

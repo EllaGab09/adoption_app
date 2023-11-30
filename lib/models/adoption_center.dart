@@ -1,30 +1,38 @@
+import 'package:uuid/uuid.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
-
 import 'dart:convert';
 
-class AdoptionCenter {
-  final String id;
-  //final String imageUrl;
-  final String name;
-  final String description;
-  final String phoneNo;
-  final AdoptionCenterLocation adress;
-  final List<String> availableAnimalIds;
+// Generate a unique identifier using the UUID package
+const uuid = Uuid();
 
+// Model representing an Adoption Center
+class AdoptionCenter {
   AdoptionCenter({
-    required this.id,
-    //required this.imageUrl,
     required this.name,
     required this.description,
     required this.phoneNo,
-    required this.adress,
-    required this.availableAnimalIds,
-  });
+    required this.location,
+    required this.email,
+    required this.password,
+    this.animalIds,
+  }) : adoptionCenterId = uuid.v4();
+
+  final String adoptionCenterId; // Unique identifier for the Adoption Center
+  final String name;
+  final String phoneNo;
+  final String description;
+  final AdoptionCenterLocation location;
+  final String email;
+  final String password;
+  final String role = 'adoptionCenter';
+  final List<String>?
+      animalIds; // List of animal IDs associated with the center
 }
 
+// Model representing the location of an Adoption Center
 class AdoptionCenterLocation {
-  LatLng coordinates;
+  LatLng coordinates; // Geographic coordinates (latitude and longitude)
   final String street;
   final String city;
   final String zipCode;
@@ -35,8 +43,18 @@ class AdoptionCenterLocation {
     required this.city,
     required this.zipCode,
     required this.country,
-  }) : coordinates = LatLng(0, 0);
+  }) : coordinates = LatLng(0, 0); // Initialize coordinates to default (0, 0)
 
+  Map<String, dynamic> toMap() {
+    return {
+      'street': street,
+      'city': city,
+      'zipCode': zipCode,
+      'country': country,
+    };
+  } // Initialize coordinates to default (0, 0)
+
+  // Fetch coordinates for the given address using the Google Maps Geocoding API
   Future<void> fetchCoordinates() async {
     const apiKey = 'AIzaSyCY2zMPRGHVKE11z-bGeHdclT9d5UuX38I';
     final address = '$street, $city, $zipCode, $country';
@@ -53,7 +71,8 @@ class AdoptionCenterLocation {
         final location = data['results'][0]['geometry']['location'];
         final lat = location['lat'];
         final lng = location['lng'];
-        coordinates = LatLng(lat, lng);
+        coordinates =
+            LatLng(lat, lng); // Update coordinates with fetched values
       }
     } else {
       throw Exception('Failed to fetch coordinates');

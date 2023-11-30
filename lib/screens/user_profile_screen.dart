@@ -1,65 +1,23 @@
-import 'package:adoption_app/models/user.dart';
+import 'package:adoption_app/models/adopter.dart';
+import 'package:adoption_app/services/login_state_authentication.dart';
 import 'package:adoption_app/widgets/logo_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UserProfileScreen extends StatelessWidget {
-  final User user;
+  final Adopter user;
 
   const UserProfileScreen({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: LogoAppBar(
-        onProfilePressed: () {},
-      ),
+      appBar: const LogoAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              height: 250, // Set the image container height
-              child: Image.network(
-                user.imageUrl,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      // Handle the "User Profile" tap
-                    },
-                    child: const Text(
-                      'User Profile',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const Spacer(), // Add some spacing between the text and the icon
-                  InkWell(
-                    onTap: () {
-                      // Handle the "Messages" tap
-                    },
-                    child: const Row(
-                      children: [
-                        Text(
-                          'Inbox ',
-                          style: TextStyle(
-                            fontSize: 18,
-                            //  fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Icon(Icons.mail_outline),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+            const SizedBox(
+              height: 50,
             ),
             // Display user details here
             ListTile(
@@ -99,6 +57,31 @@ class UserProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
+            Stack(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: FloatingActionButton.extended(
+                      onPressed: () {
+                        // Sign out the user
+                        FirebaseAuth.instance.signOut();
+
+                        // Set the user as logged out
+                        StayLogedInService.setLoggedIn(false);
+
+                        // Navigate to the login screen
+                        Navigator.pushNamed(context, '/login');
+                      },
+                      label: const Text('Logout'),
+                      icon: const Icon(Icons.logout),
+                      backgroundColor: Theme.of(context).focusColor,
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
