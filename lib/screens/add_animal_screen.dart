@@ -27,6 +27,7 @@ class AddAnimalForm extends StatefulWidget {
 class _AddAnimalFormState extends State<AddAnimalForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  // Controllers for form fields
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _imageURLController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
@@ -40,6 +41,7 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
   AnimalSex animalSex = AnimalSex.unspecified;
   AnimalActivity activityLevel = AnimalActivity.unspecified;
 
+  // Map of breed options for each animal type
   final Map<AnimalType, List<String>> breedOptions = {
     AnimalType.dog: DogBreed.values
         .map((breed) => breed.toString().split('.').last)
@@ -61,6 +63,7 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
         .toList(),
   };
 
+// Set the selected animal type
   void _setAnimalType(AnimalType value) {
     setState(() {
       animalType = AnimalType.values.firstWhere((type) => type == value);
@@ -68,20 +71,24 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
     });
   }
 
+  // Set the selected activity level
   void _setAnimalActivityLevel(AnimalActivity value) {
     setState(() {
       activityLevel = AnimalActivity.values.firstWhere((type) => type == value);
     });
   }
 
+  // Set the selected animal sex
   void _setAnimalSex(AnimalSex value) {
     setState(() {
       animalSex = AnimalSex.values.firstWhere((type) => type == value);
     });
   }
 
+  // Handle the form submission
   void onPressed(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
+      // Create a new Animal object with form values
       widget.animal = Animal(
           name: capitalize(_nameController.text),
           imageUrl: _imageURLController.text,
@@ -95,6 +102,7 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
           applicationIds: [],
           availability: true);
 
+      // Clear form fields
       _nameController.clear();
       _imageURLController.clear();
       _descriptionController.clear();
@@ -103,8 +111,10 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
       _healthController.clear();
 
       try {
+        // Call the addAnimal method in the AnimalController
         await AnimalController.addAnimal(animal: widget.animal);
       } catch (e) {
+        // Show a snackbar if animal addition fails
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Animal could not be added'),
@@ -112,6 +122,7 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
         );
       }
     } else {
+      // Show a snackbar if form validation fails
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Invalid fields'),
@@ -120,6 +131,7 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
     }
   }
 
+  // Capitalize the first letter of a string
   String capitalize(String s) {
     if (s.isEmpty) {
       return s;
