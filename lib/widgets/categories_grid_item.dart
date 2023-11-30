@@ -74,7 +74,7 @@ class CategoryGridItem extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${animal.sex} ${capitalize(animal.breed)}",
+                    "${animal.sex}",
                     style: const TextStyle(
                       fontSize: 13,
                     ),
@@ -82,7 +82,7 @@ class CategoryGridItem extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    "Age: ${animal.age}",
+                    capitalize(animal.breed),
                     style: const TextStyle(
                       fontSize: 13,
                     ),
@@ -101,7 +101,7 @@ class CategoryGridItem extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    animal.health,
+                    "Age: ${animal.age}",
                     style: const TextStyle(
                       fontSize: 13,
                     ),

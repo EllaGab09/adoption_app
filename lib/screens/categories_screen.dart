@@ -155,7 +155,7 @@ class CategoriesScreenState extends State<CategoriesScreen> {
       selectedSex = AnimalSex.unspecified;
       selectedAge = const RangeValues(0, 15);
 
-      // Fetch all animals from Firestore again
+      // Fetch all animals from Firestore
       List<Animal> animals = await fetchDataFromFirestore();
       setState(() {
         displayedAnimals = animals;
@@ -189,8 +189,6 @@ class CategoriesScreenState extends State<CategoriesScreen> {
         String animalBreed = animal.breed.trim().toLowerCase();
         return selectedBreeds.contains(animalBreed);
       }).toList();
-    } else {
-      // If no breeds are selected, include all breeds in the result
     }
 
     // Apply activity filter
@@ -275,20 +273,26 @@ class CategoriesScreenState extends State<CategoriesScreen> {
             ),
           ),
           Expanded(
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 3 / 4,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-              ),
-              itemCount: filteredAnimals.length,
-              itemBuilder: (context, index) {
-                return CategoryGridItem(
-                  animal: filteredAnimals[index],
-                );
-              },
-            ),
+            child: filteredAnimals.isEmpty
+                ? const Center(
+                    // Display a message when the list is empty
+                    child: Text('No animals found.'),
+                  )
+                : GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200,
+                      childAspectRatio: 3 / 4,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                    ),
+                    itemCount: filteredAnimals.length,
+                    itemBuilder: (context, index) {
+                      return CategoryGridItem(
+                        animal: filteredAnimals[index],
+                      );
+                    },
+                  ),
           ),
         ],
       ),
