@@ -42,14 +42,6 @@ const lightColorScheme = ColorScheme(
   onSurface: Color(0xFF001F25),
   surfaceVariant: Color(0xFFDFE2EB),
   onSurfaceVariant: Color(0xFF43474E),
-  outline: Color(0xFF73777F),
-  onInverseSurface: Color(0xFFD6F6FF),
-  inverseSurface: Color(0xFF00363F),
-  inversePrimary: Color(0xFFA2C9FF),
-  shadow: Color(0xFF000000),
-  surfaceTint: Color(0xFF1460A5),
-  outlineVariant: Color(0xFFC3C6CF),
-  scrim: Color(0xFF000000),
 );
 
 final ThemeData darkTheme = ThemeData(
@@ -88,14 +80,4 @@ const darkColorScheme = ColorScheme(
   onBackground: Color(0xFFA6EEFF),
   surface: Color(0xFF001F25),
   onSurface: Color.fromARGB(255, 6, 109, 226),
-  surfaceVariant: Color(0xFF43474E),
-  onSurfaceVariant: Color(0xFFC3C6CF),
-  outline: Color(0xFF8D9199),
-  onInverseSurface: Color(0xFF001F25),
-  inverseSurface: Color.fromARGB(255, 6, 76, 92),
-  inversePrimary: Color(0xFF1460A5),
-  shadow: Color(0xFF000000),
-  surfaceTint: Color(0xFFA2C9FF),
-  outlineVariant: Color(0xFF43474E),
-  scrim: Color(0xFF000000),
 );

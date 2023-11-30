@@ -59,7 +59,6 @@ class UserProfileScreen extends StatelessWidget {
             ),
             Stack(
               children: <Widget>[
-                // ... other widgets here ...
                 Align(
                   alignment: Alignment.bottomRight,
                   child: Padding(
@@ -77,6 +76,7 @@ class UserProfileScreen extends StatelessWidget {
                       },
                       label: const Text('Logout'),
                       icon: const Icon(Icons.logout),
+                      backgroundColor: Theme.of(context).focusColor,
                     ),
                   ),
                 ),
