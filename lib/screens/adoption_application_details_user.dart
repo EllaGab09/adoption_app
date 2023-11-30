@@ -7,9 +7,10 @@ class AdoptionApplicationDetails extends StatelessWidget {
   final String userMessage;
   final String adoptionCenter;
   final String animalInfo;
-  final Animal animal;
+  final String animal;
 
-  const AdoptionApplicationDetails({super.key, 
+  const AdoptionApplicationDetails({
+    super.key,
     required this.userName,
     required this.userMessage,
     required this.adoptionCenter,

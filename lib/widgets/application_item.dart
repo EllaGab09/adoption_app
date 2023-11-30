@@ -1,4 +1,5 @@
 import 'package:adoption_app/providers/applications_provider.dart';
+import 'package:adoption_app/screens/adoption_application_details_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -29,23 +30,37 @@ class ApplicationItem extends ConsumerWidget {
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
         child: Padding(
           padding: const EdgeInsets.all(8),
-          child: ListTile(
-            leading: const CircleAvatar(
-              child: Icon(Icons.person),
+          child: InkWell(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AdoptionApplicationDetails(
+                  userName: userName,
+                  userMessage: message,
+                  adoptionCenter: "Adoption Center",
+                  animalInfo: "Animal Info",
+                  animal: animalName,
+                ),
+              ),
             ),
-            title: Text("Application for $animalName"),
-            subtitle: Text(message),
-            trailing: IconButton(
-              iconSize: 30,
-              icon: const Icon(Icons.delete),
-              color: Colors.red,
-              highlightColor: Colors.yellow,
-              splashColor: Colors.green,
-              tooltip: 'Delete Application',
-              onPressed: () {
-                ref.read(applicationProvider.notifier).removeApplication(
-                    applications.firstWhere((element) => element.id == id));
-              },
+            child: ListTile(
+              leading: const CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+              title: Text("Application for $animalName"),
+              subtitle: Text(message),
+              trailing: IconButton(
+                iconSize: 30,
+                icon: const Icon(Icons.delete),
+                color: Colors.red,
+                highlightColor: Colors.yellow,
+                splashColor: Colors.green,
+                tooltip: 'Delete Application',
+                onPressed: () {
+                  ref.read(applicationProvider.notifier).removeApplication(
+                      applications.firstWhere((element) => element.id == id));
+                },
+              ),
             ),
           ),
         ),
