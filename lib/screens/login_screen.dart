@@ -1,10 +1,10 @@
 import 'package:adoption_app/screens/forgot_password_screen.dart';
 import 'package:adoption_app/services/login_state_authentication.dart';
 import 'package:adoption_app/widgets/tabs.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:adoption_app/screens/sign_up_adopter_screen.dart';
 import 'package:adoption_app/screens/sign_up_center_screen.dart';
-import 'package:adoption_app/widgets/tabs.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/services/firebase_authentication.dart';
@@ -47,6 +47,27 @@ class _LoginFormState extends State<LoginForm> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool rememberMe = false; // Track the state of the "Remember me" checkbox
+
+  var user;
+  // var adopter = Adopter(
+  //     firstname: "",
+  //     surname: "",
+  //     email: "",
+  //     password: "",
+  //     age: 0,
+  //     address: UserAddress(
+  //         street: "street",
+  //         city: "city",
+  //         zipCode: "zipCode",
+  //         country: "country"));
+  // var adoptionCenter = AdoptionCenter(
+  //     name: "",
+  //     description: "",
+  //     phoneNo: "",
+  //     location: AdoptionCenterLocation(
+  //         street: "", city: "", zipCode: "", country: ""),
+  //     email: "email",
+  //     password: "password");
 
   @override
   void initState() {
@@ -156,6 +177,7 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                 );
                 saveRememberMeState(); // Save the state after successful login
+
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (ctx) => const TabsScreen()),
                 );
