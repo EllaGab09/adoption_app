@@ -14,8 +14,6 @@ class AdopterRegistrationScreen extends StatelessWidget {
   final TextEditingController _countryController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
 
-  SignUpScreen({super.key});
-
   void registerAndAddUser(BuildContext context) async {
     final age = int.tryParse(_ageController.text) ?? 0;
 
