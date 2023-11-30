@@ -25,6 +25,7 @@ class AdoptionCenter {
   final AdoptionCenterLocation location;
   final String email;
   final String password;
+  final String role = 'adoptionCenter';
   final List<String>?
       animalIds; // List of animal IDs associated with the center
 }
