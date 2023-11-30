@@ -83,15 +83,15 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
   void onPressed(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       widget.animal = Animal(
-          name: _nameController.text,
+          name: capitalize(_nameController.text),
           imageUrl: _imageURLController.text,
-          description: _descriptionController.text,
-          type: animalType.toString().split('.').last,
+          description: capitalize(_descriptionController.text),
+          type: capitalize(animalType.toString().split('.').last),
           breed: _typeController.text,
           age: int.parse(_ageController.text),
-          activityLevel: activityLevel.toString().split('.').last,
-          sex: animalSex.toString().split('.').last,
-          health: _healthController.text,
+          activityLevel: capitalize(activityLevel.toString().split('.').last),
+          sex: capitalize(animalSex.toString().split('.').last),
+          health: capitalize(_healthController.text),
           applicationIds: [],
           availability: true);
 
@@ -118,6 +118,13 @@ class _AddAnimalFormState extends State<AddAnimalForm> {
         ),
       );
     }
+  }
+
+  String capitalize(String s) {
+    if (s.isEmpty) {
+      return s;
+    }
+    return s[0].toUpperCase() + s.substring(1);
   }
 
   @override
