@@ -76,6 +76,7 @@ class Animal {
     required this.health,
     required this.availability,
     this.applicationIds,
+    this.adoptionCenterId,
   }) : animalId = uuid.v4();
 
   final String animalId; // Unique identifier for the Animal
@@ -89,11 +90,13 @@ class Animal {
   String activityLevel;
   String sex;
   final String health;
+  bool availability = true; // Indicates if the animal is available for adoption
+
   final List<String>?
       applicationIds; // List of application IDs associated with the animal
 
-  bool availability = true; // Indicates if the animal is available for adoption
-
+  String?
+      adoptionCenterId; // ID of the adoption center associated with the animal
   // Get a list of available animal types
   List<AnimalType> getAnimalTypes() {
     return AnimalType.values;

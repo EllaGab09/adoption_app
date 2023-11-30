@@ -18,15 +18,17 @@ class AnimalController {
     // Set data for the animal
     var animalResult = await animalDocumentReferencer.set({
       "animalId": animal.animalId, // Include the animalId in the document
-      "animal_name": animal.name,
-      "animal_description": animal.description,
-      "animal_type": animal.type,
-      "animal_breed": animal.breed,
-      "animal_color": animal.age,
-      "animal_health": animal.health,
-      "animal_activity_level": animal.activityLevel,
-      "animal_sex": animal.sex,
-      "animal_availability": animal.availability
+      "name": animal.name,
+      "description": animal.description,
+      "type": animal.type,
+      "breed": animal.breed,
+      "color": animal.age,
+      "health": animal.health,
+      "activity_level": animal.activityLevel,
+      "sex": animal.sex,
+      "availability": animal.availability,
+      "adoptionCenterID":
+          "nzxBKZD3SZcidSeYswQBubnZnT63" // TODO replace with passed adoption center ID
     }).whenComplete(() {
       response.code = 200;
       response.message = "Successfully added animal to the database";
@@ -74,16 +76,16 @@ class AnimalController {
 
     var animalResult = await animalDocumentReferencer.update({
       "animalId": animal.animalId, // Include the animalId in the document
-      "animal_name": animal.name,
-      "animal_description": animal.description,
-      "animal_type": animal.type,
-      "animal_breed": animal.breed,
-      "animal_color": animal.age,
-      "animal_health": animal.health,
-      "animal_activity_level": animal.activityLevel,
-      "animal_sex": animal.sex,
-      "animal_availability": animal.availability,
-      "animal_id": animal.animalId
+      "name": animal.name,
+      "description": animal.description,
+      "type": animal.type,
+      "breed": animal.breed,
+      "color": animal.age,
+      "health": animal.health,
+      "activity_level": animal.activityLevel,
+      "sex": animal.sex,
+      "availability": animal.availability,
+      "adoptionCenterId": animal.animalId
     }).whenComplete(() {
       response.code = 200;
       response.message = "Successfully updated animal";
