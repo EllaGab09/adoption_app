@@ -1,29 +1,16 @@
 import 'package:adoption_app/screens/login_screen.dart';
 import 'package:adoption_app/services/login_state_authentication.dart';
+import 'package:adoption_app/themes/theme_data.dart';
 import 'package:adoption_app/widgets/tabs.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'themes/theme_data.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 
-/// The theme data for the application.
-final theme = ThemeData(
-  useMaterial3: true,
-  colorScheme: ColorScheme.fromSwatch(
-    primarySwatch: Colors.blue,
-    accentColor: Colors.lightGreenAccent,
-    backgroundColor: Colors.white,
-    brightness: Brightness.light,
-  ),
-  textTheme: GoogleFonts.robotoTextTheme(),
-  inputDecorationTheme: const InputDecorationTheme(
-    hintStyle: TextStyle(color: Colors.grey),
-  ),
-);
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -54,6 +41,7 @@ class App extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/tabs': (context) => const TabsScreen(),
       },
+      theme: lightTheme,
     );
   }
 }

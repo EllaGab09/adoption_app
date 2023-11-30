@@ -34,6 +34,8 @@ class CategoryGridItem extends StatelessWidget {
       },
       child: Card(
         //color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+        //  color: Theme.of(context).colorScheme.tertiary,
+
         child: Padding(
           padding: const EdgeInsets.all(6.0),
           child: Column(

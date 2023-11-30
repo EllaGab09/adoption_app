@@ -163,10 +163,22 @@ class CategoriesScreenState extends State<CategoriesScreen> {
                     onPressed: () {
                       Scaffold.of(context).openDrawer();
                     },
-                    child: const Column(
+                    child: Column(
                       children: [
-                        Icon(Icons.tune),
-                        Text('Filter'),
+                        Icon(
+                          Icons.tune,
+                          color: Theme.of(context)
+                              .iconTheme
+                              .color, // Set the color for the icon
+                        ),
+                        Text(
+                          'Filter',
+                          style: TextStyle(
+                            color:
+                                Theme.of(context).textTheme.bodyText1?.color ??
+                                    Colors.black, // Set the color for the text
+                          ),
+                        ),
                       ],
                     ),
                   ),
