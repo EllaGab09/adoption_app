@@ -1,8 +1,10 @@
 import 'package:adoption_app/screens/forgot_password_screen.dart';
-import 'package:adoption_app/screens/sign_up_screen.dart';
 import 'package:adoption_app/services/login_state_authentication.dart';
 import 'package:adoption_app/widgets/tabs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:adoption_app/screens/sign_up_adopter_screen.dart';
+import 'package:adoption_app/screens/sign_up_center_screen.dart';
+import 'package:adoption_app/widgets/tabs.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_app/services/firebase_authentication.dart';
@@ -205,22 +207,58 @@ class _LoginFormState extends State<LoginForm> {
                 const SizedBox(height: 5),
                 // Sign Up Text Button
                 const Text("Need an account? "),
+                // Registration Popup Button
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (ctx) => SignUpScreen()));
+                    _showRegistrationPopup(context);
                   },
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  ),
-                  child: const Text('SIGN UP'),
+                  child: const Text('Register'),
                 ),
               ],
             ),
           )
         ],
       ),
+    );
+  }
+
+  void _showRegistrationPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Choose Registration Type'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context); // Close the popup
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AdopterRegistrationScreen()),
+                  );
+                },
+                child: Text('Register as Adopter'),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context); // Close the popup
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            AdoptionCenterRegistrationScreen()),
+                  );
+                },
+                child: Text('Register as Adoption Center'),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

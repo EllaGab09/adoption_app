@@ -11,6 +11,7 @@ class Adopter {
   final String password; // Password associated with the user's account
   final int age; // Age of the user
   final UserAddress address; // Address information of the user
+  final String role = "adopter"; // Role of the user
   final List<String>?
       applicationIds; // List of application IDs associated with the user
 

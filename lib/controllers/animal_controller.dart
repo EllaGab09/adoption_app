@@ -80,7 +80,8 @@ class AnimalController {
       "animal_color": animal.age,
       "animal_activity_level": animal.activityLevel,
       "animal_sex": animal.sex,
-      "animal_availability": animal.availability
+      "animal_availability": animal.availability,
+      "animal_id": animal.animalId
     }).whenComplete(() {
       response.code = 200;
       response.message = "Successfully updated animal";
