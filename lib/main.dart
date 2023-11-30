@@ -18,7 +18,6 @@ void main() async {
 
   // Check if the user is already logged in
   bool stayLoggedIn = await StayLogedInService.isLoggedIn();
-  print("Stay logged in: $stayLoggedIn");
 
   Widget initialScreen =
       stayLoggedIn ? const TabsScreen() : const LoginScreen();
